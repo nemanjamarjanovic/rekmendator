@@ -1,16 +1,43 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./template.xhtml">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/template.xhtml">
 
+    <ui:define name="left">
 
-<!--    <ui:define name="left">
-        left
-    </ui:define>-->
+        All roles:
+        <div><h:link outcome="index" value="Index"/> </div> 
+        <div><h:link outcome="search" value="Search"/> </div> 
+        <div><h:link outcome="movies" value="Movies"/> </div> 
+        <br/><br/>
 
-<!--    <ui:define name="content">
-        content
-    </ui:define>-->
+        Guest:
+        <div><h:link outcome="login" value="Login"/> </div> 
+        <div><h:link outcome="register" value="Register"/> </div> 
+        <br/><br/>
 
-  
+        Regular user:
+        <div><h:link outcome="movie-detail" value="Movie"/> </div>             
+        <div><h:link outcome="movie-favorites" value="Favorites"/> </div> 
+        <div><h:link outcome="event-list" value="Events"/> </div> 
+        <div><h:link outcome="user-profile" value="Profile"/> </div>  
+        <br/><br/>
+
+        Super user:
+        <div><h:link outcome="event-create" value="New Event"/> </div>             
+        <div><h:link outcome="movie-upload" value="Movie Trailer Upload"/> </div>         
+        <br/><br/>
+
+        Administrator:
+        <div><h:link outcome="user-clist" value="Users"/> </div>             
+        <div><h:link outcome="genre-list" value="Genres"/> </div>         
+        <br/><br/>
+
+    </ui:define>
+
+    <ui:define name="content">
+        Index
+    </ui:define>
+
 </ui:composition>
