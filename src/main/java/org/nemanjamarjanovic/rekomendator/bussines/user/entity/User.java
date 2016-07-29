@@ -1,13 +1,14 @@
 package org.nemanjamarjanovic.rekomendator.bussines.user.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.ApplicationUser.FIND_ALL;
+import javax.persistence.PrePersist;
+import org.nemanjamarjanovic.rekomendator.bussines.security.control.Role;
+import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.User.FIND_ALL;
 
 /**
  *
@@ -15,40 +16,30 @@ import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.Applicatio
  */
 @Entity
 @NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select au from ApplicationUser au")
+        @NamedQuery(name = FIND_ALL, query = "select au from User au")
 )
-public class ApplicationUser implements Serializable
+public class User implements Serializable
 {
 
-    public static final String FIND_ALL  = "ApplicationUser.findAll";
+    public static final String FIND_ALL = "User.findAll";
 
     @Id
     private UUID id;
 
     private String username;
     private String password;
-    private UserType type;
 
-    public ApplicationUser()
-    {
-    }
+    private Role role;
 
-    public ApplicationUser(String username, UserType type)
+    @PrePersist
+    public void generateId()
     {
         id = UUID.randomUUID();
-        this.username = username;
-        this.password = new String(new BigInteger(username.getBytes()).add(BigInteger.valueOf(42)).toByteArray());
-        this.type = type;
     }
 
     public UUID getId()
     {
         return id;
-    }
-
-    public void setId(UUID id)
-    {
-        this.id = id;
     }
 
     public String getUsername()
@@ -71,14 +62,14 @@ public class ApplicationUser implements Serializable
         this.password = password;
     }
 
-    public UserType getType()
+    public Role getRole()
     {
-        return type;
+        return role;
     }
 
-    public void setType(UserType type)
+    public void setRole(Role role)
     {
-        this.type = type;
+        this.role = role;
     }
 
 }

@@ -1,18 +1,34 @@
 package org.nemanjamarjanovic.rekomendator.bussines.user.boundary;
 
 import java.util.List;
-import org.nemanjamarjanovic.rekomendator.bussines.user.entity.ApplicationUser;
-import org.nemanjamarjanovic.rekomendator.bussines.user.entity.UserType;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
+import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.User.FIND_ALL;
 
 /**
  *
  * @author nemanja
  */
-public interface UserDao
+@Stateless
+public class UserDao
 {
 
-    void create(String username, UserType type);
+    @PersistenceContext
+    EntityManager entityManager;
 
-    List<ApplicationUser> findAll();
-    
+    public User create(String username)
+    {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(username);
+        entityManager.persist(user);
+        return user;
+    }
+
+    public List<User> findAll()
+    {
+        return entityManager.createNamedQuery(FIND_ALL, User.class).getResultList();
+    }
 }

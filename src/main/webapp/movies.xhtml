@@ -8,17 +8,25 @@
 
 
     <ui:define name="content">
-        Movies - redefined index
-        <h:message for="test"/>
-        <h:form>
-            <h:commandButton id="test" action="#{movieController.search()}" value="Search" />
-        </h:form>
-        <h:dataTable value="#{movieController.movies}" var="item" rendered="#{not empty movieController.movies}">
-            <h:column>
-                #{item}
-            </h:column>
 
+        <h:button value="init" outcome="#{mockInit.init()}" />
+        
+        <h:dataTable value="#{movies.all}" var="item" rendered="#{not empty movies.all}">
+            <h:column>
+                #{item.title}
+            </h:column>
         </h:dataTable>
+        <h:dataTable value="#{actors.all}" var="item" >
+            <h:column>
+                #{item.title}
+            </h:column>
+        </h:dataTable>
+        <h:dataTable value="#{genres.all}" var="item" rendered="#{not empty movies.all}">
+            <h:column>
+                #{item.title}
+            </h:column>
+        </h:dataTable>
+        
         
     </ui:define>
 
