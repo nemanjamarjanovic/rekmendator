@@ -8,20 +8,19 @@
 
 
     <ui:define name="content">
-
-        <h:button value="init" outcome="#{mockInit.init()}" />
         
-        <h:dataTable value="#{movies.all}" var="item" rendered="#{not empty movies.all}">
+    
+        <h:dataTable value="#{movieContext.movies.all}" var="item"  >
             <h:column>
                 #{item.title}
             </h:column>
         </h:dataTable>
         <h:dataTable value="#{actors.all}" var="item" >
             <h:column>
-                #{item.title}
+                #{item.name}
             </h:column>
         </h:dataTable>
-        <h:dataTable value="#{genres.all}" var="item" rendered="#{not empty movies.all}">
+        <h:dataTable value="#{genres.all}" var="item">
             <h:column>
                 #{item.title}
             </h:column>

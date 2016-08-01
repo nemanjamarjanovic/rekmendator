@@ -2,7 +2,7 @@ package org.nemanjamarjanovic.rekomendator.presentation.movie;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
 
@@ -11,7 +11,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
  * @author nemanja.marjanovic
  */
 @Named
-@Dependent
+@RequestScoped
 public class Actors implements Serializable
 {
 

@@ -24,7 +24,7 @@ public class User implements Serializable
     public static final String FIND_ALL = "User.findAll";
 
     @Id
-    private UUID id;
+    private String id;
 
     private String username;
     private String password;
@@ -34,10 +34,10 @@ public class User implements Serializable
     @PrePersist
     public void generateId()
     {
-        id = UUID.randomUUID();
+        id = UUID.randomUUID().toString();
     }
 
-    public UUID getId()
+    public String getId()
     {
         return id;
     }

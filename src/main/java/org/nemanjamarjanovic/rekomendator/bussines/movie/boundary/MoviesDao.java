@@ -42,7 +42,7 @@ public class MoviesDao
     {
 
         Movie movie = new Movie();
-        movie.setId(UUID.randomUUID());
+        movie.setId(UUID.randomUUID().toString());
         movie.setTitle(title);
 
         movie.setGenre(new HashSet<>(10));

@@ -3,7 +3,7 @@ package org.nemanjamarjanovic.rekomendator.presentation.movie;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 
@@ -12,7 +12,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
  * @author nemanja.marjanovic
  */
 @Named
-@Dependent
+@RequestScoped
 public class Movies implements Serializable
 {
 
