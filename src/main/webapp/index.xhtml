@@ -8,12 +8,17 @@
 
 
 
-        <h:link outcome="login" value="Login" rendered="#{userContext.hasPermission('LOGIN')}"/>
+        <h:link outcome="/index" value="Index" /><br/>
+        <h:link outcome="/login" value="Login" rendered="#{userContext.hasPermission('LOGIN')}"/><br/>
         <h:form>
             <h:commandLink action="#{userContext.doLogout()}" value="Logout" rendered="#{userContext.hasPermission('LOGOUT')}"/>
-        </h:form>
-        <h:link outcome="movies" value="Movies" rendered="#{userContext.hasPermission('MOVIES-LIST')}"/>
-        <h:link outcome="admin" value="admin" rendered="#{userContext.hasPermission('ADMIN')}"/>
+        </h:form><br/>
+        <h:link outcome="/movies" value="Movies" rendered="#{userContext.hasPermission('MOVIES-LIST')}"/><br/>
+        
+        
+        <!-- ADMIN-->
+        <h:link outcome="/admin/genres" value="genres" rendered="#{userContext.hasPermission('GENRES')}"/><br/>
+        <h:link outcome="/admin/admin" value="admin" rendered="#{userContext.hasPermission('ADMIN')}"/><br/>
 
 
     </ui:define>

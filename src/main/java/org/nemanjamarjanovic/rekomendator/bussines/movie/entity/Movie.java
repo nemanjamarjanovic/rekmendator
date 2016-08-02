@@ -10,31 +10,31 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
 
 /**
  *
  * @author nemanja
  */
 @Entity
-@NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select m from Movie m")
-)
+@NamedQueries({
+    @NamedQuery(name = FIND_ALL, query = "select m from Movie m"),
+    @NamedQuery(name = FIND_BY_TITLE, query = "select m from Movie m where m.title like :title ")
+})
 public class Movie implements Serializable
 {
 
     public static final String FIND_ALL = "Movie.findAll";
+    public static final String FIND_BY_TITLE = "Movie.findByTitle";
 
     @Id
     private String id;
     private String title;
     private String description;
     private Integer duration;
-    
+
     @Temporal(TemporalType.DATE)
     private Date publishingDate;
-    
-    
 
     @OneToMany
     private Set<Genre> genre;

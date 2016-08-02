@@ -28,6 +28,14 @@ public class MoviesDao
         return entityManager.createNamedQuery(Movie.FIND_ALL, Movie.class).getResultList();
     }
 
+    public List<Movie> searchMovies(String title)
+    {
+        return entityManager
+                .createNamedQuery(Movie.FIND_BY_TITLE, Movie.class)
+                .setParameter("title", "%" + title + "%")
+                .getResultList();
+    }
+
     public List<Genre> findAllGenres()
     {
         return entityManager.createNamedQuery(Genre.FIND_ALL, Genre.class).getResultList();
