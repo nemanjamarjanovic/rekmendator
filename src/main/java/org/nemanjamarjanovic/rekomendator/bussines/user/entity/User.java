@@ -8,20 +8,22 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import org.nemanjamarjanovic.rekomendator.bussines.security.control.Role;
-import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.User.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.User.*;
 
 /**
  *
  * @author nemanja
  */
 @Entity
-@NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select au from User au")
-)
+@NamedQueries({
+        @NamedQuery(name = FIND_ALL, query = "select u from User u"),
+        @NamedQuery(name = FIND_BY_USERNAME, query = "select u from User u where u.username = :username ")
+})
 public class User implements Serializable
 {
 
     public static final String FIND_ALL = "User.findAll";
+    public static final String FIND_BY_USERNAME = "User.findByUsername";
 
     @Id
     private String id;

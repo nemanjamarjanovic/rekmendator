@@ -45,4 +45,13 @@ public class SecurityDao
         Role role = entityManager.getReference(Role.class, roleTitle);
         user.setRole(role);
     }
+
+    public User authorize(String username, String password)
+    {
+
+        return entityManager
+                .createNamedQuery(User.FIND_BY_USERNAME, User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 }

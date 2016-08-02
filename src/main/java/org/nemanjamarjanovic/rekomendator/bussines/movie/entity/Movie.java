@@ -1,13 +1,15 @@
 package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.FIND_ALL;
 
 /**
@@ -25,8 +27,14 @@ public class Movie implements Serializable
 
     @Id
     private String id;
-
     private String title;
+    private String description;
+    private Integer duration;
+    
+    @Temporal(TemporalType.DATE)
+    private Date publishingDate;
+    
+    
 
     @OneToMany
     private Set<Genre> genre;

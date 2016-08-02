@@ -6,33 +6,15 @@
 
     <ui:define name="left">
 
-        All roles:
-        <div><h:link outcome="index" value="Index"/> </div> 
-        <div><h:link outcome="search" value="Search"/> </div> 
-        <div><h:link outcome="movies" value="Movies"/> </div> 
-        <br/><br/>
 
-        Guest:
-        <div><h:link outcome="login" value="Login"/> </div> 
-        <div><h:link outcome="register" value="Register"/> </div> 
-        <br/><br/>
 
-        Regular user:
-        <div><h:link outcome="movie-detail" value="Movie"/> </div>             
-        <div><h:link outcome="movie-favorites" value="Favorites"/> </div> 
-        <div><h:link outcome="event-list" value="Events"/> </div> 
-        <div><h:link outcome="user-profile" value="Profile"/> </div>  
-        <br/><br/>
+        <h:link outcome="login" value="Login" rendered="#{userContext.hasPermission('LOGIN')}"/>
+        <h:form>
+            <h:commandLink action="#{userContext.doLogout()}" value="Logout" rendered="#{userContext.hasPermission('LOGOUT')}"/>
+        </h:form>
+        <h:link outcome="movies" value="Movies" rendered="#{userContext.hasPermission('MOVIES-LIST')}"/>
+        <h:link outcome="admin" value="admin" rendered="#{userContext.hasPermission('ADMIN')}"/>
 
-        Super user:
-        <div><h:link outcome="event-create" value="New Event"/> </div>             
-        <div><h:link outcome="movie-upload" value="Movie Trailer Upload"/> </div>         
-        <br/><br/>
-
-        Administrator:
-        <div><h:link outcome="user-clist" value="Users"/> </div>             
-        <div><h:link outcome="genre-list" value="Genres"/> </div>         
-        <br/><br/>
 
     </ui:define>
 

@@ -19,6 +19,9 @@
                             <td colspan="2" class="title">
                                 <ui:insert name="top">
                                     <h1>Movie rekomendator</h1>
+                                    Welcome
+                                    <h:outputLabel rendered="#{not empty userContext.current}">#{userContext.current}!</h:outputLabel>
+                                    <h:outputLabel rendered="#{empty userContext.current}">Guest!</h:outputLabel>
                                 </ui:insert>
                             </td>
                         </tr>
