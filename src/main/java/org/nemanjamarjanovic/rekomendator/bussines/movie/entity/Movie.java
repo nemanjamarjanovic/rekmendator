@@ -32,10 +32,10 @@ public class Movie implements Serializable
     private String title;
     private String description;
     private Integer duration;
-    
+
     @Temporal(TemporalType.DATE)
     private Date publishingDate;
-    
+
     @OneToMany
     private Set<Genre> genre;
 
