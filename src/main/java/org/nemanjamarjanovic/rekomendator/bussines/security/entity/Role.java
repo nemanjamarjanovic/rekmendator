@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.security.control;
+package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import static org.nemanjamarjanovic.rekomendator.bussines.security.control.Role.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role.FIND_ALL;
 
 /**
  *

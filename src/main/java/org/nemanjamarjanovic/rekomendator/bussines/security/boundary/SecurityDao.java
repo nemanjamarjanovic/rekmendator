@@ -4,8 +4,8 @@ import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.nemanjamarjanovic.rekomendator.bussines.security.control.Permission;
-import org.nemanjamarjanovic.rekomendator.bussines.security.control.Role;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Permission;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
 
 /**

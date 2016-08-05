@@ -1,60 +1,35 @@
 package org.nemanjamarjanovic.rekomendator.presentation.movie;
 
-import java.io.Serializable;
-import javax.annotation.PostConstruct;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MoviesDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
 
 /**
  *
  * @author nemanja.marjanovic
  */
-@Named
-@RequestScoped
-public class MovieContext implements Serializable
+public class MovieContext
 {
-
-
-
-    @Inject
-    private Movies movies;
-
-    @Inject
-    private Actors actors;
-
-    @Inject
-    private Genres genres;
 
     @EJB
     MoviesDao moviesDao;
 
-    @PostConstruct
-    public void init()
+    @Produces
+    @Named
+    public List<Genre> getAllGenres()
     {
-       
-        movies.setAll(moviesDao.findAllMovies());
-        actors.setAll(moviesDao.findAllActors());
-        genres.setAll(moviesDao.findAllGenres());
+        return moviesDao.findAllGenres();
     }
 
-    public void end()
+    @Produces
+    @Named
+    public List<Actor> getAllActors()
     {
-   
-    }
-
-    public Movies getMovies()
-    {
-        return movies;
-    }
-
-    public void setMovies(Movies movies)
-    {
-        this.movies = movies;
+        return moviesDao.findAllActors();
     }
 
 }

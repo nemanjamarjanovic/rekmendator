@@ -14,6 +14,8 @@
         </h:form>
         <h:link outcome="movies" value="Movies" rendered="#{userContext.hasPermission('MOVIES-LIST')}"/>
         <h:link outcome="admin" value="admin" rendered="#{userContext.hasPermission('ADMIN')}"/>
+        
+        <h:link outcome="genres" value="genres" rendered="#{userContext.hasPermission('GENRE-LIST')}"/>
 
 
     </ui:define>

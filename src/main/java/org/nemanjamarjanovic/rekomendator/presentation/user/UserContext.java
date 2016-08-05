@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.SecurityDao;
-import org.nemanjamarjanovic.rekomendator.bussines.security.control.Permission;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Permission;
 import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
 
 /**

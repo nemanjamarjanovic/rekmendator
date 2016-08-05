@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
-import org.nemanjamarjanovic.rekomendator.bussines.security.control.Role;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 import static org.nemanjamarjanovic.rekomendator.bussines.user.entity.User.*;
 
 /**

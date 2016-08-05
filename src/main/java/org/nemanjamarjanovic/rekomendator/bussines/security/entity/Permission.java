@@ -1,11 +1,11 @@
-package org.nemanjamarjanovic.rekomendator.bussines.security.control;
+package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.security.control.Permission.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.Permission.FIND_ALL;
 
 /**
  *

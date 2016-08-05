@@ -17,9 +17,9 @@ import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre.FIN
 )
 public class Genre implements Serializable
 {
-    
-    public static final String FIND_ALL  = "Genre.findAll";
-    
+
+    public static final String FIND_ALL = "Genre.findAll";
+
     @Id
     private String title;
 
