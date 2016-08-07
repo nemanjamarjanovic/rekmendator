@@ -3,14 +3,20 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="/index.xhtml"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
 
     <ui:define name="content">
-        <h:dataTable value="#{allGenres}" var="item"  >
+        <h:dataTable value="#{allGenres}" 
+                     var="item" 
+                     styleClass="datatable"
+                     headerClass="datatable-header"
+                     rowClasses="datatable-odd-row,datatable-even-row">
             <h:column>
-                #{item.title}
+                <f:facet name="header">Title</f:facet>
+                    #{item.title}
             </h:column>
         </h:dataTable>
         <h:link outcome="new_genre" value="new genre" rendered="#{userContext.hasPermission('GENRE-CREATE')}"/>

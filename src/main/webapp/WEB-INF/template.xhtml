@@ -11,43 +11,41 @@
     </h:head>
 
     <h:body class="global">
-        <table class="shell">
-            <tr>
-                <td>
-                    <table class="full-width">
-                        <tr>
-                            <td colspan="2" class="title">
-                                <ui:insert name="top">
-                                    <h1>Movie rekomendator</h1>
-                                    Welcome
-                                    <h:outputLabel rendered="#{not empty userContext.current}">#{userContext.current}!</h:outputLabel>
-                                    <h:outputLabel rendered="#{empty userContext.current}">Guest!</h:outputLabel>
-                                </ui:insert>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="third-width menu">
-                                <ui:insert name="left">
-                                    Menu
-                                </ui:insert>
-                            </td>
-                            <td  class="content">
-                                <ui:insert name="content">
-                                    Content
-                                </ui:insert>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <ui:insert name="bottom">
-                                    Lnaguage: English
-                                </ui:insert>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+
+        <div id="wrapper">
+            <header>
+                <h1>Movie rekomendator</h1>
+                <h:outputLabel rendered="#{not empty userContext.current}">#{userContext.current}!</h:outputLabel>
+                <h:outputLabel rendered="#{empty userContext.current}">Guest!</h:outputLabel>
+                <nav>
+                    <ul>
+                        <li><a rel="external" href="#">Home</a></li>
+                        <li><a rel="external" href="#">About us</a></li>
+                        <li><a rel="external" href="#">Contacts</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <div id="core" class="clearfix">
+                <section id="left">
+                    <ui:insert >
+                        Menu
+                    </ui:insert>
+                </section>
+                <section id="right">
+                    <ui:insert name="content">
+                        Content
+                    </ui:insert>
+                </section>
+            </div>
+
+            <footer>
+                <ui:insert name="bottom">
+                    Lnaguage: English
+                </ui:insert>
+            </footer>
+        </div>
+
     </h:body>
 
 </html>
