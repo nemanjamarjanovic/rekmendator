@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.entity.Actor.FIND_ALL;
 
 /**
  *

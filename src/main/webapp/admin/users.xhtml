@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+    <ui:define name="content">
+
+        <!--        -->
+        <h2>All users:</h2>
+        <hr/>
+        <br/>
+        <h:dataTable value="#{allUsers}" 
+                     var="item" 
+                     styleClass="datatable"
+                     headerClass="datatable-header"
+                     rowClasses="datatable-odd-row,datatable-even-row">
+            <h:column>
+                <f:facet name="header">Username</f:facet>
+                    #{item.username}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Password</f:facet>
+                    #{item.password}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                    #{item.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Surname</f:facet>
+                    #{item.surname}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Mbr</f:facet>
+                    #{item.mbr}
+            </h:column>
+            <h:column>
+                <f:facet name="header">E-mail</f:facet>
+                    #{item.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">E-mail</f:facet>
+                    #{item.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Role</f:facet>
+                    #{item.role.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">State</f:facet>
+                <h:outputLabel rendered="#{item.active}" value="Active"/>
+                <h:outputLabel rendered="#{!item.active}" value="Not activated"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Aktivacija</f:facet>
+                <h:form>
+                    <h:commandLink class="menu-item" action="#{activation.setUserState(item.id, true)}" value="Activate" rendered="#{!item.active}"/>
+                    <h:commandLink class="menu-item" action="#{activation.setUserState(item.id, false)}" value="Deactivate" rendered="#{item.active}"/>
+                </h:form>
+            </h:column>
+        </h:dataTable>
+
+        <h:panelGroup rendered="#{changeRole.selectedUser}">
+            <h2>Change role:</h2><br/><hr/>
+            <h:form>
+                <h:selectOneMenu value="#{changeRole.selectedRole}">
+                    <f:selectItems value="#{allRoles}" 
+                                   var="role" 
+                                   itemValue="#{role}" 
+                                   itemLabel="#{role.title}"/>
+                </h:selectOneMenu>
+                <h:commandLink class="menu-item" action="#{changeRole.doChange()}" value="Activate" rendered="#{changeRole.selectedRole}"/>
+            </h:form>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

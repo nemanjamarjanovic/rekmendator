@@ -6,16 +6,7 @@
 
     <ui:define name="content">
         
-        <h:form>
-            <h:inputText value="#{movieSearch.title}"/>
-            <h:commandButton value="Search" action="#{movieSearch.doSearch()}"/>
-        </h:form>
-    
-        <h:dataTable value="#{movieSearch.result}" var="item"  >
-            <h:column>
-                #{item.title}
-            </h:column>
-        </h:dataTable>
+       
         
     </ui:define>
 </ui:composition>

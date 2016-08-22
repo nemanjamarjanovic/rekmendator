@@ -3,12 +3,23 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="/index.xhtml"
-                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
 
     <ui:define name="content">
-        Genres
-    </ui:define>
 
+        <h:link class="new-item" outcome="new_genre" value="new genre" rendered="#{security.hasPermission('GENRE-CREATE')}"/>
+        <h:dataTable value="#{allGenres}" 
+                     var="item" 
+                     styleClass="datatable"
+                     headerClass="datatable-header"
+                     rowClasses="datatable-odd-row,datatable-even-row">
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                    #{item.title}
+            </h:column>
+        </h:dataTable>
+    </ui:define>
 </ui:composition>

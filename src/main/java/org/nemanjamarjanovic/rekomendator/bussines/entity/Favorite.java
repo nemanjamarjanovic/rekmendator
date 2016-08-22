@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,8 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Favorite.FIND_ALL;
-import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
+import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_ALL;
 
 /**
  *

@@ -1,8 +1,8 @@
-package org.nemanjamarjanovic.rekomendator.presentation;
+package org.nemanjamarjanovic.rekomendator.presentation.temp;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MoviesDao;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.MoviesDao;
 
 /**
  *

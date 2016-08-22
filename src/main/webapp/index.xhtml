@@ -1,30 +1,117 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="left">
+    <ui:define name="menu">
 
-
-
-        <h:link outcome="/index" value="Index" /><br/>
-        <h:link outcome="/login" value="Login" rendered="#{userContext.hasPermission('LOGIN')}"/><br/>
-        <h:form>
-            <h:commandLink action="#{userContext.doLogout()}" value="Logout" rendered="#{userContext.hasPermission('LOGOUT')}"/>
-        </h:form><br/>
-        <h:link outcome="/movies" value="Movies" rendered="#{userContext.hasPermission('MOVIES-LIST')}"/><br/>
+        <!--
+        /**
+                <h:form>
+                    <h:commandLink class="menu-item" action="#{security.doLogout()}" value="LOGOUT" rendered="#{security.hasPermission('LOGOUT')}"/>
+                </h:form>
         
+                <h:outputLabel class="username" rendered="#{not empty security.current}">Korisnik: #{security.current}</h:outputLabel>
         
-        <!-- ADMIN-->
-        <h:link outcome="/admin/genres" value="genres" rendered="#{userContext.hasPermission('GENRES')}"/><br/>
-        <h:link outcome="/admin/admin" value="admin" rendered="#{userContext.hasPermission('ADMIN')}"/><br/>
-
+                <h:link class="menu-item" outcome="/login" value="LOGIN" rendered="#{security.hasPermission('LOGIN')}"/>
+                <h:link class="menu-item" outcome="/register" value="REGISTER" rendered="#{security.hasPermission('REGISTER')}"/>
+                <h:link class="menu-item" outcome="/movies" value="MOVIES" rendered="#{security.hasPermission('MOVIES-LIST')}"/>
+                <h:link class="menu-item" outcome="/admin/genres" value="GENRES" rendered="#{security.hasPermission('GENRE-LIST')}"/>
+                <h:link class="menu-item" outcome="/admin/users" value="USERS" rendered="#{security.hasPermission('USER-LIST')}"/>
+        **/
+        -->
 
     </ui:define>
 
     <ui:define name="content">
-        Index
+
+        
+            <div class="w3-container  w3-center w3-margin">
+                <div class="w3-container w3-teal">
+                    <h2>Try movie search:</h2>
+                </div>
+
+                <h:form class="w3-container">
+                    <h:inputText class="w3-input" value="#{movieSearch.title}"/>
+                    <h:commandButton class="w3-btn w3-teal" value="Search" action="#{movieSearch.doSearch()}"/>
+                </h:form>
+
+                <h:dataTable value="#{movieSearch.result}" var="item"  >
+                    <h:column>
+                        #{item.title}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        
+
+        <div class="w3-row ">
+            <div class="w3-container w3-margin w3-padding-small">
+
+                <div class="w3-container w3-third">
+                    <div class="w3-container w3-teal">
+                        <h2>Login:</h2>
+                    </div>
+                    <h:form>
+                        <h:outputLabel class="w3-label" value="Username:"/>
+                        <h:inputText class="w3-input" value="#{security.username}"/> 
+                        <h:outputLabel class="w3-label" value="Password:"/>
+                        <h:inputText  class="w3-input" value="#{security.password}"/>
+                        <h:commandButton class="w3-btn w3-teal" action="#{security.doLogin()}" value="Login"/>
+                    </h:form>
+                </div>
+
+                <div class="w3-container w3-rest">
+                    <div class="w3-container w3-teal">
+                        <h2>Register:</h2>
+                    </div>
+                    <h:form id="registerForm">
+                        <h:panelGrid columns="3">
+                            Username: 
+                            <h:inputText id="username" value="#{registration.newUser.username}" validatorMessage="od 12 do 20" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="12" maximum="20" />
+                            </h:inputText>
+                            <h:message for="username" style="color:red"/>
+
+                            Password: 
+                            <h:inputText id="password" value="#{registration.newUser.password}" validatorMessage="od 15 do 20" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="15" maximum="20" />
+                            </h:inputText>
+                            <h:message for="password" style="color:red"/>
+
+                            Name: 
+                            <h:inputText id="name" value="#{registration.newUser.name}" validatorMessage="od 2 do 20" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="2" maximum="20" />
+                            </h:inputText>
+                            <h:message for="name" style="color:red"/>
+
+                            Surname: 
+                            <h:inputText id="surname" value="#{registration.newUser.surname}" validatorMessage="od 2 do 20" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="2" maximum="20" />
+                            </h:inputText>
+                            <h:message for="surname" style="color:red"/>
+
+                            Mbr: 
+                            <h:inputText id="mbr" value="#{registration.newUser.mbr}" validatorMessage="tacno 13" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="13" maximum="13" />
+                            </h:inputText>
+                            <h:message for="mbr" style="color:red"/>
+
+                            E-mail: 
+                            <h:inputText id="email" value="#{registration.newUser.email}" validatorMessage="od 6 do 30" required="true" requiredMessage="Obavezno" >
+                                <f:validateLength minimum="6" maximum="30" />
+                            </h:inputText>
+                            <h:message for="email" style="color:red"/>
+
+                            <h:commandButton class="w3-btn w3-teal" action="#{registration.doCreate()}" value="Register"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
     </ui:define>
 
 </ui:composition>

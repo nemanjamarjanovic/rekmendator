@@ -6,46 +6,28 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="main.css"/>
-        <title>Facelets Template</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/>
+
+        <title>Znas li neki dobar film</title>
     </h:head>
 
-    <h:body class="global">
-
-        <div id="wrapper">
-            <header>
-                <h1>Movie rekomendator</h1>
-                <h:outputLabel rendered="#{not empty userContext.current}">#{userContext.current}!</h:outputLabel>
-                <h:outputLabel rendered="#{empty userContext.current}">Guest!</h:outputLabel>
-                <nav>
-                    <ul>
-                        <li><a rel="external" href="#">Home</a></li>
-                        <li><a rel="external" href="#">About us</a></li>
-                        <li><a rel="external" href="#">Contacts</a></li>
-                    </ul>
-                </nav>
-            </header>
-
-            <div id="core" class="clearfix">
-                <section id="left">
-                    <ui:insert >
-                        Menu
-                    </ui:insert>
-                </section>
-                <section id="right">
-                    <ui:insert name="content">
-                        Content
-                    </ui:insert>
-                </section>
-            </div>
-
-            <footer>
-                <ui:insert name="bottom">
-                    Lnaguage: English
-                </ui:insert>
-            </footer>
+    <h:body>
+        <div class="w3-container w3-teal">
+            <ui:insert name="header">
+                <h1>Menu goes here</h1>
+            </ui:insert>
         </div>
 
+        <div class="w3-container">
+            <ui:insert name="content">
+                Content goes here
+            </ui:insert>
+        </div>
+        <div class="w3-container w3-teal">
+            <p>viva las vegas!</p>
+        </div>
     </h:body>
 
 </html>

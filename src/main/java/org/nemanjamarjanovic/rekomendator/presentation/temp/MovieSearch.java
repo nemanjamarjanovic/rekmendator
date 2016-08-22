@@ -1,13 +1,13 @@
-package org.nemanjamarjanovic.rekomendator.presentation;
+package org.nemanjamarjanovic.rekomendator.presentation.temp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MoviesDao;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.MoviesDao;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
 
 /**
  *
@@ -18,7 +18,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 public class MovieSearch implements Serializable
 {
 
-    @EJB
+    @Inject
     MoviesDao moviesDao;
 
     private String title = "";

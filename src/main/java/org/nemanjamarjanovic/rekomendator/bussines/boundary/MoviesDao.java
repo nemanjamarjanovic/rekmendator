@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.movie.boundary;
+package org.nemanjamarjanovic.rekomendator.bussines.boundary;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,9 +8,9 @@ import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
 
 /**
  *

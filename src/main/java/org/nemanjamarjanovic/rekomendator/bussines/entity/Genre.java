@@ -1,11 +1,11 @@
-package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.entity.Genre.FIND_ALL;
 
 /**
  *

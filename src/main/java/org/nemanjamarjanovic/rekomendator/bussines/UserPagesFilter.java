@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.nemanjamarjanovic.rekomendator.presentation.UserContext;
+import org.nemanjamarjanovic.rekomendator.presentation.Security;
 
 /**
  *
@@ -22,7 +22,7 @@ public class UserPagesFilter implements Filter
 {
 
     @Inject
-    UserContext userContext;
+    Security userContext;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException

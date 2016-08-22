@@ -8,7 +8,13 @@
 
 
     <ui:define name="content">
-        Admin pages
+        <h:form>
+            <h:panelGrid columns="2">
+                Username: <h:inputText value="#{security.username}"/> 
+                Password: <h:inputText value="#{security.password}"/>
+                <h:commandButton action="#{security.doLogin()}" value="Login"/>
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 
 </ui:composition>

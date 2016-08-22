@@ -2,14 +2,17 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.SecurityDao;
-import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.SecurityDao;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Role;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
 
 /**
  *
@@ -17,16 +20,17 @@ import org.nemanjamarjanovic.rekomendator.bussines.user.entity.User;
  */
 @Named
 @SessionScoped
-public class UserContext implements Serializable
+public class Security implements Serializable
 {
 
     private String username;
     private String password;
+    private String role;
 
     private Set<String> permissions = new HashSet<>();
     private String current;
 
-    @EJB
+    @Inject
     SecurityDao securityDao;
 
     @PostConstruct
@@ -75,6 +79,13 @@ public class UserContext implements Serializable
         return permissions.contains(permission);
     }
 
+    @Produces
+    @Named
+    public List<Role> getAllRoles()
+    {
+        return securityDao.allRoles();
+    }
+
     private void clearFields()
     {
         this.username = "";
@@ -110,4 +121,15 @@ public class UserContext implements Serializable
     {
         this.current = current;
     }
+
+    public String getRole()
+    {
+        return role;
+    }
+
+    public void setRole(String role)
+    {
+        this.role = role;
+    }
+
 }

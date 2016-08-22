@@ -10,9 +10,9 @@
     <ui:define name="content">
         <h:form>
             <h:panelGrid columns="2">
-                Username: <h:inputText value="#{userContext.username}"/> 
-                Password: <h:inputText value="#{userContext.password}"/>
-                <h:commandButton action="#{userContext.doLogin()}" value="Login"/>
+                Username: <h:inputText value="#{security.username}"/> 
+                Password: <h:inputText value="#{security.password}"/>
+                <h:commandButton action="#{security.doLogin()}" value="Login"/>
             </h:panelGrid>
         </h:form>
     </ui:define>

@@ -1,12 +1,13 @@
-package org.nemanjamarjanovic.rekomendator.presentation.movie;
+package org.nemanjamarjanovic.rekomendator.presentation.temp;
 
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MoviesDao;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.MoviesDao;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
 
 /**
  *
@@ -15,7 +16,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
 public class MovieContext
 {
 
-    @EJB
+    @Inject
     MoviesDao moviesDao;
 
     @Produces

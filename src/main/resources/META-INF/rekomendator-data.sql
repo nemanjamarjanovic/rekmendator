@@ -12,29 +12,34 @@ INSERT INTO `rekomendator`.`ROLE` (`TITLE`) VALUES ('ADMIN');
 
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIES-LIST');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIES-DETAILS');
-INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('ADMIN');
+INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('ADMIN-PAGES');
+INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('USER-PAGES');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('LOGIN');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('LOGOUT');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('REGISTER');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('GENRE-LIST');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('GENRE-CREATE');
+INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('USER-LIST');
 
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('GUEST', 'LOGIN');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('GUEST', 'REGISTER');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('GUEST', 'MOVIES-LIST');
 
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'LOGOUT');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'USER-PAGES');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIES-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIES-DETAILS');
 
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'LOGOUT');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'USER-PAGES');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIES-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIES-DETAILS');
 
-INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'ADMIN');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'ADMIN-PAGES');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'LOGOUT');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'GENRE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'GENRE-CREATE');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'USER-LIST');
 
 INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('0', 'guest', 'guest', 'GUEST');
 INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('1', 'user', 'user', 'USER');
