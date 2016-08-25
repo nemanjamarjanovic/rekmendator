@@ -36,9 +36,9 @@ public class Security implements Serializable
     @PostConstruct
     public void init()
     {
-        this.username = "guest";
-        this.password = "guest";
-        authenticate();
+        //this.username = "guest";
+        //this.password = "guest";
+        //authenticate();
     }
 
     private boolean authenticate()
@@ -48,6 +48,7 @@ public class Security implements Serializable
             User user = securityDao.authorize(this.username, this.password);
             this.current = user.getUsername();
             this.permissions = user.getRole().getPermissions().stream().map(p -> p.getTitle()).collect(Collectors.toSet());
+            result = true;
         }
         catch (Exception e) {
             result = false;
@@ -64,13 +65,12 @@ public class Security implements Serializable
 
     public String doLogin()
     {
-        this.authenticate();
-        return "/index?faces-redirect=true";
+        return (this.authenticate()) ? "/pages/movies?faces-redirect=true" : "/index?faces-redirect=true";
     }
 
     public String doLogout()
     {
-        this.init();
+        this.clearFields();
         return "/index?faces-redirect=true";
     }
 
@@ -90,6 +90,7 @@ public class Security implements Serializable
     {
         this.username = "";
         this.password = "";
+        this.current = null;
     }
 
     public String getUsername()

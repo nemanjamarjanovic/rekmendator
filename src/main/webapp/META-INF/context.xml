@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/rekomendator">
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="15" maxIdle="3" name="jdbc/rekomendatorDS" password="rekomendator" type="javax.sql.DataSource" url="jdbc:mysql:/localhost:3306/rekomendator" username="rekomendator"/>
+    <Resource auth="Container" 
+              driverClassName="com.mysql.jdbc.Driver" 
+              maxActive="15" 
+              maxIdle="3" 
+              name="jdbc/rekomendatorDS" 
+              password="rekomendator" 
+              type="javax.sql.DataSource" 
+              url="jdbc:mysql://localhost:3306/rekomendator?serverTimezone=UTC" 
+              username="rekomendator"
+              JtaManaged="true"
+    />
 </Context>

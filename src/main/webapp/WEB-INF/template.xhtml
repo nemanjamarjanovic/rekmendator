@@ -16,7 +16,27 @@
     <h:body>
         <div class="w3-container w3-black">
             <ui:insert name="header">
-                <h1>Menu goes here</h1>
+                <h3>Menu goes here</h3>
+                <!--
+       /**
+               <h:form>
+                   <h:commandLink class="menu-item" action="#{security.doLogout()}" value="LOGOUT" rendered="#{security.hasPermission('LOGOUT')}"/>
+               </h:form>
+       
+               <h:outputLabel class="username" rendered="#{not empty security.current}">Korisnik: #{security.current}</h:outputLabel>
+       
+               <h:link class="menu-item" outcome="/login" value="LOGIN" rendered="#{security.hasPermission('LOGIN')}"/>
+               <h:link class="menu-item" outcome="/register" value="REGISTER" rendered="#{security.hasPermission('REGISTER')}"/>
+               <h:link class="menu-item" outcome="/movies" value="MOVIES" rendered="#{security.hasPermission('MOVIES-LIST')}"/>
+               <h:link class="menu-item" outcome="/admin/genres" value="GENRES" rendered="#{security.hasPermission('GENRE-LIST')}"/>
+               <h:link class="menu-item" outcome="/admin/users" value="USERS" rendered="#{security.hasPermission('USER-LIST')}"/>
+       **/
+                -->
+
+                <h:form>
+                    <h:outputLabel class="username" rendered="#{not empty security.current}">Korisnik: #{security.current}</h:outputLabel>
+                    <h:commandButton class="w3-btn w3-white w3-text-teal" rendered="#{not empty security.current}" action="#{security.doLogout()}" value="Log out"/>
+                </h:form>
             </ui:insert>
         </div>
 
@@ -25,9 +45,9 @@
                 Content goes here
             </ui:insert>
         </div>
-<!--        <div class="w3-container w3-teal">
-            <p>viva las vegas!</p>
-        </div>-->
+        <!--        <div class="w3-container w3-teal">
+                    <p>viva las vegas!</p>
+                </div>-->
     </h:body>
 
 </html>

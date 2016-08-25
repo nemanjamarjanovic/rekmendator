@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="content">
+
+        <div class="w3-card-4 ">
+            <header class="w3-container w3-teal">
+                <h2>Register:</h2>
+            </header>
+            <div class="w3-padding-medium">
+                <h:form id="registerForm">
+                    <h:outputLabel class="w3-label" value="Username: "/> <h:message for="username" style="color:red"/>
+                    <h:inputText class="w3-input"  id="username" value="#{registration.newUser.username}" validatorMessage="od 12 do 20" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="12" maximum="20" />
+                    </h:inputText>
+                    <h:outputLabel class="w3-label" value="Password: "/>  <h:message for="password" style="color:red"/>
+                    <h:inputText class="w3-input" id="password" value="#{registration.newUser.password}" validatorMessage="od 15 do 20" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="15" maximum="20" />
+                    </h:inputText>
+                    <h:outputLabel class="w3-label" value="Name: "/> <h:message for="name" style="color:red"/>
+                    <h:inputText class="w3-input" id="name" value="#{registration.newUser.name}" validatorMessage="od 2 do 20" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="2" maximum="20" />
+                    </h:inputText>
+                    <h:outputLabel class="w3-label" value="Surname: "/> <h:message for="surname" style="color:red"/>
+                    <h:inputText class="w3-input" id="surname" value="#{registration.newUser.surname}" validatorMessage="od 2 do 20" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="2" maximum="20" />
+                    </h:inputText>
+                    <h:outputLabel class="w3-label" value="Mbr: "/>  <h:message for="mbr" style="color:red"/>
+                    <h:inputText class="w3-input" id="mbr" value="#{registration.newUser.mbr}" validatorMessage="tacno 13" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="13" maximum="13" />
+                    </h:inputText>
+                    <h:outputLabel class="w3-label" value="Email: "/>  <h:message for="email" style="color:red"/>
+                    <h:inputText class="w3-input" id="email" value="#{registration.newUser.email}" validatorMessage="od 6 do 30" required="true" requiredMessage="Obavezno" >
+                        <f:validateLength minimum="6" maximum="30" />
+                    </h:inputText>
+                    <br/>
+                    <h:commandButton class="w3-btn w3-teal" action="#{registration.doCreate()}" value="Register"/>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+
