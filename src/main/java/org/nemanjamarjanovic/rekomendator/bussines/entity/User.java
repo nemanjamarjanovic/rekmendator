@@ -2,12 +2,10 @@ package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PrePersist;
 import static org.nemanjamarjanovic.rekomendator.bussines.entity.User.*;
 
 /**
@@ -37,13 +35,6 @@ public class User implements Serializable
     private boolean active;
 
     private Role role;
-
-    @PrePersist
-    public void generateId()
-    {
-        id = UUID.randomUUID().toString();
-        active = false;
-    }
 
     public String getId()
     {
@@ -130,6 +121,11 @@ public class User implements Serializable
         this.active = active;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
     @Override
     public int hashCode()
     {

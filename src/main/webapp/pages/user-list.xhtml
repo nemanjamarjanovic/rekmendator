@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+
+        <h2><h:outputText value="#{text['user-list.title']}"/></h2>
+
+        <h:dataTable value="#{allUsers}" var="item">
+
+<!--            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['generic.details']}"/>
+                </f:facet>
+                <h:link outcome="user-view" value="#{text['generic.details']}">
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>-->
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value=" #{text['generic.edit-title']}"/>
+                </f:facet>
+                <h:link outcome="user-edit" value="#{text['generic.edit-title']}">
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.id']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.username']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.username}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.password']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.password}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.role']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.role.title}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.name']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.name}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.surname']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.surname}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.mbr']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.mbr}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['user.email']}:"/>
+                </f:facet>
+                <h:outputText value="#{item.email}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    #{text['user-list.activation']}
+                </f:facet>
+                <h:form>
+                    <h:commandLink action="#{userEdit.doStateChange(item.id)}" 
+                                   value="#{text['user-list.activate']}" rendered="#{!item.active}"/>
+
+                    <h:commandLink action="#{userEdit.doStateChange(item.id)}" 
+                                   value="#{text['user-list.deactivate']}" rendered="#{item.active}"/>
+                </h:form>
+            </h:column>
+
+        </h:dataTable>
+
+    </ui:define>
+</ui:composition>

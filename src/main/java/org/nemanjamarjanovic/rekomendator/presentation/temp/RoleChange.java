@@ -1,8 +1,9 @@
-package org.nemanjamarjanovic.rekomendator.presentation.user;
+package org.nemanjamarjanovic.rekomendator.presentation.temp;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import org.nemanjamarjanovic.rekomendator.bussines.boundary.SecurityDao;
+import org.nemanjamarjanovic.rekomendator.bussines.entity.Role;
 import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
 
 /**
@@ -10,16 +11,17 @@ import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
  * @author nemanja
  */
 @Model
-public class Activation
+public class RoleChange
 {
 
-    @Inject
-    private SecurityDao securityDao;
     private User selectedUser;
+    private Role selectedRole;
+    @Inject
+    SecurityDao securityDao;
 
-    public String setUserState(String userId, boolean state)
+    public String doChange()
     {
-        securityDao.setUserState(userId, state);
+        securityDao.promoteUser(this.selectedUser.getId(), this.selectedRole.getTitle());
         return "/admin/users?faces-redirect=true";
     }
 
@@ -31,6 +33,16 @@ public class Activation
     public void setSelectedUser(User selectedUser)
     {
         this.selectedUser = selectedUser;
+    }
+
+    public Role getSelectedRole()
+    {
+        return selectedRole;
+    }
+
+    public void setSelectedRole(Role selectedRole)
+    {
+        this.selectedRole = selectedRole;
     }
 
 }

@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.presentation;
+package org.nemanjamarjanovic.rekomendator.presentation.temp;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -79,12 +79,7 @@ public class Security implements Serializable
         return permissions.contains(permission);
     }
 
-    @Produces
-    @Named
-    public List<Role> getAllRoles()
-    {
-        return securityDao.allRoles();
-    }
+   
 
     private void clearFields()
     {

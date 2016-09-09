@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_ALL;
 
 /**
@@ -32,18 +33,11 @@ public class Favorite implements Serializable
     @OneToOne
     private Movie movie;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
 
     public Favorite()
     {
-    }
-
-    public Favorite(String id, User user, Movie movie)
-    {
-        this.id = UUID.randomUUID().toString();
-        this.createdDate = new Date();
-        this.user = user;
-        this.movie = movie;
     }
 
     public String getId()

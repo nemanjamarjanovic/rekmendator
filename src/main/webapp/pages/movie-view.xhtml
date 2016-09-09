@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+
+        <f:metadata>
+            <f:viewParam name="id" 
+                         value="#{movie}" 
+                         converter="#{movieConverter}" 
+                         converterMessage="Unknown product, please use a link from within the system."
+                         required="true" 
+                         requiredMessage="Bad request, please use a link from within the system."
+                         />
+        </f:metadata>
+
+        <h:messages />
+
+        <h:form id="newActorForm">
+            <h:panelGrid columns="2">
+                #{text['movie.title']}: 
+                <h:outputLabel>#{movie.title}</h:outputLabel>
+
+                #{text['movie.description']}: 
+                <h:outputLabel>#{movie.description}</h:outputLabel>
+
+                #{text['movie.duration']}: 
+                <h:outputLabel>#{movie.duration}</h:outputLabel>
+
+                #{text['movie.publishingdate']}: 
+                <h:outputLabel>#{movie.publishingDate}</h:outputLabel>
+
+                #{text['movie.genre']}: 
+                <h:dataTable value="#{movie.genre}" var="subitem1">
+                    <h:column>#{subitem1.title}</h:column>
+                </h:dataTable>
+
+                #{text['movie.actors']}: 
+                <h:dataTable value="#{movie.actors}" var="subitem2">
+                    <h:column>#{subitem2.name}</h:column>
+                </h:dataTable>
+
+                <h:commandButton value="#{text['movie.action.favorites']}"
+                                 action="#{movieAction.doFavorite(movie.id)}"/>
+                <h:commandButton value="#{text['movie.action.rate']}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+

@@ -1,53 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/>
-
-        <title>Znas li neki dobar film</title>
+        <title>Neki naslov</title>
     </h:head>
 
     <h:body>
-        <div class="w3-container w3-black">
-            <ui:insert name="header">
-                <h3>Menu goes here</h3>
-                <!--
-       /**
-               <h:form>
-                   <h:commandLink class="menu-item" action="#{security.doLogout()}" value="LOGOUT" rendered="#{security.hasPermission('LOGOUT')}"/>
-               </h:form>
-       
-               <h:outputLabel class="username" rendered="#{not empty security.current}">Korisnik: #{security.current}</h:outputLabel>
-       
-               <h:link class="menu-item" outcome="/login" value="LOGIN" rendered="#{security.hasPermission('LOGIN')}"/>
-               <h:link class="menu-item" outcome="/register" value="REGISTER" rendered="#{security.hasPermission('REGISTER')}"/>
-               <h:link class="menu-item" outcome="/movies" value="MOVIES" rendered="#{security.hasPermission('MOVIES-LIST')}"/>
-               <h:link class="menu-item" outcome="/admin/genres" value="GENRES" rendered="#{security.hasPermission('GENRE-LIST')}"/>
-               <h:link class="menu-item" outcome="/admin/users" value="USERS" rendered="#{security.hasPermission('USER-LIST')}"/>
-       **/
-                -->
 
-                <h:form>
-                    <h:outputLabel class="username" rendered="#{not empty security.current}">Korisnik: #{security.current}</h:outputLabel>
-                    <h:commandButton class="w3-btn w3-white w3-text-teal" rendered="#{not empty security.current}" action="#{security.doLogout()}" value="Log out"/>
-                </h:form>
-            </ui:insert>
+        <div>
+            <h:link class="menu-item" 
+                    outcome="/index" 
+                    value="#{text['login.title']}"/> 
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/genre-list" 
+                    value="#{text['genre-list.title']}"/> 
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/actor-list" 
+                    value="#{text['actor-list.title']}"/>
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/movie-list" 
+                    value="#{text['movie-list.title']}"/>
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/user-list" 
+                    value="#{text['user-list.title']}"/>
+            |
+            <h:outputLabel rendered="#{not empty currentUser.name}"
+                           value="#{currentUser.name}"/>
+            |
+            <h:form ><h:commandLink class="menu-item" 
+                           action="#{currentUser.doLogout()}"
+                    rendered="#{not empty currentUser.name}"
+                    value="#{text['login.logout']}"/></h:form>
         </div>
-
-        <div class="w3-container">
+        <div>
             <ui:insert name="content">
                 Content goes here
             </ui:insert>
         </div>
-        <!--        <div class="w3-container w3-teal">
-                    <p>viva las vegas!</p>
-                </div>-->
     </h:body>
 
 </html>

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MoviesDao;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
 import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
 
 /**
@@ -19,7 +19,7 @@ public class MovieSearch implements Serializable
 {
 
     @Inject
-    MoviesDao moviesDao;
+    MovieDao moviesDao;
 
     private String title = "";
     private List<Movie> result = new ArrayList<>();

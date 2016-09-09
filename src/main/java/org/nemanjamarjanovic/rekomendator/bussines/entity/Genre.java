@@ -1,6 +1,7 @@
 package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -42,4 +43,30 @@ public class Genre implements Serializable
         this.title = title;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Genre other = (Genre) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+        
+        <h2><h:outputText value="#{text['movie-list.title']}"/></h2>
+        
+        <h:link outcome="movie-edit" value="#{text['movie-list.newmovie']}"/>
+        
+        <h:dataTable value="#{allMovies}" var="item">
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['generic.details']}"/>
+                </f:facet>
+                <h:link outcome="movie-view" value="#{text['generic.details']}">
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value=" #{text['generic.edit-title']}"/>
+                </f:facet>
+                <h:link outcome="movie-edit" value="#{text['generic.edit-title']}">
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.title']}"/>
+                </f:facet>
+                <h:outputText value="#{item.title}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.description']}"/>
+                </f:facet>
+                <div style="max-width: 33%;"><h:outputText value=""/>#{item.description}</div>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.duration']}"/>
+                </f:facet>
+                <h:outputText value="#{item.duration}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.genre']}"/>
+                </f:facet>
+                <h:dataTable value="#{item.genre}" var="subitem1">
+                    <h:column>
+                        <h:outputText value="#{subitem1.title}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.actors']}"/>
+                </f:facet>
+                <h:dataTable value="#{item.actors}" var="subitem2">
+                    <h:column>
+                        <h:outputText value="#{subitem2.name}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{text['movie.publishingdate']}"/>
+                </f:facet>
+                <h:outputText value="#{item.publishingDate}"/>
+            </h:column>
+
+        </h:dataTable>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+
+        <f:metadata>
+            <f:viewParam name="id" 
+                         value="#{editUser.data}" 
+                         converter="#{userConverter}" 
+                         converterMessage="Unknown product, 
+                         please use a link from within the system."
+                         />
+        </f:metadata>
+  
+        <h:form id="newUserForm">
+            <h:panelGrid columns="3">
+                
+                <h:outputLabel value="#{text['user.username']}:"/>
+                <h:inputText id="username" 
+                             value="#{editUser.data.username}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="username" style="color:red"/>
+                
+                <h:outputLabel value="#{text['user.password']}:"/>
+                <h:inputText id="password" 
+                             value="#{editUser.data.password}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="password" style="color:red"/>
+                
+                <h:outputLabel value="#{text['user.name']}:"/>
+                <h:inputText id="name" 
+                             value="#{editUser.data.name}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="name" style="color:red"/>
+                
+                <h:outputLabel value="#{text['user.surname']}:"/>
+                <h:inputText id="surname" 
+                             value="#{editUser.data.surname}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="surname" style="color:red"/>
+                
+                <h:outputLabel value="#{text['user.mbr']}:"/>
+                <h:inputText id="mbr" 
+                             value="#{editUser.data.mbr}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="mbr" style="color:red"/>
+                
+                <h:outputLabel value="#{text['user.email']}:"/>
+                <h:inputText id="email" 
+                             value="#{editUser.data.email}" 
+                             required="true" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="email" style="color:red"/>
+                
+                
+
+                #{text['movie.genre']}: 
+                <h:selectManyListbox id="genre" 
+                                     value="#{movieEdit.data.genre}" 
+                                     converter="#{genreConverter}">
+                    <f:selectItems value="#{allGenres}" 
+                                   var="genreitem" 
+                                   itemValue="#{genreitem}" 
+                                   itemLabel="#{genreitem.title}" />
+                </h:selectManyListbox>
+                <h:message for="genre" style="color:red"/>
+
+                #{text['movie.actors']}: 
+                <h:selectManyListbox id="actor" 
+                                     value="#{movieEdit.data.actors}" 
+                                     converter="#{actorConverter}">
+                    <f:selectItems value="#{allActors}" 
+                                   var="actoritem" 
+                                   itemValue="#{actoritem}" 
+                                   itemLabel="#{actoritem.name}" />
+                </h:selectManyListbox>
+                <h:message for="actor" style="color:red"/>
+
+                <h:commandButton action="#{movieEdit.doCreate()}" 
+                                 value="#{text['generic.save']}"
+                                 rendered="#{empty movieEdit.data.id}"/>
+                
+                <h:commandButton action="#{movieEdit.doUpdate()}" 
+                                 value="#{text['generic.edit']}"
+                                 rendered="#{not empty movieEdit.data.id}"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
