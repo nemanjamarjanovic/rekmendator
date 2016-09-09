@@ -122,6 +122,7 @@ public class MovieDao {
         favorite.setCreatedDate(new Date());
         favorite.setUser(entityManager.getReference(User.class, user));
         favorite.setMovie(entityManager.getReference(Movie.class, movie));
+        entityManager.persist(favorite);
     }
 
 }

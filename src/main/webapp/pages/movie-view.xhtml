@@ -25,30 +25,41 @@
         <h:form id="newActorForm">
             <h:panelGrid columns="2">
                 #{text['movie.title']}: 
-                <h:outputLabel>#{movie.title}</h:outputLabel>
+                <h:outputLabel value="#{movie.title}"/>
 
                 #{text['movie.description']}: 
-                <h:outputLabel>#{movie.description}</h:outputLabel>
+                <h:outputLabel value="#{movie.description}"/>
 
                 #{text['movie.duration']}: 
-                <h:outputLabel>#{movie.duration}</h:outputLabel>
+                <h:outputLabel value="#{movie.duration}"/>
 
                 #{text['movie.publishingdate']}: 
-                <h:outputLabel>#{movie.publishingDate}</h:outputLabel>
+                <h:outputLabel value="#{movie.publishingDate}"/>
 
                 #{text['movie.genre']}: 
                 <h:dataTable value="#{movie.genre}" var="subitem1">
-                    <h:column>#{subitem1.title}</h:column>
+                    <h:column>
+                        <h:outputLabel value="#{subitem1.title}"/>
+                    </h:column>
                 </h:dataTable>
 
                 #{text['movie.actors']}: 
                 <h:dataTable value="#{movie.actors}" var="subitem2">
-                    <h:column>#{subitem2.name}</h:column>
+                    <h:column>
+                        <h:outputLabel value="#{subitem2.name}"/>
+                    </h:column>
                 </h:dataTable>
+            </h:panelGrid>
 
-                <h:commandButton value="#{text['movie.action.favorites']}"
-                                 action="#{movieAction.doFavorite(movie.id)}"/>
-                <h:commandButton value="#{text['movie.action.rate']}"/>
+            <h:panelGrid columns="1">
+                <h:commandLink value="#{text['movie.action.favorites']}"
+                               rendered="#{!favoriteEdit.isFavorited(movie.id)}"
+                               action="#{movieEdit.doFavorite(movie.id)}"/>
+
+                <h:outputLabel value="#{text['movie-view.favorited']}"
+                               rendered="#{favoriteEdit.isFavorited(movie.id)}"/>
+
+                <h:commandLink value="#{text['movie.action.rate']}"/>
             </h:panelGrid>
         </h:form>
     </ui:define>

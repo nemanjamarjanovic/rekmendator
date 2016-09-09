@@ -2,6 +2,7 @@ package org.nemanjamarjanovic.rekomendator.bussines.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_BY_USER;
 
 /**
  *
@@ -17,12 +18,13 @@ import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_A
  */
 @Entity
 @NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select f from Favorite f")
+        @NamedQuery(name = FIND_BY_USER, query = "select f from Favorite f where f.user.id = :user ")
 )
 public class Favorite implements Serializable
 {
 
-    public static final String FIND_ALL = "Favorite.findAll";
+    public static final String FIND_BY_USER = "Favorite.findByUser";
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
@@ -78,6 +80,33 @@ public class Favorite implements Serializable
     public void setCreatedDate(Date createdDate)
     {
         this.createdDate = createdDate;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Favorite other = (Favorite) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -42,12 +42,6 @@ public class DataProvider {
 
     @Produces
     @Named
-    public List<Movie> getAllMovies() {
-        return moviesDao.findAllMovies();
-    }
-
-    @Produces
-    @Named
     public List<User> getAllUsers() {
         return userDao.findAll();
     }

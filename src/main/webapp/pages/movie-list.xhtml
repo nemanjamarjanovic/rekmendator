@@ -10,12 +10,24 @@
 
 
     <ui:define name="content">
+
+        <f:metadata>
+            <f:viewParam name="favorites" 
+                         value="#{movieList.favorites}" 
+                         required="false" 
+                         />
+            <f:viewAction action="#{movieList.init()}" />
+        </f:metadata>
+
+        <h:panelGroup rendered="#{movieList.favorites}">
+            <h1>favorites</h1>
+        </h:panelGroup>
         
         <h2><h:outputText value="#{text['movie-list.title']}"/></h2>
-        
+
         <h:link outcome="movie-edit" value="#{text['movie-list.newmovie']}"/>
-        
-        <h:dataTable value="#{allMovies}" var="item">
+
+        <h:dataTable value="#{movieList.data}" var="item">
 
             <h:column>
                 <f:facet name="header">
@@ -46,7 +58,7 @@
                 <f:facet name="header">
                     <h:outputText value="#{text['movie.description']}"/>
                 </f:facet>
-                <div style="max-width: 33%;"><h:outputText value=""/>#{item.description}</div>
+                <div><h:outputText value=""/>#{item.description}</div>
             </h:column>
 
             <h:column>

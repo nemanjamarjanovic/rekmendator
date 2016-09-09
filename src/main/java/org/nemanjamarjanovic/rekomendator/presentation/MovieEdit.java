@@ -1,10 +1,10 @@
 package org.nemanjamarjanovic.rekomendator.presentation;
 
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.nemanjamarjanovic.rekomendator.bussines.boundary.FavoriteDao;
 import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
 import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
 
@@ -18,6 +18,12 @@ public class MovieEdit implements Serializable {
 
     @Inject
     private MovieDao moviesDao;
+    
+    @Inject
+    private FavoriteDao favoriteDao;
+    
+    @Inject
+    private CurrentUser currentUser;
 
     private Movie data = new Movie();
 
@@ -38,5 +44,17 @@ public class MovieEdit implements Serializable {
     public void setData(Movie data) {
         this.data = data;
     }
+
+    
+    public String doFavorite(String movie) {
+        moviesDao.addToFavorites(movie, currentUser.getId());
+        return "movie-view?faces-redirect=true&id="+movie;
+    }
+
+//    @Inject
+//    public String doRate(String movie) {
+//        //moviesDao.updateMovie(data);
+//        return "movie-view?faces-redirect=true";
+//    }
 
 }

@@ -11,7 +11,7 @@
         <title>Neki naslov</title>
     </h:head>
 
-    <h:body>
+    <h:body style="width:800px">
 
         <div>
             <h:link class="menu-item" 
@@ -33,16 +33,20 @@
             <h:link class="menu-item" 
                     outcome="/pages/user-list" 
                     value="#{text['user-list.title']}"/>
-            |
+        
+        
+        <span style="float:right">
             <h:outputLabel rendered="#{not empty currentUser.name}"
                            value="#{currentUser.name}"/>
             |
-            <h:form ><h:commandLink class="menu-item" 
+            <h:form style="display: inline" ><h:commandLink class="menu-item" 
                            action="#{currentUser.doLogout()}"
                     rendered="#{not empty currentUser.name}"
                     value="#{text['login.logout']}"/></h:form>
-        </div>
-        <div>
+        </span>
+            
+            </div>
+        <div >
             <ui:insert name="content">
                 Content goes here
             </ui:insert>
