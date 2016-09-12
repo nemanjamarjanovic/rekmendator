@@ -18,14 +18,14 @@
                          please use a link from within the system."
                          />
         </f:metadata>
-  
+
         <h:form id="newUserForm">
             <h:panelGrid columns="3">
-                
+
                 <h:outputLabel value="#{text['user.username']}:"/>
                 <h:outputLabel value="#{userEdit.data.username}"/>
                 <h:outputLabel/>
-                
+
                 <h:outputLabel value="#{text['user.password']}:"/>
                 <h:inputText id="password" 
                              value="#{userEdit.data.password}" 
@@ -33,7 +33,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.name']}:"/>
                 <h:inputText id="name" 
                              value="#{userEdit.data.name}" 
@@ -41,7 +41,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="name" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.surname']}:"/>
                 <h:inputText id="surname" 
                              value="#{userEdit.data.surname}" 
@@ -49,7 +49,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="surname" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.mbr']}:"/>
                 <h:inputText id="mbr" 
                              value="#{userEdit.data.mbr}" 
@@ -57,7 +57,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="mbr" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.email']}:"/>
                 <h:inputText id="email" 
                              value="#{userEdit.data.email}" 
@@ -66,10 +66,10 @@
                 </h:inputText>
                 <h:message for="email" style="color:red"/>
 
-                <h:commandButton action="#{userEdit.doCreate()}" 
+                <h:commandButton action="#{userEdit.doRegister()}" 
                                  value="#{text['generic.save']}"
                                  rendered="#{empty userEdit.data.id}"/>
-                
+
                 <h:commandButton action="#{userEdit.doUpdate()}" 
                                  value="#{text['generic.edit']}"
                                  rendered="#{not empty userEdit.data.id}"/>

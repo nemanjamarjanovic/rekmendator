@@ -12,26 +12,72 @@
     <ui:define name="content">
 
         <f:metadata>
-            <f:viewParam name="favorites" 
-                         value="#{movieList.favorites}" 
-                         required="false" 
+            <f:viewParam name="src" 
+                         value="#{movieList.src}" 
+                         required="true" 
                          />
             <f:viewAction action="#{movieList.init()}" />
         </f:metadata>
 
-        <h:panelGroup rendered="#{movieList.favorites}">
-            <h1>favorites</h1>
-        </h:panelGroup>
+
+
+        <h2>
+            <h:outputText value="#{text['movie-list.alltitle']}" rendered="#{movieList.src=='all'}"/>
+            <h:outputText value="#{text['movie-list.favoritetitle']}" rendered="#{movieList.src=='favorite'}"/>
+            <h:outputText value="#{text['movie-list.searchtitle']}" rendered="#{movieList.src=='search'}"/>
+        </h2>
+
+        <h:form rendered="#{movieList.src=='search'}">
+            <h:panelGrid columns="3">
+
+                <h:outputLabel value="#{text['movie.title']}"/>
+                <h:inputText id="title"
+                             value="#{movieList.title}" >
+                    <f:validateLength minimum="3" maximum="100" />
+                </h:inputText>
+                <h:message for="title" style="color:red"/>
+
+<!--                <h:outputLabel value="#{text['movie.publishingdate']}"/>
+                <h:inputText id="publishingDate"
+                             value="#{movieList.publishingDate}" >
+                    <f:validateLength minimum="8" maximum="10" />
+                </h:inputText>
+                <h:message for="publishingDate" style="color:red"/>-->
+
+                <h:commandButton action="#{movieList.doSearch()}" 
+                                 value="#{text['generic.search']}"/>
+
+            </h:panelGrid>
+        </h:form>
         
-        <h2><h:outputText value="#{text['movie-list.title']}"/></h2>
+        <hr/>
+        <br/>
+        <ui:include src="/WEB-INF/pagination.xhtml">
+            <ui:param name="list" value="#{movieList}"/>
+        </ui:include>
+        <br/>
 
-        <h:link outcome="movie-edit" value="#{text['movie-list.newmovie']}"/>
-
-        <h:dataTable value="#{movieList.data}" var="item">
+        <h:dataTable value="#{movieList.pagination.items}"
+                     rendered="#{not empty movieList.pagination.items}"
+                     var="item">
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['generic.details']}"/>
+                    <h:outputLabel value="#{text['movie.title']}"/>
+                </f:facet>
+                <h:outputLabel value="#{item.title}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="#{text['movie.publishingdate']}"/>
+                </f:facet>
+                <h:outputLabel value="#{item.publishingDate}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputLabel value="#{text['generic.details']}"/>
                 </f:facet>
                 <h:link outcome="movie-view" value="#{text['generic.details']}">
                     <f:param name="id" value="#{item.id}" />
@@ -40,61 +86,11 @@
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value=" #{text['generic.edit-title']}"/>
+                    <h:outputLabel value=" #{text['generic.edit-title']}"/>
                 </f:facet>
                 <h:link outcome="movie-edit" value="#{text['generic.edit-title']}">
                     <f:param name="id" value="#{item.id}" />
                 </h:link>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.title']}"/>
-                </f:facet>
-                <h:outputText value="#{item.title}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.description']}"/>
-                </f:facet>
-                <div><h:outputText value=""/>#{item.description}</div>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.duration']}"/>
-                </f:facet>
-                <h:outputText value="#{item.duration}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.genre']}"/>
-                </f:facet>
-                <h:dataTable value="#{item.genre}" var="subitem1">
-                    <h:column>
-                        <h:outputText value="#{subitem1.title}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.actors']}"/>
-                </f:facet>
-                <h:dataTable value="#{item.actors}" var="subitem2">
-                    <h:column>
-                        <h:outputText value="#{subitem2.name}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="#{text['movie.publishingdate']}"/>
-                </f:facet>
-                <h:outputText value="#{item.publishingDate}"/>
             </h:column>
 
         </h:dataTable>

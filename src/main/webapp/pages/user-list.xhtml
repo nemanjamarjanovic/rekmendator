@@ -11,82 +11,73 @@
 
     <ui:define name="content">
 
-        <h2><h:outputText value="#{text['user-list.title']}"/></h2>
+        <h2><h:outputLabel value="#{text['user-list.title']}"/></h2>
 
         <h:dataTable value="#{allUsers}" var="item">
 
-<!--            <h:column>
+            <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['generic.details']}"/>
+                    <h:outputLabel value="#{text['generic.details']}"/>
                 </f:facet>
                 <h:link outcome="user-view" value="#{text['generic.details']}">
                     <f:param name="id" value="#{item.id}" />
                 </h:link>
-            </h:column>-->
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value=" #{text['generic.edit-title']}"/>
-                </f:facet>
-                <h:link outcome="user-edit" value="#{text['generic.edit-title']}">
-                    <f:param name="id" value="#{item.id}" />
-                </h:link>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.id']}:"/>
+                    <h:outputLabel value="#{text['user.id']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.id}"/>
+                <h:outputLabel value="#{item.id}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.username']}:"/>
+                    <h:outputLabel value="#{text['user.username']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.username}"/>
+                <h:outputLabel value="#{item.username}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.password']}:"/>
+                    <h:outputLabel value="#{text['user.password']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.password}"/>
+                <h:outputLabel value="#{item.password}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.role']}:"/>
+                    <h:outputLabel value="#{text['user.role']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.role.title}"/>
+                <h:outputLabel value="#{item.role.title}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.name']}:"/>
+                    <h:outputLabel value="#{text['user.name']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.name}"/>
+                <h:outputLabel value="#{item.name}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.surname']}:"/>
+                    <h:outputLabel value="#{text['user.surname']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.surname}"/>
+                <h:outputLabel value="#{item.surname}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.mbr']}:"/>
+                    <h:outputLabel value="#{text['user.mbr']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.mbr}"/>
+                <h:outputLabel value="#{item.mbr}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['user.email']}:"/>
+                    <h:outputLabel value="#{text['user.email']}:"/>
                 </f:facet>
-                <h:outputText value="#{item.email}"/>
+                <h:outputLabel value="#{item.email}"/>
             </h:column>
 
             <h:column>

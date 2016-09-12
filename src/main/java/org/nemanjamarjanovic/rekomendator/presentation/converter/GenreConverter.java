@@ -6,8 +6,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.GenreDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
 
 /**
  *
@@ -18,14 +18,14 @@ import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
 public class GenreConverter implements Converter {
 
     @EJB
-    private MovieDao moviesDao;
+    private GenreDao genreDao;
 
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
 
         return (value == null || value.isEmpty())
-                ? null : moviesDao.findGenreById(value);
+                ? null : genreDao.findById(value);
     }
 
     @Override

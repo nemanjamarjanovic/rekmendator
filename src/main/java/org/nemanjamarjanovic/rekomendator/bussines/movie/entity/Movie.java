@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import static org.nemanjamarjanovic.rekomendator.bussines.entity.Movie.*;
+import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
 
 /**
  *
@@ -19,13 +19,15 @@ import static org.nemanjamarjanovic.rekomendator.bussines.entity.Movie.*;
 @Entity
 @NamedQueries({
     @NamedQuery(name = FIND_ALL, query = "select m from Movie m"),
-    @NamedQuery(name = FIND_BY_TITLE, query = "select m from Movie m where m.title like :title ")
+    @NamedQuery(name = SEARCH, query = "select m from Movie m  "
+            + " where( :title is null or (:title is not null and m.title like :title)) ")
+           // + "  and ( :publishingDate is null or (:publishingDate is not null and m.publishingDate between :from and :to )) ")
 })
 public class Movie implements Serializable
 {
 
     public static final String FIND_ALL = "Movie.findAll";
-    public static final String FIND_BY_TITLE = "Movie.findByTitle";
+    public static final String SEARCH = "Movie.Search";
 
     @Id
     private String id;

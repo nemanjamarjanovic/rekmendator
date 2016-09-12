@@ -6,8 +6,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 
 /**
  *

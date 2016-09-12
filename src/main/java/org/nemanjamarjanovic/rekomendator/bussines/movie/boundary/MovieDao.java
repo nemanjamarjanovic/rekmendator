@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.boundary;
+package org.nemanjamarjanovic.rekomendator.bussines.movie.boundary;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,11 +7,11 @@ import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Actor;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Favorite;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 
 /**
  *
@@ -27,10 +27,6 @@ public class MovieDao {
         return entityManager.find(Movie.class, id);
     }
 
-    public Genre findGenreById(String id) {
-        return entityManager.find(Genre.class, id);
-    }
-
     public Actor findActorById(String id) {
         return entityManager.find(Actor.class, id);
     }
@@ -41,16 +37,14 @@ public class MovieDao {
                 .getResultList();
     }
 
-    public List<Movie> searchMovies(String title) {
-        return entityManager
-                .createNamedQuery(Movie.FIND_BY_TITLE, Movie.class)
-                .setParameter("title", "%" + title + "%")
-                .getResultList();
-    }
+    public List<Movie> search(String title, Date publishingDate, List<Genre> genres) {
 
-    public List<Genre> findAllGenres() {
+        String titleParam = (title == null) ? null : "%" + title.trim() + "%";
+
         return entityManager
-                .createNamedQuery(Genre.FIND_ALL, Genre.class)
+                .createNamedQuery(Movie.SEARCH, Movie.class)
+                .setParameter("title", titleParam)
+                // .setParameter("publishingDate", publishingDate)
                 .getResultList();
     }
 
@@ -60,7 +54,7 @@ public class MovieDao {
                 .getResultList();
     }
 
-    public void createMovie(final Movie data) {
+    public Movie createMovie(final Movie data) {
 
         Movie movie = new Movie();
         movie.setId(UUID.randomUUID().toString());
@@ -80,9 +74,11 @@ public class MovieDao {
                 .forEach(a -> movie.getActors().add(a));
 
         entityManager.persist(movie);
+
+        return movie;
     }
 
-    public void updateMovie(final Movie data) {
+    public Movie updateMovie(final Movie data) {
 
         Movie movie = entityManager.find(Movie.class, data.getId());
 
@@ -101,13 +97,7 @@ public class MovieDao {
                 .getReference(Actor.class, a.getId()))
                 .forEach(a -> movie.getActors().add(a));
 
-        entityManager.persist(movie);
-    }
-
-    public Genre createGenre(String title) {
-        Genre genre = new Genre(title);
-        entityManager.persist(genre);
-        return genre;
+        return movie;
     }
 
     public Actor createActor(String title) {

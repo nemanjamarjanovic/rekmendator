@@ -11,13 +11,22 @@
         <title>Neki naslov</title>
     </h:head>
 
-    <h:body style="width:800px">
-
-        <div>
+    <h:body>
+        <div align="center">
             <h:link class="menu-item" 
                     outcome="/index" 
                     value="#{text['login.title']}"/> 
             | 
+            <h:link class="menu-item" 
+                    outcome="/pages/user-registration" 
+                    value="#{text['registration.title']}"/> 
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/movie-list?src=search" 
+                    value="#{text['movie-list.searchtitle']}"/>
+        </div>
+        <div align="center">
+
             <h:link class="menu-item" 
                     outcome="/pages/genre-list" 
                     value="#{text['genre-list.title']}"/> 
@@ -27,26 +36,44 @@
                     value="#{text['actor-list.title']}"/>
             | 
             <h:link class="menu-item" 
-                    outcome="/pages/movie-list" 
-                    value="#{text['movie-list.title']}"/>
+                    outcome="/pages/movie-list?src=search" 
+                    value="#{text['movie-list.searchtitle']}"/>
             | 
+            <h:link class="menu-item" 
+                    outcome="/pages/movie-list?src=favorite" 
+                    value="#{text['movie-list.favoritetitle']}"/>
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/movie-list?src=all" 
+                    value="#{text['movie-list.alltitle']}"/>
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/movie-edit" 
+                    value="#{text['movie-list.newmovie']}"/>
+        </div>
+        <div align="center"> 
             <h:link class="menu-item" 
                     outcome="/pages/user-list" 
                     value="#{text['user-list.title']}"/>
-        
-        
-        <span style="float:right">
+            | 
+            <h:link class="menu-item" 
+                    outcome="/pages/user-edit?id=#{currentUser.id}" 
+                    value="#{text['user-edit.profiletitle']}"/>
+            | 
             <h:outputLabel rendered="#{not empty currentUser.name}"
                            value="#{currentUser.name}"/>
             |
-            <h:form style="display: inline" ><h:commandLink class="menu-item" 
-                           action="#{currentUser.doLogout()}"
-                    rendered="#{not empty currentUser.name}"
-                    value="#{text['login.logout']}"/></h:form>
-        </span>
-            
-            </div>
-        <div >
+            <h:form style="display: inline" >
+                <h:commandLink class="menu-item" 
+                               action="#{currentUser.doLogout()}"
+                               rendered="#{not empty currentUser.name}"
+                               value="#{text['login.logout']}"/>
+            </h:form>
+        </div>
+        <hr/>
+        <br/>
+
+        <div  align="center">
             <ui:insert name="content">
                 Content goes here
             </ui:insert>

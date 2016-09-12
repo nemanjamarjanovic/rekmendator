@@ -2,7 +2,7 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 
 /**
  *

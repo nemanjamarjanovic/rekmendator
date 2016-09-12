@@ -1,11 +1,15 @@
 package org.nemanjamarjanovic.rekomendator.presentation;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.UserDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
+import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 
 /**
  *
@@ -23,13 +27,15 @@ public class CurrentUser implements Serializable {
 
     private String id;
     private String name;
+    private Set<String> permissions = new HashSet<>();
 
-    public String doLogin() {
+    public String doLogin() throws NoSuchAlgorithmException {
         User user = userDao.findByUsername(this.username, this.password);
         this.id = user.getId();
         this.name = user.getName();
         this.username = null;
         this.password = null;
+        this.permissions = user.getRole().getPermissions().stream().map(p -> p.getTitle()).collect(Collectors.toSet());
         return "/pages/movie-list?faces-redirect=true";
     }
 
@@ -63,15 +69,8 @@ public class CurrentUser implements Serializable {
         return name;
     }
 
-    public void setId(String id)
-    {
-        this.id = id;
+    public boolean hasPermission(String permission) {
+        return this.permissions.contains(permission);
     }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-    
 
 }

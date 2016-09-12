@@ -11,15 +11,15 @@
 
     <ui:define name="content">
         
-        <h2><h:outputText value="#{text['actor-list.title']}"/></h2>
+        <h2><h:outputLabel value="#{text['actor-list.title']}"/></h2>
         <h:link outcome="actor-edit" value="#{text['actor-list.newactor']}"/>
         
         <h:dataTable value="#{allActors}" var="item">
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="#{text['actor.name']}"/>
+                    <h:outputLabel value="#{text['actor.name']}"/>
                 </f:facet>
-                <h:outputText value="#{item.name}"/>
+                <h:outputLabel value="#{item.name}"/>
             </h:column>
         </h:dataTable>
         

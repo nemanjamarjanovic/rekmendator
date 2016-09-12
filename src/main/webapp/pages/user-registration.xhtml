@@ -26,15 +26,16 @@
                 <h:inputText id="username" 
                              value="#{userEdit.data.username}" 
                              required="true" >
-                    <f:validateLength minimum="3" maximum="100" />
+                    <f:validateLength minimum="12" maximum="100" />
+                    <f:validateRegex pattern="[^@#/]"
                 </h:inputText>
                 <h:message for="username" style="color:red"/>
                 
                 <h:outputLabel value="#{text['user.password']}:"/>
                 <h:inputText id="password" 
                              value="#{userEdit.data.password}" 
-                             required="true" >
-                    <f:validateLength minimum="3" maximum="100" />
+                             required="true" 
+                             validator="paswordValidator">
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
                 

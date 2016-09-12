@@ -11,7 +11,8 @@
     <ui:define name="content">
         <h:form id="newActorForm">
             <h:panelGrid columns="3">
-                #{text['actor.name']}: 
+                
+                <h:outputLabel value="#{text['actor.name']}:"/>
                 <h:inputText id="name" 
                              value="#{newActor.name}" 
                              required="true" >

@@ -4,9 +4,9 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.FavoriteDao;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.FavoriteDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 
 /**
  *
@@ -18,23 +18,23 @@ public class MovieEdit implements Serializable {
 
     @Inject
     private MovieDao moviesDao;
-    
+
     @Inject
     private FavoriteDao favoriteDao;
-    
+
     @Inject
     private CurrentUser currentUser;
 
     private Movie data = new Movie();
 
     public String doCreate() {
-        moviesDao.createMovie(data);
-        return "movie-list?faces-redirect=true";
+        Movie createMovie = moviesDao.createMovie(data);
+        return "movie-view?faces-redirect=true&id=" + createMovie.getId();
     }
 
     public String doUpdate() {
         moviesDao.updateMovie(data);
-        return "movie-list?faces-redirect=true";
+        return "movie-view?faces-redirect=true&id=" + data.getId();
     }
 
     public Movie getData() {
@@ -44,17 +44,5 @@ public class MovieEdit implements Serializable {
     public void setData(Movie data) {
         this.data = data;
     }
-
-    
-    public String doFavorite(String movie) {
-        moviesDao.addToFavorites(movie, currentUser.getId());
-        return "movie-view?faces-redirect=true&id="+movie;
-    }
-
-//    @Inject
-//    public String doRate(String movie) {
-//        //moviesDao.updateMovie(data);
-//        return "movie-view?faces-redirect=true";
-//    }
 
 }

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/index.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <ui:define name="content">
+
+        <f:metadata>
+            <f:viewParam name="id" 
+                         value="#{user}" 
+                         converter="#{userConverter}" 
+                         converterMessage="Unknown product, please use a link from within the system."
+                         required="true" 
+                         requiredMessage="Bad request, please use a link from within the system."
+                         />
+        </f:metadata>
+
+
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="#{text['user.username']}:"/>
+            <h:outputLabel value="#{user.username}"/>
+
+            <h:outputLabel value="#{text['user.password']}:"/>
+            <h:outputLabel value="#{user.password}"/>
+
+            <h:outputLabel value="#{text['user.name']}:"/>
+            <h:outputLabel value="#{user.name}"/>
+
+            <h:outputLabel value="#{text['user.surname']}:"/>
+            <h:outputLabel value="#{user.surname}"/>
+
+            <h:outputLabel value="#{text['user.mbr']}:"/>
+            <h:outputLabel value="#{user.mbr}"/>
+
+            <h:outputLabel value="#{text['user.email']}:"/>
+            <h:outputLabel value="#{user.email}"/>
+        </h:panelGrid>
+        
+        <h:form id="changeRoleForm">
+            <h:selectOneMenu value="#{roleChange.role}">
+                <f:selectItems  value="#{allRoles}"/>
+            </h:selectOneMenu>
+            <br/>
+
+            <h:commandButton action="#{roleChange.doRoleChange(user.id)}" 
+                             value="#{text['generic.edit']}"
+                             rendered="#{not empty user.id}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+

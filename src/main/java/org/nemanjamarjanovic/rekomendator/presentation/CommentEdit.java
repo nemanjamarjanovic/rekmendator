@@ -3,28 +3,38 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 import java.io.Serializable;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.FavoriteDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.CommentDao;
 
 /**
  *
  * @author nemanja
  */
 @Model
-public class FavoriteEdit implements Serializable {
+public class CommentEdit implements Serializable {
 
     @Inject
-    private FavoriteDao favoriteDao;
+    private CommentDao commentDao;
 
     @Inject
     private CurrentUser currentUser;
 
-    public String doFavorite(String movie) {
-        favoriteDao.create(movie, currentUser.getId());
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String doComment(String movie) {
+        commentDao.create(movie, currentUser.getId(), this.text);
         return "movie-view?faces-redirect=true&id=" + movie;
     }
 
-    public boolean isFavorited(String movie) {
-        return favoriteDao
+    public boolean isCommented(String movie) {
+        return commentDao
                 .findByUser(currentUser.getId())
                 .parallelStream()
                 .map(f -> f.getMovie().getId())

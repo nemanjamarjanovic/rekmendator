@@ -11,7 +11,7 @@
     <ui:define name="content">
         <h:form id="newGenreForm">
             <h:panelGrid columns="3">
-                #{text['genre.title']}: 
+                <h:outputLabel value="#{text['genre.title']}: "/>
                 <h:inputText id="title" 
                              value="#{newGenre.title}" 
                              required="true" >

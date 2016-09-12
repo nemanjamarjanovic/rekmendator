@@ -20,7 +20,7 @@
 
         <h:form id="newMovieForm">
             <h:panelGrid columns="3">
-                #{text['movie.title']}: 
+                : <h:outputLabel value="#{text['movie.title']}"/>
                 <h:inputText id="title" 
                              value="#{movieEdit.data.title}" 
                              required="true" >
@@ -28,7 +28,7 @@
                 </h:inputText>
                 <h:message for="title" style="color:red"/>
 
-                #{text['movie.description']}: 
+                <h:outputLabel value="#{text['movie.description']}:"/> 
                 <h:inputTextarea id="description" 
                                  cols="60"
                                  rows="20"
@@ -38,7 +38,7 @@
                 </h:inputTextarea>
                 <h:message for="description" style="color:red"/>
 
-                #{text['movie.duration']}: 
+                <h:outputLabel value="#{text['movie.duration']}:"/> 
                 <h:inputText id="duration" 
                              value="#{movieEdit.data.duration}" 
                              required="true" >
@@ -46,7 +46,7 @@
                 </h:inputText>
                 <h:message for="duration" style="color:red"/>
 
-                #{text['movie.publishingdate']}: 
+                <h:outputLabel value="#{text['movie.publishingdate']}:"/> 
                 <h:inputText id="publishingdate" 
                              value="#{movieEdit.data.publishingDate}" 
                              required="true" >
@@ -54,7 +54,7 @@
                 </h:inputText>
                 <h:message for="publishingdate" style="color:red"/>
 
-                #{text['movie.genre']}: 
+                <h:outputLabel value="#{text['movie.genre']}:"/> 
                 <h:selectManyListbox id="genre" 
                                      value="#{movieEdit.data.genre}" 
                                      converter="#{genreConverter}">
@@ -65,7 +65,7 @@
                 </h:selectManyListbox>
                 <h:message for="genre" style="color:red"/>
 
-                #{text['movie.actors']}: 
+                <h:outputLabel value="#{text['movie.actors']}:"/> 
                 <h:selectManyListbox id="actor" 
                                      value="#{movieEdit.data.actors}" 
                                      converter="#{actorConverter}">
@@ -76,10 +76,17 @@
                 </h:selectManyListbox>
                 <h:message for="actor" style="color:red"/>
 
+
+                <h:outputLabel value="#{text['movie.trailer']}:"/> 
+                <h:link outcome="movie-upload" value="#{text['movie.action.trailerupload']}">
+                    <f:param name="id" value="#{movieEdit.data.id}" />
+                </h:link>
+
+
                 <h:commandButton action="#{movieEdit.doCreate()}" 
                                  value="#{text['generic.save']}"
                                  rendered="#{empty movieEdit.data.id}"/>
-                
+
                 <h:commandButton action="#{movieEdit.doUpdate()}" 
                                  value="#{text['generic.edit']}"
                                  rendered="#{not empty movieEdit.data.id}"/>

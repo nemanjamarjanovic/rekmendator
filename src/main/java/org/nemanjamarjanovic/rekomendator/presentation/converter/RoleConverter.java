@@ -6,8 +6,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.RoleDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 
 /**
  *
@@ -15,24 +15,24 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
  */
 @Named
 @RequestScoped
-public class ActorConverter implements Converter {
+public class RoleConverter implements Converter {
 
     @EJB
-    private MovieDao moviesDao;
+    private RoleDao roleDao;
 
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
 
         return (value == null || value.isEmpty())
-                ? null : moviesDao.findActorById(value);
+                ? null : roleDao.findById(value);
     }
 
     @Override
     public String getAsString(FacesContext context,
             UIComponent component, Object value) {
 
-        return (value == null) ? "" : ((Actor) value).getId();
+        return (value == null) ? "" : ((Role) value).getTitle();
     }
 
 }

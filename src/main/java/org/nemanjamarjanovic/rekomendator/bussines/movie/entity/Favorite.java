@@ -1,16 +1,16 @@
-package org.nemanjamarjanovic.rekomendator.bussines.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import static org.nemanjamarjanovic.rekomendator.bussines.entity.Favorite.FIND_BY_USER;
+import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Favorite.FIND_BY_USER;
 
 /**
  *

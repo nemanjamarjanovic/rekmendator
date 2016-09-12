@@ -4,7 +4,8 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 template="/index.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
 
 
 
@@ -24,43 +25,84 @@
 
         <h:form id="newActorForm">
             <h:panelGrid columns="2">
-                #{text['movie.title']}: 
+                <h:outputLabel value="#{text['movie.title']}:"/> 
                 <h:outputLabel value="#{movie.title}"/>
 
-                #{text['movie.description']}: 
+                <h:outputLabel value="#{text['movie.description']}:"/>
                 <h:outputLabel value="#{movie.description}"/>
 
-                #{text['movie.duration']}: 
+                <h:outputLabel value="#{text['movie.duration']}:"/> 
                 <h:outputLabel value="#{movie.duration}"/>
 
-                #{text['movie.publishingdate']}: 
+                <h:outputLabel value="#{text['movie.publishingdate']}:"/>
                 <h:outputLabel value="#{movie.publishingDate}"/>
 
-                #{text['movie.genre']}: 
+                <h:outputLabel value="#{text['movie.genre']}:"/> 
                 <h:dataTable value="#{movie.genre}" var="subitem1">
                     <h:column>
                         <h:outputLabel value="#{subitem1.title}"/>
                     </h:column>
                 </h:dataTable>
 
-                #{text['movie.actors']}: 
+                <h:outputLabel value="#{text['movie.actors']}:"/> 
                 <h:dataTable value="#{movie.actors}" var="subitem2">
                     <h:column>
                         <h:outputLabel value="#{subitem2.name}"/>
                     </h:column>
                 </h:dataTable>
+
+                <h:outputLabel value="#{text['movie.rating']}:"/>
+                <h:outputLabel value="#{rateEdit.currentRating(movie.id)}"/>
             </h:panelGrid>
 
             <h:panelGrid columns="1">
                 <h:commandLink value="#{text['movie.action.favorites']}"
                                rendered="#{!favoriteEdit.isFavorited(movie.id)}"
-                               action="#{movieEdit.doFavorite(movie.id)}"/>
-
+                               action="#{favoriteEdit.doFavorite(movie.id)}"/>
                 <h:outputLabel value="#{text['movie-view.favorited']}"
                                rendered="#{favoriteEdit.isFavorited(movie.id)}"/>
 
-                <h:commandLink value="#{text['movie.action.rate']}"/>
+                <h:selectOneRadio rendered="#{!rateEdit.isRated(movie.id)}"
+                                  value="#{rateEdit.rating}" >
+                    <f:selectItem itemValue="1" itemLabel="trash" />
+                    <f:selectItem itemValue="2" itemLabel="nah - nah" />
+                    <f:selectItem itemValue="3" itemLabel="must see!" />
+                    <f:selectItem itemValue="4" itemLabel="two thumbs up" />
+                </h:selectOneRadio>
+
+                <h:commandLink value="#{text['movie.action.rate']}"
+                               rendered="#{!rateEdit.isRated(movie.id)}"
+                               action="#{rateEdit.doRate(movie.id)}"/>
+
+                <h:outputLabel value="#{text['movie-view.rated']}: #{rateEdit.userRating(movie.id)}"
+                               rendered="#{rateEdit.isRated(movie.id)}"/>
             </h:panelGrid>
+
+            <br/><br/>
+            <h2><h:outputLabel value="#{text['movie.action.comment']}:"/></h2>
+            <h:inputTextarea cols="50" 
+                             rows="4" 
+                             value="#{commentEdit.text}"/>
+            <br/>
+            <h:commandButton value="#{text['generic.save']}"
+                             action="#{commentEdit.doComment(movie.id)}"/>
+
+            <br/><br/>
+            <h2><h:outputLabel value="#{text['movie.comments']}:"/></h2>
+            <hr/>
+            <ui:repeat value="#{commentList.movieComments(movie.id)}" var="item">
+                <br/>
+                <h:outputLabel value="#{item.user.name} "/>
+                <h:outputLabel value="#{item.user.surname}"/>
+                <br/>
+                <strong>
+                    <h:outputLabel value="#{item.createdDate}"/>
+                </strong>
+                <br/>
+                <h:outputLabel value="#{item.text}"/>
+                <br/>
+            </ui:repeat>
+
         </h:form>
     </ui:define>
 

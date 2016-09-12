@@ -1,17 +1,17 @@
 package org.nemanjamarjanovic.rekomendator.presentation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.SecurityDao;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.UserDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Actor;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Genre;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Role;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.GenreDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.RoleDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 
 /**
  *
@@ -21,17 +21,20 @@ public class DataProvider {
 
     @Inject
     MovieDao moviesDao;
+    
+    @Inject
+    GenreDao genreDao;
 
     @Inject
     UserDao userDao;
 
     @Inject
-    SecurityDao securityDao;
+    RoleDao roleDao;
 
     @Produces
     @Named
     public List<Genre> getAllGenres() {
-        return moviesDao.findAllGenres();
+        return genreDao.findAll();
     }
 
     @Produces
@@ -48,7 +51,7 @@ public class DataProvider {
 
     @Produces
     @Named
-    public List<Role> getAllRoles() {
-        return securityDao.allRoles();
+    public List<String> getAllRoles() {
+        return roleDao.findAll().parallelStream().map(f->f.getTitle()).collect(Collectors.toList());
     }
 }

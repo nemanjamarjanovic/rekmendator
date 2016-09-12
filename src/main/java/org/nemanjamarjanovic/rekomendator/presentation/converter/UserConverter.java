@@ -6,8 +6,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.UserDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.User;
+import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 
 /**
  *

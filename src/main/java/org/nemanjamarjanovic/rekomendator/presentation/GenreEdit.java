@@ -2,7 +2,7 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.GenreDao;
 
 /**
  *
@@ -12,12 +12,12 @@ import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
 public class GenreEdit {
 
     @Inject
-    private MovieDao moviesDao;
+    GenreDao genreDao;
 
     private String title;
 
     public String doCreate() {
-        moviesDao.createGenre(title);
+        genreDao.create(title);
         return "genre-list?faces-redirect=true";
     }
 

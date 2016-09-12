@@ -1,20 +1,21 @@
 package org.nemanjamarjanovic.rekomendator.presentation;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.stream.Collectors;
-import javax.enterprise.inject.Model;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.FavoriteDao;
-import org.nemanjamarjanovic.rekomendator.bussines.boundary.MovieDao;
-import org.nemanjamarjanovic.rekomendator.bussines.entity.Movie;
+import javax.inject.Named;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.FavoriteDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 
 /**
  *
  * @author nemanja.marjanovic
  */
-@Model
-public class MovieList
-{
+@Named
+@ViewScoped
+public class MovieList implements Serializable {
 
     @Inject
     MovieDao moviesDao;
@@ -25,37 +26,71 @@ public class MovieList
     @Inject
     private CurrentUser currentUser;
 
-    private List<Movie> data;
-    private boolean favorites;
+    private String src;
+    private String title;
+    private String publishingDate;
+    private Pagination pagination;
 
-    public void init()
-    {
-        if (this.favorites) {
-            this.data = favoriteDao.findAllByUser(currentUser.getId()).parallelStream().map(f -> f.getMovie()).collect(Collectors.toList());
+    public void init() {
+        switch (this.src) {
+            case "favorite":
+                this.pagination = new Pagination(
+                        favoriteDao.findByUser(currentUser.getId())
+                        .parallelStream()
+                        .map(f -> f.getMovie())
+                        .collect(Collectors.toList()), 3);
+                break;
+            case "all":
+                this.pagination = new Pagination(moviesDao.findAllMovies(), 3);
+                break;
+            case "search":
+            default:
+                this.pagination = new Pagination(Collections.EMPTY_LIST, 1);
         }
-        else {
-            data = moviesDao.findAllMovies();
-        }
     }
 
-    public List<Movie> getData()
-    {
-        return data;
+    public void doSearch() {
+
+//        Date pd;
+//        try {
+//            pd = new SimpleDateFormat("dd.MM.yyyy").parse(this.publishingDate);
+//        } catch (ParseException ex) {
+//            pd = null;
+//        }
+        this.pagination = new Pagination(
+                moviesDao.search(this.title, null, null), 5);
     }
 
-    public void setData(List<Movie> data)
-    {
-        this.data = data;
+    public String getSrc() {
+        return src;
     }
 
-    public boolean isFavorites()
-    {
-        return favorites;
+    public void setSrc(String src) {
+        this.src = src;
     }
 
-    public void setFavorites(boolean favorites)
-    {
-        this.favorites = favorites;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPublishingDate() {
+        return publishingDate;
+    }
+
+    public void setPublishingDate(String publishingDate) {
+        this.publishingDate = publishingDate;
+    }
+
+    public Pagination getPagination() {
+        return pagination;
+    }
+
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
     }
 
 }

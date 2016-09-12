@@ -1,4 +1,4 @@
-package org.nemanjamarjanovic.rekomendator.bussines.entity;
+package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.entity.User.*;
+import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.*;
 
 /**
  *
