@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://boundary.actor.bussines.rekomendator.nemanjamarjanovic.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ActorService" targetNamespace="http://boundary.actor.bussines.rekomendator.nemanjamarjanovic.org/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://boundary.actor.bussines.rekomendator.nemanjamarjanovic.org/" elementFormDefault="unqualified" targetNamespace="http://boundary.actor.bussines.rekomendator.nemanjamarjanovic.org/" version="1.0">
+
+  <xs:element name="add" type="tns:add"/>
+
+  <xs:element name="addResponse" type="tns:addResponse"/>
+
+  <xs:element name="search" type="tns:search"/>
+
+  <xs:element name="searchResponse" type="tns:searchResponse"/>
+
+  <xs:complexType name="search">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="add">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="search">
+    <wsdl:part element="tns:search" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add">
+    <wsdl:part element="tns:add" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchResponse">
+    <wsdl:part element="tns:searchResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addResponse">
+    <wsdl:part element="tns:addResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ActorService">
+    <wsdl:operation name="search">
+      <wsdl:input message="tns:search" name="search">
+    </wsdl:input>
+      <wsdl:output message="tns:searchResponse" name="searchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input message="tns:add" name="add">
+    </wsdl:input>
+      <wsdl:output message="tns:addResponse" name="addResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ActorServiceSoapBinding" type="tns:ActorService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="search">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="search">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ActorService">
+    <wsdl:port binding="tns:ActorServiceSoapBinding" name="ActorServicePort">
+      <soap:address location="http://localhost:8080/rekomendator/ActorService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
