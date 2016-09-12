@@ -1,10 +1,10 @@
 package org.nemanjamarjanovic.rekomendator.bussines.netflix.boundary;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.client.ClientBuilder;
+import javax.servlet.ServletContext;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.netflix.entity.Rss;
 
 /**
@@ -13,24 +13,33 @@ import org.nemanjamarjanovic.rekomendator.bussines.netflix.entity.Rss;
  */
 @Named
 @ApplicationScoped
-public class NetflixRestClient {
+@Loggable
+public class NetflixRestClient
+{
+
+    @Inject
+    ServletContext servletContext;
 
     private Rss netflixRssFeed = null;
 
-    public Rss getNetflixRssFeed() {
+    public Rss getNetflixRssFeed()
+    {
 
-        if (this.netflixRssFeed == null) {
-            this.netflixRssFeed = ClientBuilder
-                    .newClient()
-                    .target("http://dvd.netflix.com/Top100RSS")
-                    .request()
-                    .get()
-                    .readEntity(Rss.class);
-        }
-        
-        Logger.getLogger("NetflixRestClient").log(Level.INFO, "NETFLIX RSS");
-
-        return this.netflixRssFeed;
+//        String address = servletContext.getInitParameter("netflix.address");
+//        
+//        if (this.netflixRssFeed == null) {
+//            this.netflixRssFeed = ClientBuilder
+//                    .newClient()
+//                    .target(address)
+//                    .request()
+//                    .get()
+//                    .readEntity(Rss.class);
+//        }
+//        
+//        Logger.getLogger("NetflixRestClient").log(Level.INFO, "NETFLIX RSS");
+//
+//        return this.netflixRssFeed;
+        return null;
     }
 
 }

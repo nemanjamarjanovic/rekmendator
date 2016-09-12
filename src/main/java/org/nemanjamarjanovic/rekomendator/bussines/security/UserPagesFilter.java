@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.presentation.CurrentUser;
 
 /**
@@ -18,6 +19,7 @@ import org.nemanjamarjanovic.rekomendator.presentation.CurrentUser;
  * @author nemanja.marjanovic
  */
 @WebFilter("/faces/user/*")
+@Loggable
 public class UserPagesFilter implements Filter {
 
     @Inject

@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.FavoriteDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.omdb.boundary.OmdbClient;
+import org.nemanjamarjanovic.rekomendator.bussines.omdb.entity.OmdbMovie;
 
 /**
  *
@@ -18,18 +20,22 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 public class MovieList implements Serializable {
 
     @Inject
-    MovieDao moviesDao;
+    private MovieDao movieDao;
 
     @Inject
-    FavoriteDao favoriteDao;
+    private FavoriteDao favoriteDao;
 
     @Inject
     private CurrentUser currentUser;
+    
+    @Inject 
+    private OmdbClient omdbClient;
 
     private String src;
     private String title;
     private String publishingDate;
     private Pagination pagination;
+    private OmdbMovie omdbMovie;
 
     public void init() {
         switch (this.src) {
@@ -41,7 +47,7 @@ public class MovieList implements Serializable {
                         .collect(Collectors.toList()), 3);
                 break;
             case "all":
-                this.pagination = new Pagination(moviesDao.findAllMovies(), 3);
+                this.pagination = new Pagination(movieDao.findAll(), 3);
                 break;
             case "search":
             default:
@@ -58,7 +64,9 @@ public class MovieList implements Serializable {
 //            pd = null;
 //        }
         this.pagination = new Pagination(
-                moviesDao.search(this.title, null, null), 5);
+                movieDao.search(this.title, null, null), 5);
+        
+       // this.omdbMovie = this.omdbClient.search(this.title);
     }
 
     public String getSrc() {
@@ -91,6 +99,11 @@ public class MovieList implements Serializable {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
+    }
+
+    public OmdbMovie getOmdbMovie()
+    {
+        return omdbMovie;
     }
 
 }

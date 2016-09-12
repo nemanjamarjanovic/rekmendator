@@ -21,4 +21,28 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>
+            upload.location
+        </param-name>
+        <param-value>
+            C:\tomee\uploaded_files
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>
+            netflix.address
+        </param-name>
+        <param-value>
+            http://207.45.72.238/Top100RSS
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>
+            imdb.address
+        </param-name>
+        <param-value>
+            54.239.29.45
+        </param-value>
+    </context-param>
 </web-app>

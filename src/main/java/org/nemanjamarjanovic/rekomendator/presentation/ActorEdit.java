@@ -2,6 +2,7 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.ActorDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 
 /**
@@ -12,12 +13,12 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 public class ActorEdit {
 
     @Inject
-    private MovieDao moviesDao;
+    private ActorDao actorDao;
 
     private String name;
 
     public String doCreate() {
-        moviesDao.createActor(name);
+        actorDao.create(name);
         return "actor-list?faces-redirect=true";
     }
 

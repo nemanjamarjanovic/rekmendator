@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.FIND_ALL;
@@ -18,6 +19,7 @@ import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.F
  * @author nemanja
  */
 @Stateless
+@Loggable
 public class UserDao {
 
     @PersistenceContext
@@ -92,7 +94,7 @@ public class UserDao {
         return entityManager
                 .createNamedQuery(User.FIND_BY_USERNAME, User.class)
                 .setParameter("username", username)
-                .setParameter("password", hashedPassword)
+               // .setParameter("password", hashedPassword)
                 .getSingleResult();
     }
 

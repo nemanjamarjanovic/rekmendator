@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.ActorDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.GenreDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
@@ -20,16 +21,16 @@ import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 public class DataProvider {
 
     @Inject
-    MovieDao moviesDao;
+    private GenreDao genreDao;
+
+    @Inject
+    private UserDao userDao;
+
+    @Inject
+    private RoleDao roleDao;
     
     @Inject
-    GenreDao genreDao;
-
-    @Inject
-    UserDao userDao;
-
-    @Inject
-    RoleDao roleDao;
+    private ActorDao actorDao;
 
     @Produces
     @Named
@@ -40,7 +41,7 @@ public class DataProvider {
     @Produces
     @Named
     public List<Actor> getAllActors() {
-        return moviesDao.findAllActors();
+        return actorDao.findAll();
     }
 
     @Produces

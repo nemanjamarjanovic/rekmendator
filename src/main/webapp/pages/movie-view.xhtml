@@ -53,6 +53,15 @@
 
                 <h:outputLabel value="#{text['movie.rating']}:"/>
                 <h:outputLabel value="#{rateEdit.currentRating(movie.id)}"/>
+                
+                <h:outputLabel value="#{text['movie.youtube']}:"
+                               rendered="#{not empty movie.youtube}"/>
+                <h:outputLabel value="#{movie.youtube}"
+                               rendered="#{not empty movie.youtube}"/>
+                
+                <h:outputLabel value="#{text['movie.trailer']}:"
+                               rendered="#{movie.trailer}"/>
+                <h:outputLink value="/api/movies/#{movie.id}/trailer">#{text['movie.trailer']}</h:outputLink>
             </h:panelGrid>
 
             <h:panelGrid columns="1">

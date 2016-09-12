@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 
 /**
@@ -11,6 +12,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
  * @author nemanja.marjanovic
  */
 @Stateless
+@Loggable
 public class RoleDao {
 
     @PersistenceContext

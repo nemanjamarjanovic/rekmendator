@@ -2,6 +2,7 @@ package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
 
 /**
@@ -23,6 +25,7 @@ import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
             + " where( :title is null or (:title is not null and m.title like :title)) ")
            // + "  and ( :publishingDate is null or (:publishingDate is not null and m.publishingDate between :from and :to )) ")
 })
+@XmlRootElement
 public class Movie implements Serializable
 {
 
@@ -34,6 +37,8 @@ public class Movie implements Serializable
     private String title;
     private String description;
     private Integer duration;
+    private String youtube;
+    private boolean trailer;
 
     @Temporal(TemporalType.DATE)
     private Date publishingDate;
@@ -111,5 +116,53 @@ public class Movie implements Serializable
     public void setPublishingDate(Date publishingDate) {
         this.publishingDate = publishingDate;
     }
+
+    public String getYoutube()
+    {
+        return youtube;
+    }
+
+    public void setYoutube(String youtube)
+    {
+        this.youtube = youtube;
+    }
+
+    public boolean isTrailer()
+    {
+        return trailer;
+    }
+
+    public void setTrailer(boolean trailer)
+    {
+        this.trailer = trailer;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Movie other = (Movie) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
 
 }

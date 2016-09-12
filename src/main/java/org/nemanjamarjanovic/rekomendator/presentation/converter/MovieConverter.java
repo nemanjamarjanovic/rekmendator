@@ -25,7 +25,7 @@ public class MovieConverter implements Converter {
             UIComponent component, String value) {
 
         return (value == null || value.isEmpty())
-                ? null : moviesDao.findMovieById(value);
+                ? null : moviesDao.findById(value);
     }
 
     @Override

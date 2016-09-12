@@ -6,7 +6,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.ActorDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
 
 /**
@@ -18,14 +18,14 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor;
 public class ActorConverter implements Converter {
 
     @EJB
-    private MovieDao moviesDao;
+    private ActorDao actorDao;
 
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
 
         return (value == null || value.isEmpty())
-                ? null : moviesDao.findActorById(value);
+                ? null : actorDao.findById(value);
     }
 
     @Override

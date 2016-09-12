@@ -49,7 +49,7 @@
 
             </h:panelGrid>
         </h:form>
-        
+
         <hr/>
         <br/>
         <ui:include src="/WEB-INF/pagination.xhtml">
@@ -94,5 +94,13 @@
             </h:column>
 
         </h:dataTable>
+        <h:panelGroup rendered="#{movieList.src=='search' and( not empty movieList.omdbMovie)}">
+            <br/><hr/>
+            <h2>Description from OMDB</h2>
+            <h:graphicImage url="#{movieList.omdbMovie.poster}"/>
+            <h:outputText value="#{movieList.omdbMovie.title}"/>
+            <h:outputText value="#{movieList.omdbMovie.plot}"/>
+        </h:panelGroup>
+
     </ui:define>
 </ui:composition>

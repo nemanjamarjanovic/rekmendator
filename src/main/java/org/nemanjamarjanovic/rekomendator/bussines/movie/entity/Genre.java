@@ -2,10 +2,15 @@ package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre.FIND_ALL;
 
 /**
@@ -44,14 +49,16 @@ public class Genre implements Serializable
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.title);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj)
+    {
         if (this == obj) {
             return true;
         }
@@ -68,5 +75,4 @@ public class Genre implements Serializable
         return true;
     }
 
-    
 }

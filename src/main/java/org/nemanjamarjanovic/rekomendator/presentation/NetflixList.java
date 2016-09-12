@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.netflix.boundary.NetflixRestClient;
+import org.nemanjamarjanovic.rekomendator.bussines.netflix.entity.Rss;
 
 /**
  *
@@ -13,23 +14,30 @@ import org.nemanjamarjanovic.rekomendator.bussines.netflix.boundary.NetflixRestC
  */
 @Named
 @ViewScoped
-public class NetflixList implements Serializable {
-    
+public class NetflixList implements Serializable
+{
+
     @Inject
     NetflixRestClient netflixRestClient;
-    
+
     private Pagination pagination;
-    
+
     @PostConstruct
-    public void init() {
-        
-        this.pagination = new Pagination(
-                netflixRestClient.getNetflixRssFeed().getChannel().getItems(),
-                5);
+    public void init()
+    {
+
+        Rss netflixRssFeed = netflixRestClient.getNetflixRssFeed();
+        if (netflixRssFeed != null) {
+
+            this.pagination = new Pagination(
+                    netflixRssFeed.getChannel().getItems(),
+                    5);
+        }
     }
-    
-    public Pagination getPagination() {
+
+    public Pagination getPagination()
+    {
         return pagination;
     }
- 
+
 }

@@ -31,8 +31,8 @@ public class Uploader extends HttpServlet {
         String id = request.getParameter("id");
         Part filePart = request.getPart("file");
 
-        File file = new File("/home/nemanja/uploads/" + id);
-        Path path = FileSystems.getDefault().getPath("/home/nemanja/uploads/", id);
+         String location = request.getServletContext().getInitParameter("upload.location") + File.separator + "trailer"+id;
+        Path path = FileSystems.getDefault().getPath(location);
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, path, StandardCopyOption.REPLACE_EXISTING);
         }

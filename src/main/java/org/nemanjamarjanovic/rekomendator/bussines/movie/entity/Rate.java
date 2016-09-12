@@ -19,12 +19,14 @@ import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Rate.*;
 @Entity
 @NamedQueries({
     @NamedQuery(name = FIND_BY_USER, query = "select r from Rate r where r.user.id = :user "),
-    @NamedQuery(name = FIND_AVERAGE_BY_MOVIE, query = "select avg(r.value) from Rate r where r.movie.id = :movie ")
+    @NamedQuery(name = FIND_TOP_MOVIES, query = "select avg(r.value) from Rate r where r.movie.id = :movie "),
+    @NamedQuery(name = FIND_AVERAGE_BY_MOVIE, query = "select r.movie from Rate r group by (r.movie.id) order by avg(r.value) desc ")
 })
 public class Rate implements Serializable {
 
     public static final String FIND_BY_USER = "Rate.findByUser";
     public static final String FIND_AVERAGE_BY_MOVIE = "Rate.findAverageByMovie";
+    public static final String FIND_TOP_MOVIES = "Rate.findTopMovies";
     private static final long serialVersionUID = 1L;
 
     @Id

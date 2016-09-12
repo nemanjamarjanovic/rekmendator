@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Favorite;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
@@ -15,6 +16,7 @@ import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
  * @author nemanja
  */
 @Stateless
+@Loggable
 public class FavoriteDao
 {
 

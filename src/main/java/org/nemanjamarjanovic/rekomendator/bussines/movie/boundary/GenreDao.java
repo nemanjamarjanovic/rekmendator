@@ -1,16 +1,20 @@
 package org.nemanjamarjanovic.rekomendator.bussines.movie.boundary;
 
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Genre;
+import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 
 /**
  *
  * @author nemanja
  */
 @Stateless
+@Loggable
 public class GenreDao {
 
     @PersistenceContext
@@ -31,4 +35,5 @@ public class GenreDao {
     public Genre findById(String id) {
         return entityManager.find(Genre.class, id);
     }
+
 }
