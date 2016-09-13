@@ -27,7 +27,7 @@
                              value="#{userEdit.data.username}" 
                              required="true" >
                     <f:validateLength minimum="12" maximum="100" />
-                    <f:validateRegex pattern="[^@#/]"
+                    <f:validateRegex pattern="[^@#/]"/>
                 </h:inputText>
                 <h:message for="username" style="color:red"/>
                 
@@ -35,7 +35,7 @@
                 <h:inputText id="password" 
                              value="#{userEdit.data.password}" 
                              required="true" 
-                             validator="paswordValidator">
+                             validator="passwordValidator">
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
                 

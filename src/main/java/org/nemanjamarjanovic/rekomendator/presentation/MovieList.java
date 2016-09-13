@@ -27,8 +27,8 @@ public class MovieList implements Serializable {
 
     @Inject
     private CurrentUser currentUser;
-    
-    @Inject 
+
+    @Inject
     private OmdbClient omdbClient;
 
     private String src;
@@ -65,8 +65,8 @@ public class MovieList implements Serializable {
 //        }
         this.pagination = new Pagination(
                 movieDao.search(this.title, null, null), 5);
-        
-       // this.omdbMovie = this.omdbClient.search(this.title);
+
+        this.omdbMovie = this.omdbClient.search(this.title);
     }
 
     public String getSrc() {
@@ -101,8 +101,7 @@ public class MovieList implements Serializable {
         this.pagination = pagination;
     }
 
-    public OmdbMovie getOmdbMovie()
-    {
+    public OmdbMovie getOmdbMovie() {
         return omdbMovie;
     }
 

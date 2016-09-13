@@ -1,12 +1,9 @@
 package org.nemanjamarjanovic.rekomendator.bussines.omdb.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author nemanja
  */
-@XmlRootElement
 public class OmdbMovie
 {
 
@@ -20,10 +17,19 @@ public class OmdbMovie
     private String poster;
     private String imdbRating;
 
-    public OmdbMovie()
-    {
+    public OmdbMovie(String title, String year, String runtime, String genre, String director, String actors, String plot, String poster, String imdbRating) {
+        this.title = title;
+        this.year = year;
+        this.runtime = runtime;
+        this.genre = genre;
+        this.director = director;
+        this.actors = actors;
+        this.plot = plot;
+        this.poster = poster;
+        this.imdbRating = imdbRating;
     }
 
+ 
     public String getTitle()
     {
         return title;

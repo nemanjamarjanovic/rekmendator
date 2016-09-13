@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
+import javax.ws.rs.client.ClientBuilder;
 import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
 import org.nemanjamarjanovic.rekomendator.bussines.netflix.entity.Rss;
 
@@ -25,21 +26,18 @@ public class NetflixRestClient
     public Rss getNetflixRssFeed()
     {
 
-//        String address = servletContext.getInitParameter("netflix.address");
-//        
-//        if (this.netflixRssFeed == null) {
-//            this.netflixRssFeed = ClientBuilder
-//                    .newClient()
-//                    .target(address)
-//                    .request()
-//                    .get()
-//                    .readEntity(Rss.class);
-//        }
-//        
-//        Logger.getLogger("NetflixRestClient").log(Level.INFO, "NETFLIX RSS");
-//
-//        return this.netflixRssFeed;
-        return null;
+        String address = servletContext.getInitParameter("netflix.address");
+
+        if (this.netflixRssFeed == null) {
+            this.netflixRssFeed = ClientBuilder
+                    .newClient()
+                    .target(address)
+                    .request()
+                    .get()
+                    .readEntity(Rss.class);
+        }
+
+        return this.netflixRssFeed;
     }
 
 }
