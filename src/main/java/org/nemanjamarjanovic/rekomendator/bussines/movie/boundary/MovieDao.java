@@ -18,26 +18,22 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
  */
 @Stateless
 @Loggable
-public class MovieDao
-{
+public class MovieDao {
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public Movie findById(String id)
-    {
+    public Movie findById(String id) {
         return entityManager.find(Movie.class, id);
     }
 
-    public List<Movie> findAll()
-    {
+    public List<Movie> findAll() {
         return entityManager
                 .createNamedQuery(Movie.FIND_ALL, Movie.class)
                 .getResultList();
     }
 
-    public List<Movie> search(String title, Date publishingDate, List<Genre> genres)
-    {
+    public List<Movie> search(String title, Date publishingDate, List<Genre> genres) {
 
         String titleParam = (title == null) ? null : "%" + title.trim() + "%";
 
@@ -48,8 +44,7 @@ public class MovieDao
                 .getResultList();
     }
 
-    public Movie createMovie(final Movie data)
-    {
+    public Movie createMovie(final Movie data, List<String> actors) {
 
         Movie movie = new Movie();
         movie.setId(UUID.randomUUID().toString());
@@ -64,8 +59,8 @@ public class MovieDao
                 .forEach(g -> movie.getGenre().add(g));
 
         movie.setActors(new HashSet<>(10));
-        data.getActors().stream().map(a -> entityManager
-                .getReference(Actor.class, a.getId()))
+        actors.stream().map(a -> entityManager
+                .getReference(Actor.class, a))
                 .forEach(a -> movie.getActors().add(a));
 
         entityManager.persist(movie);
@@ -73,8 +68,7 @@ public class MovieDao
         return movie;
     }
 
-    public Movie updateMovie(final Movie data)
-    {
+    public Movie updateMovie(final Movie data, List<String> actors) {
 
         Movie movie = entityManager.find(Movie.class, data.getId());
 
@@ -89,8 +83,8 @@ public class MovieDao
                 .forEach(g -> movie.getGenre().add(g));
 
         movie.setActors(new HashSet<>(10));
-        data.getActors().stream().map(a -> entityManager
-                .getReference(Actor.class, a.getId()))
+        actors.stream().map(a -> entityManager
+                .getReference(Actor.class, a))
                 .forEach(a -> movie.getActors().add(a));
 
         return movie;

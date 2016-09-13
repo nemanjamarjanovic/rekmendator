@@ -20,7 +20,7 @@
 
         <h:form id="newMovieForm">
             <h:panelGrid columns="3">
-                : <h:outputLabel value="#{text['movie.title']}"/>
+                :<h:outputLabel value="#{text['movie.title']}:"/>
                 <h:inputText id="title" 
                              value="#{movieEdit.data.title}" 
                              required="true" >
@@ -66,15 +66,15 @@
                 <h:message for="genre" style="color:red"/>
 
                 <h:outputLabel value="#{text['movie.actors']}:"/> 
-                <h:selectManyListbox id="actor" 
-                                     value="#{movieEdit.data.actors}" 
-                                     converter="#{actorConverter}">
-                    <f:selectItems value="#{allActors}" 
-                                   var="actoritem" 
-                                   itemValue="#{actoritem}" 
-                                   itemLabel="#{actoritem.name}" />
-                </h:selectManyListbox>
-                <h:message for="actor" style="color:red"/>
+                <h:inputText id="actor" value="#{actor}"/>
+                <h:commandButton action="#{movieEdit.doAddActor(actor)}"
+                                 value="Add actor"/>
+
+                <h:dataTable value="#{movieEdit.actors}" var="item">
+                    <h:column>
+                        <h:outputLabel value="#{item}"/>
+                    </h:column>
+                </h:dataTable>
 
 
                 <h:outputLabel value="#{text['movie.trailer']}:"/> 
