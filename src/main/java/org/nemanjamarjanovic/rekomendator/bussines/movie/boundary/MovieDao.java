@@ -18,22 +18,26 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
  */
 @Stateless
 @Loggable
-public class MovieDao {
+public class MovieDao
+{
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public Movie findById(String id) {
+    public Movie findById(String id)
+    {
         return entityManager.find(Movie.class, id);
     }
 
-    public List<Movie> findAll() {
+    public List<Movie> findAll()
+    {
         return entityManager
                 .createNamedQuery(Movie.FIND_ALL, Movie.class)
                 .getResultList();
     }
 
-    public List<Movie> search(String title, Date publishingDate, List<Genre> genres) {
+    public List<Movie> search(String title, Date publishingDate, List<Genre> genres)
+    {
 
         String titleParam = (title == null) ? null : "%" + title.trim() + "%";
 
@@ -44,7 +48,8 @@ public class MovieDao {
                 .getResultList();
     }
 
-    public Movie createMovie(final Movie data, List<String> actors) {
+    public Movie createMovie(final Movie data, List<String> actors)
+    {
 
         Movie movie = new Movie();
         movie.setId(UUID.randomUUID().toString());
@@ -59,16 +64,23 @@ public class MovieDao {
                 .forEach(g -> movie.getGenre().add(g));
 
         movie.setActors(new HashSet<>(10));
-        actors.stream().map(a -> entityManager
-                .getReference(Actor.class, a))
-                .forEach(a -> movie.getActors().add(a));
+        actors.stream().forEach((actor) -> {
+
+            Actor actorEntity = entityManager.find(Actor.class, actor);
+            if (actorEntity == null) {
+                actorEntity = new Actor(actor);
+                entityManager.persist(actorEntity);
+            }
+            movie.getActors().add(actorEntity);
+        });
 
         entityManager.persist(movie);
 
         return movie;
     }
 
-    public Movie updateMovie(final Movie data, List<String> actors) {
+    public Movie updateMovie(final Movie data, List<String> actors)
+    {
 
         Movie movie = entityManager.find(Movie.class, data.getId());
 
@@ -76,6 +88,7 @@ public class MovieDao {
         movie.setDuration(data.getDuration());
         movie.setDescription(data.getDescription());
         movie.setPublishingDate(data.getPublishingDate());
+        movie.setYoutube(data.getYoutube());
 
         movie.setGenre(new HashSet<>(10));
         data.getGenre().stream().map(g -> entityManager
@@ -83,11 +96,23 @@ public class MovieDao {
                 .forEach(g -> movie.getGenre().add(g));
 
         movie.setActors(new HashSet<>(10));
-        actors.stream().map(a -> entityManager
-                .getReference(Actor.class, a))
-                .forEach(a -> movie.getActors().add(a));
+        actors.stream().forEach((actor) -> {
+
+            Actor actorEntity = entityManager.find(Actor.class, actor);
+            if (actorEntity == null) {
+                actorEntity = new Actor(actor);
+                entityManager.persist(actorEntity);
+            }
+            movie.getActors().add(actorEntity);
+        });
 
         return movie;
+    }
+
+    public void trailerUploaded(String id)
+    {
+        Movie movie = entityManager.find(Movie.class, id);
+        movie.setTrailer(true);
     }
 
 }

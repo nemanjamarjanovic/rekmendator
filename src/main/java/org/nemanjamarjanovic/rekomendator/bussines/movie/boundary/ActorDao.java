@@ -24,17 +24,4 @@ public class ActorDao
         return entityManager.find(Actor.class, id);
     }
 
-    public List<Actor> findAll()
-    {
-        return entityManager
-                .createNamedQuery(Actor.FIND_ALL, Actor.class)
-                .getResultList();
-    }
-
-    public Actor create(String title)
-    {
-        Actor actor = new Actor(title);
-        entityManager.persist(actor);
-        return actor;
-    }
 }

@@ -6,8 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.nemanjamarjanovic.rekomendator.bussines.actorclient.control.ActorService_Service;
-import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.FavoriteDao;
+import org.nemanjamarjanovic.rekomendator.bussines.actor.boundary.ActorServiceClient;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.boundary.MovieDao;
 import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 
@@ -19,10 +18,14 @@ import org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie;
 @ViewScoped
 public class MovieEdit implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private MovieDao moviesDao;
     
-    ActorService_Service actorService_Service = new ActorService_Service();
+    @Inject 
+    ActorServiceClient actorServiceClient;
+
 
     private Movie data = new Movie();
     private List<String> actors = new ArrayList<>();
@@ -38,7 +41,11 @@ public class MovieEdit implements Serializable {
     }
 
     public void doAddActor(String actor) {
-         String search = actorService_Service.getActorServicePort().search(actor);
+        String search = actorServiceClient.search(actor);
+        if(search == null){
+            actorServiceClient.add(actor);
+            search = actor;
+        }
         this.actors.add(search);
     }
 

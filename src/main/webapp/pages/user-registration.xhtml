@@ -18,19 +18,19 @@
                          please use a link from within the system."
                          />
         </f:metadata>
-  
+
         <h:form id="newUserForm">
             <h:panelGrid columns="3">
-                
+
                 <h:outputLabel value="#{text['user.username']}:"/>
                 <h:inputText id="username" 
                              value="#{userEdit.data.username}" 
                              required="true" >
                     <f:validateLength minimum="12" maximum="100" />
-                    <f:validateRegex pattern="[^@#/]"/>
+                    <f:validateRegex pattern="[^@#/]*"/>
                 </h:inputText>
                 <h:message for="username" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.password']}:"/>
                 <h:inputText id="password" 
                              value="#{userEdit.data.password}" 
@@ -38,7 +38,10 @@
                              validator="passwordValidator">
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
-                
+
+                <h:outputLabel value="#{text['user.image']}:"/>
+                <h:inputFile value="#{userEdit.file}"/>
+
                 <h:outputLabel value="#{text['user.name']}:"/>
                 <h:inputText id="name" 
                              value="#{userEdit.data.name}" 
@@ -46,7 +49,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="name" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.surname']}:"/>
                 <h:inputText id="surname" 
                              value="#{userEdit.data.surname}" 
@@ -54,7 +57,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="surname" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.mbr']}:"/>
                 <h:inputText id="mbr" 
                              value="#{userEdit.data.mbr}" 
@@ -62,7 +65,7 @@
                     <f:validateLength minimum="3" maximum="100" />
                 </h:inputText>
                 <h:message for="mbr" style="color:red"/>
-                
+
                 <h:outputLabel value="#{text['user.email']}:"/>
                 <h:inputText id="email" 
                              value="#{userEdit.data.email}" 
@@ -73,7 +76,7 @@
 
                 <h:commandButton action="#{userEdit.doRegister()}" 
                                  value="#{text['generic.save']}"/>
-               
+
             </h:panelGrid>
         </h:form>
     </ui:define>

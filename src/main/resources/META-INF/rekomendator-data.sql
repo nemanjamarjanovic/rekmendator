@@ -41,28 +41,20 @@ INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`)
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'GENRE-CREATE');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'USER-LIST');
 
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('0', 'guest', 'guest', 'GUEST');
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('1', 'user', 'user', 'USER');
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('2', 'super', 'super', 'SUPER');
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) VALUES ('3', 'admin', 'admin', 'ADMIN');
+INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`, `NAME`, `SURNAME`, `MBR`, `EMAIL`) 
+VALUES ('6c614e2b-e206-4503-8723-9f62e1e1afc4','Ógaà½OZ�-NÑý� \', 'UserMarko1234567890', 'USER', 'Marko', 'Markovic', '123456789123456', 'nemanjam@blic.net');
+
+INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) 
+VALUES ('c62cb541-18a1-40c6-b721-2bb1b0653375', 'œ5OJÖæ_Õï5%¼¯','AdministratorNemanja', 'ADMIN', 'Nemanja', 'Marjanovic', '123456789123456', 'nemanjam@blic.net');
+
+INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`) 
+VALUES ('d4d75e2a-df2e-4cb0-8967-290d73747699', 'ÚûÚhçg`*
+CqŸÆÚ¸','SuperJelena1234567890', 'SUPER', 'Jelena', 'Marjanovic', '123456789123456', 'nemanjam@blic.net');
 
 -- DATA
 
-INSERT INTO `rekomendator`.`ACTOR` (`ID`, `NAME`) VALUES ('0', 'Keanu Reeves');
-INSERT INTO `rekomendator`.`ACTOR` (`ID`, `NAME`) VALUES ('1', 'Laurence Fishburne');
-INSERT INTO `rekomendator`.`ACTOR` (`ID`, `NAME`) VALUES ('2', 'Hugo Weaving');
-INSERT INTO `rekomendator`.`ACTOR` (`ID`, `NAME`) VALUES ('3', 'Carrie-Anne Moss');
-
-INSERT INTO `rekomendator`.`MOVIE` (`ID`, `DESCRIPTION`, `DURATION`, `PUBLISHINGDATE`, `TITLE`) VALUES ('0', 'It depicts a dystopian future in which reality as perceived by most humans is actually a simulated reality called the Matrix, created by sentient machines to subdue the human population, while their bodies heat and electrical activity are used as an energy source. Computer programmer Neo learns this truth and is drawn into a rebellion against the machines, which involves other people who have been freed from the dream world.', '136', '1999-03-31', 'The Matrix');
-
 INSERT INTO `rekomendator`.`GENRE` (`TITLE`) VALUES ('ACTION');
 INSERT INTO `rekomendator`.`GENRE` (`TITLE`) VALUES ('SCI-FI');
-INSERT INTO `rekomendator`.`MOVIE_GENRE` (`Movie_ID`, `genre_TITLE`) VALUES ('0', 'SCI-FI');
-INSERT INTO `rekomendator`.`MOVIE_GENRE` (`Movie_ID`, `genre_TITLE`) VALUES ('0', 'ACTION');
 
-INSERT INTO `rekomendator`.`MOVIE_ACTOR` (`Movie_ID`, `actors_ID`) VALUES ('0', '0');
-INSERT INTO `rekomendator`.`MOVIE_ACTOR` (`Movie_ID`, `actors_ID`) VALUES ('0', '1');
-INSERT INTO `rekomendator`.`MOVIE_ACTOR` (`Movie_ID`, `actors_ID`) VALUES ('0', '2');
-INSERT INTO `rekomendator`.`MOVIE_ACTOR` (`Movie_ID`, `actors_ID`) VALUES ('0', '3');
 
 

@@ -47,45 +47,51 @@
                 <h:outputLabel value="#{text['movie.actors']}:"/> 
                 <h:dataTable value="#{movie.actors}" var="subitem2">
                     <h:column>
-                        <h:outputLabel value="#{subitem2.name}"/>
+                        <h:outputLabel value="#{subitem2.id}"/>
                     </h:column>
                 </h:dataTable>
 
                 <h:outputLabel value="#{text['movie.rating']}:"/>
                 <h:outputLabel value="#{rateEdit.currentRating(movie.id)}"/>
-                
-                <h:outputLabel value="#{text['movie.youtube']}:"
-                               rendered="#{not empty movie.youtube}"/>
-                <h:outputLabel value="#{movie.youtube}"
-                               rendered="#{not empty movie.youtube}"/>
-                
-                <h:outputLabel value="#{text['movie.trailer']}:"
-                               rendered="#{movie.trailer}"/>
-                <h:outputLink value="/api/movies/#{movie.id}/trailer">#{text['movie.trailer']}</h:outputLink>
             </h:panelGrid>
+            <br/><br/>
+            
+            <h:outputLink value="#{movie.youtube}"
+                          target="_blank"
+                          rendered="#{not empty movie.youtube}">
+                <h:outputLabel value="#{text['movie.youtube']}"/>
+            </h:outputLink>
+            <br/>
+            
+            <h:outputLink value="/rekomendator/api/videos/#{movie.id}"
+                          target="_blank"
+                          rendered="#{movie.trailer}">
+                #{text['movie.trailer']}
+            </h:outputLink>
+            <br/>
+            <h:commandLink value="#{text['movie.action.favorites']}"
+                           rendered="#{!favoriteEdit.isFavorited(movie.id)}"
+                           action="#{favoriteEdit.doFavorite(movie.id)}"/>
+            <h:outputLabel value="#{text['movie-view.favorited']}"
+                           rendered="#{favoriteEdit.isFavorited(movie.id)}"/>
+            <br/><br/>
 
-            <h:panelGrid columns="1">
-                <h:commandLink value="#{text['movie.action.favorites']}"
-                               rendered="#{!favoriteEdit.isFavorited(movie.id)}"
-                               action="#{favoriteEdit.doFavorite(movie.id)}"/>
-                <h:outputLabel value="#{text['movie-view.favorited']}"
-                               rendered="#{favoriteEdit.isFavorited(movie.id)}"/>
+            <h:selectOneRadio rendered="#{!rateEdit.isRated(movie.id)}"
+                              value="#{rateEdit.rating}" >
+                <f:selectItem itemValue="1" itemLabel="#{text['rating.1']}" />
+                <f:selectItem itemValue="2" itemLabel="#{text['rating.2']}" />
+                <f:selectItem itemValue="3" itemLabel="#{text['rating.3']}" />
+                <f:selectItem itemValue="4" itemLabel="#{text['rating.4']}" />
+                <f:selectItem itemValue="5" itemLabel="#{text['rating.5']}" />
+            </h:selectOneRadio>
 
-                <h:selectOneRadio rendered="#{!rateEdit.isRated(movie.id)}"
-                                  value="#{rateEdit.rating}" >
-                    <f:selectItem itemValue="1" itemLabel="trash" />
-                    <f:selectItem itemValue="2" itemLabel="nah - nah" />
-                    <f:selectItem itemValue="3" itemLabel="must see!" />
-                    <f:selectItem itemValue="4" itemLabel="two thumbs up" />
-                </h:selectOneRadio>
+            <h:commandLink value="#{text['movie.action.rate']}"
+                           rendered="#{!rateEdit.isRated(movie.id)}"
+                           action="#{rateEdit.doRate(movie.id)}"/>
 
-                <h:commandLink value="#{text['movie.action.rate']}"
-                               rendered="#{!rateEdit.isRated(movie.id)}"
-                               action="#{rateEdit.doRate(movie.id)}"/>
+            <h:outputLabel value="#{text['movie-view.rated']}: #{rateEdit.userRating(movie.id)}"
+                           rendered="#{rateEdit.isRated(movie.id)}"/>
 
-                <h:outputLabel value="#{text['movie-view.rated']}: #{rateEdit.userRating(movie.id)}"
-                               rendered="#{rateEdit.isRated(movie.id)}"/>
-            </h:panelGrid>
 
             <br/><br/>
             <h2><h:outputLabel value="#{text['movie.action.comment']}:"/></h2>

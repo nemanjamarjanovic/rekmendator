@@ -87,7 +87,7 @@
   </wsdl:binding>
   <wsdl:service name="ActorService">
     <wsdl:port binding="tns:ActorServiceSoapBinding" name="ActorServicePort">
-      <soap:address location="http://localhost:8080/rekomendator/ActorService"/>
+      <soap:address location="http://localhost:8080/rekomendator-actor/webservices/ActorService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

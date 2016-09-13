@@ -24,15 +24,15 @@ public class PasswordValidator implements Validator {
             throw new ValidatorException(
                     new FacesMessage("Value must be over 15 characters!"));
         }
-        if (password.matches("[\\S]*[A-Z]+[\\S]*")) {
+        if (password.matches("[.]*[A-Z]+[.]*")) {
             throw new ValidatorException(
                     new FacesMessage("Value must contain uppercase letter!"));
         }
-        if (password.matches("[\\S]*[a-z]+[\\S]*")) {
+        if (password.matches("[.]*[a-z]+[.]*")) {
             throw new ValidatorException(
                     new FacesMessage("Value must contain lowercase letter!"));
         }
-        if (password.matches("[\\S]*[0-9]+[\\S]*")) {
+        if (password.matches("[.]*[0-9]+[.]*")) {
             throw new ValidatorException(
                     new FacesMessage("Value must contain number!"));
         }

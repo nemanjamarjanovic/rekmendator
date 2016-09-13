@@ -20,7 +20,7 @@
 
         <h:form id="newMovieForm">
             <h:panelGrid columns="3">
-                :<h:outputLabel value="#{text['movie.title']}:"/>
+                <h:outputLabel value="#{text['movie.title']}:"/>
                 <h:inputText id="title" 
                              value="#{movieEdit.data.title}" 
                              required="true" >
@@ -30,7 +30,7 @@
 
                 <h:outputLabel value="#{text['movie.description']}:"/> 
                 <h:inputTextarea id="description" 
-                                 cols="60"
+                                 cols="22"
                                  rows="20"
                                  value="#{movieEdit.data.description}" 
                                  required="true" >
@@ -57,7 +57,9 @@
                 <h:outputLabel value="#{text['movie.genre']}:"/> 
                 <h:selectManyListbox id="genre" 
                                      value="#{movieEdit.data.genre}" 
-                                     converter="#{genreConverter}">
+                                     converter="#{genreConverter}"
+                                     size="5"
+                                     >
                     <f:selectItems value="#{allGenres}" 
                                    var="genreitem" 
                                    itemValue="#{genreitem}" 
@@ -65,24 +67,39 @@
                 </h:selectManyListbox>
                 <h:message for="genre" style="color:red"/>
 
-                <h:outputLabel value="#{text['movie.actors']}:"/> 
+                <h:outputLabel value="#{text['movie.youtube']}:"/>
+                <h:inputText id="youtube" 
+                             value="#{movieEdit.data.youtube}">
+                    <f:validateLength minimum="3" maximum="500" />
+                </h:inputText>
+                <h:message for="youtube" style="color:red"/>
+
+                <h:outputLabel value="#{text['movie.actors']}:"/>
                 <h:inputText id="actor" value="#{actor}"/>
                 <h:commandButton action="#{movieEdit.doAddActor(actor)}"
-                                 value="Add actor"/>
+                                 value="Add actor">
+                    <f:ajax execute="@this actor" render="actor actors"/>
+                </h:commandButton>
 
-                <h:dataTable value="#{movieEdit.actors}" var="item">
+                <h:outputLabel value=""/>
+                <h:dataTable value="#{movieEdit.actors}" var="item" id="actors">
                     <h:column>
                         <h:outputLabel value="#{item}"/>
                     </h:column>
                 </h:dataTable>
+                <h:outputLabel value=""/>
 
-
-                <h:outputLabel value="#{text['movie.trailer']}:"/> 
-                <h:link outcome="movie-upload" value="#{text['movie.action.trailerupload']}">
+                <h:outputLabel value="#{text['movie.trailer']}:"
+                               rendered="#{not empty movieEdit.data.id}"/> 
+                <h:link outcome="movie-upload" 
+                        value="#{text['movie.action.trailerupload']}"
+                        rendered="#{not empty movieEdit.data.id}">
                     <f:param name="id" value="#{movieEdit.data.id}" />
                 </h:link>
+                <h:outputLabel value=""
+                               rendered="#{not empty movieEdit.data.id}"/> 
 
-
+                <h:outputLabel value=""/> 
                 <h:commandButton action="#{movieEdit.doCreate()}" 
                                  value="#{text['generic.save']}"
                                  rendered="#{empty movieEdit.data.id}"/>

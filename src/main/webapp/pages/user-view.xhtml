@@ -12,7 +12,7 @@
 
         <f:metadata>
             <f:viewParam name="id" 
-                         value="#{user}" 
+                         value="#{userEdit.data}" 
                          converter="#{userConverter}" 
                          converterMessage="Unknown product, please use a link from within the system."
                          required="true" 
@@ -20,37 +20,47 @@
                          />
         </f:metadata>
 
-
-        <h:panelGrid columns="2">
-
-            <h:outputLabel value="#{text['user.username']}:"/>
-            <h:outputLabel value="#{user.username}"/>
-
-            <h:outputLabel value="#{text['user.password']}:"/>
-            <h:outputLabel value="#{user.password}"/>
-
-            <h:outputLabel value="#{text['user.name']}:"/>
-            <h:outputLabel value="#{user.name}"/>
-
-            <h:outputLabel value="#{text['user.surname']}:"/>
-            <h:outputLabel value="#{user.surname}"/>
-
-            <h:outputLabel value="#{text['user.mbr']}:"/>
-            <h:outputLabel value="#{user.mbr}"/>
-
-            <h:outputLabel value="#{text['user.email']}:"/>
-            <h:outputLabel value="#{user.email}"/>
-        </h:panelGrid>
-        
         <h:form id="changeRoleForm">
-            <h:selectOneMenu value="#{roleChange.role}">
-                <f:selectItems  value="#{allRoles}"/>
-            </h:selectOneMenu>
-            <br/>
+            <h:panelGrid columns="2">
 
-            <h:commandButton action="#{roleChange.doRoleChange(user.id)}" 
-                             value="#{text['generic.edit']}"
-                             rendered="#{not empty user.id}"/>
+                <h:outputLabel value="#{text['user.username']}:"/>
+                <h:outputLabel value="#{userEdit.data.username}"/>
+
+                <h:outputLabel value="#{text['user.password']}:"/>
+                <h:outputLabel value="#{userEdit.data.password}"/>
+
+                <h:outputLabel value=""/>
+                <h:graphicImage url="/api/images/#{userEdit.data.id}"/>
+
+                <h:outputLabel value="#{text['user.name']}:"/>
+                <h:outputLabel value="#{userEdit.data.name}"/>
+
+                <h:outputLabel value="#{text['user.surname']}:"/>
+                <h:outputLabel value="#{userEdit.data.surname}"/>
+
+                <h:outputLabel value="#{text['user.mbr']}:"/>
+                <h:outputLabel value="#{userEdit.data.mbr}"/>
+
+                <h:outputLabel value="#{text['user.email']}:"/>
+                <h:outputLabel value="#{userEdit.data.email}"/>
+
+                <h:outputLabel value="#{text['user.role']}:"/>
+                <h:outputLabel value="#{userEdit.data.role.title}"/>
+
+                <h:selectOneMenu value="#{role}">
+                    <f:selectItems  value="#{allRoles}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="#{text['user.action.changerole']}:"/>
+                <h:commandButton action="#{userEdit.doRoleChange(role)}" 
+                                 value="#{text['generic.edit']}"
+                                 rendered="#{not empty userEdit.data.id}"/>
+
+
+            </h:panelGrid>
+
+
+
         </h:form>
     </ui:define>
 

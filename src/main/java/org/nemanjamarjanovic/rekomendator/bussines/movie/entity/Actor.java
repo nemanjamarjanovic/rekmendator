@@ -2,39 +2,29 @@ package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Actor.FIND_ALL;
 
 /**
  *
  * @author nemanja
  */
 @Entity
-@NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select a from Actor a")
-)
 public class Actor implements Serializable
 {
 
-    public static final String FIND_ALL = "Actor.findAll";
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
-
-    private String name;
 
     public Actor()
     {
     }
 
-    public Actor(String name)
+    public Actor(String id)
     {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
+        this.id = id;
     }
 
     public String getId()
@@ -47,25 +37,17 @@ public class Actor implements Serializable
         this.id = id;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj)
+    {
         if (this == obj) {
             return true;
         }
@@ -82,5 +64,4 @@ public class Actor implements Serializable
         return true;
     }
 
-    
 }

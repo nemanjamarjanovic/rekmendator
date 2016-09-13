@@ -52,14 +52,4 @@ public class MovieRestService
         return Response.ok(new GenericEntity<List<Movie>>(result) {}).build();
     }
 
-    @GET
-    @Path("{id}/trailer")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String trailer(
-            @NotNull
-            @PathParam("id") String id)
-    {
-
-        return "trailer" + id;
-    }
 }
