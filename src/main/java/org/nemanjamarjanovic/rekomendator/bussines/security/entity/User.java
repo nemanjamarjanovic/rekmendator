@@ -22,6 +22,7 @@ public class User implements Serializable
 
     public static final String FIND_ALL = "User.findAll";
     public static final String FIND_BY_USERNAME = "User.findByUsername";
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;

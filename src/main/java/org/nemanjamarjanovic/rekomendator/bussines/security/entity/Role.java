@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,6 +23,7 @@ public class Role implements Serializable
 {
 
     public static final String FIND_ALL = "Role.findAll";
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String title;
@@ -29,9 +31,13 @@ public class Role implements Serializable
     @OneToMany
     private Set<Permission> permissions;
 
+    @OneToMany(fetch=FetchType.EAGER)
+    private Set<Page> pages;
+
     public Role()
     {
         this.permissions = new HashSet<>(10);
+        this.pages = new HashSet<>(10);
     }
 
     public String getTitle()
@@ -49,9 +55,23 @@ public class Role implements Serializable
         return permissions;
     }
 
-    public void addPermission(Permission permission)
+    public void setPermissions(Set<Permission> permissions)
     {
-        this.permissions.add(permission);
+        this.permissions = permissions;
     }
+
+    public Set<Page> getPages()
+    {
+        return pages;
+    }
+
+    public void setPages(Set<Page> pages)
+    {
+        this.pages = pages;
+    }
+
+  
+    
+    
 
 }

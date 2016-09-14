@@ -3,9 +3,10 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="/index.xhtml"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/WEB-INF/template.xhtml">
 
 
 
@@ -30,21 +31,34 @@
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.createddate']}"/>
                 </f:facet>
-                <h:outputLabel value="#{item.createdDate}"/>
+                <h:outputLabel value="#{item.createdDate}">
+                    <f:convertDateTime type="date" pattern="dd.MM.yyyy."/>
+                </h:outputLabel>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.eventdate']}"/>
                 </f:facet>
-                <h:outputLabel value="#{item.eventDate}"/>
+                <div align="center">
+                    <h:outputLabel value="#{item.eventDate}">
+                        <f:convertDateTime type="date" pattern="dd. MMMM, yyyy."/>
+                    </h:outputLabel>
+                    <br/>
+                    <h:outputLabel value="#{item.eventDate}">
+                        <f:convertDateTime type="date" pattern="HH:mm"/>
+                    </h:outputLabel>
+                </div>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.approved']}"/>
                 </f:facet>
-                <h:outputLabel value="#{item.approved}"/>
+                <h:outputLabel rendered="#{item.approved}"
+                               value="#{text['generic.yes']}"/>
+                <h:outputLabel rendered="!#{item.approved}"
+                               value="#{text['generic.no']}"/>
             </h:column>
-            <h:column>
+            <h:column rendered="#{currentUser.hasPermission('EVENT-APPROVE')}">
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.action.approve']}"/>
                 </f:facet>

@@ -8,19 +8,13 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 template="/WEB-INF/template.xhtml">
 
+
+
     <ui:define name="content">
 
-        <h2><h:outputLabel value="#{text['genre-list.title']}"/></h2>
-        <h:link outcome="genre-edit" value="#{text['genre-list.newgenre']}"/>
+        <h2><h:outputLabel value="#{text['reports.title']}"/></h2>
 
-        <h:dataTable value="#{allGenres}" var="item">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputLabel value="#{text['genre.title']}"/>
-                </f:facet>
-                <h:outputLabel value="#{item.title}"/>
-            </h:column>
-        </h:dataTable>
+    
 
     </ui:define>
 </ui:composition>

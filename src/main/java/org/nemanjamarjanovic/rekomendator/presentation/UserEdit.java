@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 
 import javax.inject.Inject;
@@ -33,7 +34,6 @@ public class UserEdit implements Serializable {
     ServletContext servletContext;
 
     private User data = new User();
-    private Part file;
 
     public String doRegister() throws NoSuchAlgorithmException {
         userDao.create(data);
@@ -55,7 +55,8 @@ public class UserEdit implements Serializable {
         return "user-list?faces-redirect=true";
     }
 
-    public void doSaveImage() {
+    public void doSaveImage(ValueChangeEvent event) {
+        Part file = (Part) event.getNewValue();
         try (InputStream input = file.getInputStream()) {
             Files.copy(input,
                     new File(servletContext.getInitParameter("upload.location"),
@@ -72,14 +73,6 @@ public class UserEdit implements Serializable {
 
     public void setData(User data) {
         this.data = data;
-    }
-
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
     }
 
 }

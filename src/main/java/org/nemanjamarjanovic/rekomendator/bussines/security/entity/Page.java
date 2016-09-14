@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.Permission.FIND_ALL;
+import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.Page.FIND_ALL;
 
 /**
  *
@@ -13,22 +13,23 @@ import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.Permis
  */
 @Entity
 @NamedQueries(
-        @NamedQuery(name = FIND_ALL, query = "select p from Permission p")
+        @NamedQuery(name = FIND_ALL, query = "select p from Page p")
 )
-public class Permission implements Serializable
+public class Page implements Serializable
 {
 
-    public static final String FIND_ALL = "Permission.findAll";
+    public static final String FIND_ALL = "Page.findAll";
     private static final long serialVersionUID = 1L;
 
     @Id
     private String title;
+    private String page;
 
-    public Permission()
+    public Page()
     {
     }
 
-    public Permission(String title)
+    public Page(String title)
     {
         this.title = title;
     }
@@ -41,6 +42,16 @@ public class Permission implements Serializable
     public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public String getPage()
+    {
+        return page;
+    }
+
+    public void setPage(String page)
+    {
+        this.page = page;
     }
 
 }

@@ -3,12 +3,10 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="/index.xhtml"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">
-
-
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/WEB-INF/template.xhtml">
 
     <ui:define name="content">
 
@@ -19,8 +17,6 @@
                          />
             <f:viewAction action="#{movieList.init()}" />
         </f:metadata>
-
-
 
         <h2>
             <h:outputText value="#{text['movie-list.alltitle']}" rendered="#{movieList.src=='all'}"/>
@@ -33,17 +29,13 @@
 
                 <h:outputLabel value="#{text['movie.title']}"/>
                 <h:inputText id="title"
-                             value="#{movieList.title}" >
-                    <f:validateLength minimum="3" maximum="100" />
-                </h:inputText>
+                             value="#{movieList.title}"/>
                 <h:message for="title" style="color:red"/>
 
-<!--                <h:outputLabel value="#{text['movie.publishingdate']}"/>
+                <h:outputLabel value="#{text['movie.publishingdate']}"/>
                 <h:inputText id="publishingDate"
-                             value="#{movieList.publishingDate}" >
-                    <f:validateLength minimum="8" maximum="10" />
-                </h:inputText>
-                <h:message for="publishingDate" style="color:red"/>-->
+                             value="#{movieList.publishingDate}"/>
+                <h:message for="publishingDate" style="color:red"/>
 
                 <h:commandButton action="#{movieList.doSearch()}" 
                                  value="#{text['generic.search']}"/>
@@ -53,9 +45,11 @@
 
         <hr/>
         <br/>
-        <ui:include src="/WEB-INF/pagination.xhtml">
-            <ui:param name="list" value="#{movieList}"/>
-        </ui:include>
+        <h:panelGroup rendered="#{not empty movieList.pagination.items}">
+            <ui:include src="/WEB-INF/pagination.xhtml" >
+                <ui:param name="list" value="#{movieList}"/>
+            </ui:include>
+        </h:panelGroup>
         <br/>
 
         <h:dataTable value="#{movieList.pagination.items}"
@@ -76,7 +70,7 @@
                 <h:outputLabel value="#{item.publishingDate}"/>
             </h:column>
 
-            <h:column>
+            <h:column rendered="#{currentUser.hasPermission('MOVIE-VIEW')}">
                 <f:facet name="header">
                     <h:outputLabel value="#{text['generic.details']}"/>
                 </f:facet>
@@ -85,7 +79,7 @@
                 </h:link>
             </h:column>
 
-            <h:column>
+            <h:column rendered="#{currentUser.hasPermission('MOVIE-EDIT')}">
                 <f:facet name="header">
                     <h:outputLabel value=" #{text['generic.edit-title']}"/>
                 </f:facet>

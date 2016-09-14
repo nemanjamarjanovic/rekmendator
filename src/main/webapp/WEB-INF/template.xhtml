@@ -12,80 +12,100 @@
     </h:head>
 
     <h:body>
-
-        <div align="center" rendered="#{empty currentUser.name}">
-            <h:link class="menu-item" 
-                    outcome="/index" 
-                    value="#{text['login.title']}"/> 
-            | 
-            <h:link class="menu-item" 
-                    outcome="/pages/user-registration" 
-                    value="#{text['registration.title']}"/> 
-            | 
-            <h:link class="menu-item" 
-                    outcome="/pages/movie-list?src=search" 
-                    value="#{text['movie-list.searchtitle']}"/>
+        <div align="right">
+            <h:outputLink value="/rekomendator/api/Top5" 
+                          target="_blank">
+                <h:graphicImage url="/api/images/icons/rss"
+                                style="width:16px;height: 16px"/>
+            </h:outputLink>
         </div>
 
-        <div align="center" rendered="#{not empty currentUser.name}"> 
-
-
-            <h:outputLabel rendered="#{not empty currentUser.name}"
-                           value="#{currentUser.name}"/>
-            | 
-            <h:form style="display: inline" >
-                <h:commandLink class="menu-item" 
-                               action="#{currentUser.doLogout()}"
-                               rendered="#{not empty currentUser.name}"
-                               value="#{text['login.logout']}"/>
-            </h:form>
-            | 
-            <h:link class="menu-item" 
-                    outcome="/pages/user-edit?id=#{currentUser.id}" 
-                    value="#{text['user-edit.profiletitle']}"/>
-
+        <div align="left">
+            <h:panelGroup rendered="#{empty currentUser.name}">
+                <h:link outcome="/index" 
+                        value="#{text['login.title']}"/> 
+                &nbsp; 
+                <h:link outcome="/pages/user-registration" 
+                        value="#{text['registration.title']}"/> 
+                &nbsp; 
+                <h:link outcome="/pages/movie-list?src=search" 
+                        value="#{text['movie-list.searchtitle']}"/>
+            </h:panelGroup>
         </div>
 
-        <div align="center" rendered="#{not empty currentUser.name}">
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('USER-LIST')}"
-                    outcome="/pages/user-list" 
-                    value="#{text['user-list.title']}"/>
-            |
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('GENRE-LIST')}"
-                    outcome="/pages/genre-list" 
-                    value="#{text['genre-list.title']}"/> 
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                    outcome="/pages/movie-list?src=search" 
-                    value="#{text['movie-list.searchtitle']}"/>
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                    outcome="/pages/movie-list?src=favorite" 
-                    value="#{text['movie-list.favoritetitle']}"/>
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                    outcome="/pages/movie-list?src=all" 
-                    value="#{text['movie-list.alltitle']}"/>
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('MOVIE-EDIT')}"
-                    outcome="/pages/movie-edit" 
-                    value="#{text['movie-list.newmovie']}"/>
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('EVENT-LIST')}"
-                    outcome="/pages/event-list" 
-                    value="#{text['event-list.title']}"/>
-            | 
-            <h:link class="menu-item" 
-                    rendered="#{currentUser.hasPermission('EVENT-EDIT')}"
-                    outcome="/pages/event-edit" 
-                    value="#{text['event-edit.title']}"/>
+        <div align="left" > 
+            <h:panelGroup rendered="#{not empty currentUser.name}">
+
+                <h:outputLabel rendered="#{not empty currentUser.name}"
+                               value="#{currentUser.name}"/>: 
+                &nbsp; 
+                <h:form style="display: inline" >
+                    <h:commandLink action="#{currentUser.doLogout()}"
+                                   rendered="#{not empty currentUser.name}"
+                                   value="#{text['login.logout']}"/>
+                </h:form>
+
+                &nbsp; 
+                <h:link outcome="/pages/user-edit?id=#{currentUser.id}" 
+                        value="#{text['user-edit.profiletitle']}"/>
+
+                <ui:repeat value="#{currentUser.pages}" var="item">
+                    &nbsp;
+                    <h:link outcome="/pages/#{item.page}" 
+                            value="#{text[item.title]}"/> 
+                </ui:repeat>
+
+
+            </h:panelGroup>
+        </div>
+
+        <div align="center">
+            <h:panelGroup rendered="#{not empty currentUser.name}">
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('USER-LIST')}"
+                        outcome="/pages/user-list" 
+                        value="#{text['user-list.title']}"/>
+                &nbsp;
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('GENRE-LIST')}"
+                        outcome="/pages/genre-list" 
+                        value="#{text['genre-list.title']}"/> 
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
+                        outcome="/pages/movie-list?src=search" 
+                        value="#{text['movie-list.searchtitle']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
+                        outcome="/pages/movie-list?src=favorite" 
+                        value="#{text['movie-list.favoritetitle']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
+                        outcome="/pages/movie-list?src=all" 
+                        value="#{text['movie-list.alltitle']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('MOVIE-EDIT')}"
+                        outcome="/pages/movie-edit" 
+                        value="#{text['movie-list.newmovie']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('EVENT-LIST')}"
+                        outcome="/pages/event-list" 
+                        value="#{text['event-list.title']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('EVENT-EDIT')}"
+                        outcome="/pages/event-edit" 
+                        value="#{text['event-edit.title']}"/>
+                &nbsp; 
+                <h:link class="menu-item" 
+                        rendered="#{currentUser.hasPermission('COMMENT-LIST')}"
+                        outcome="/pages/comment-list" 
+                        value="#{text['comment-list.title']}"/>
+            </h:panelGroup>
         </div>
 
         <hr/>

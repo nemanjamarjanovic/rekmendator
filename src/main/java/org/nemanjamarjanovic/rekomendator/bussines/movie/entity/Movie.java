@@ -22,8 +22,8 @@ import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
 @NamedQueries({
     @NamedQuery(name = FIND_ALL, query = "select m from Movie m"),
     @NamedQuery(name = SEARCH, query = "select m from Movie m  "
-            + " where( :title is null or (:title is not null and m.title like :title)) ")
-           // + "  and ( :publishingDate is null or (:publishingDate is not null and m.publishingDate between :from and :to )) ")
+            + " where( (:title is null) or (m.title like :title) ) "
+            + "  and ( (:publishingDate is null) or (m.publishingDate = :publishingDate ) ) ")
 })
 @XmlRootElement
 public class Movie implements Serializable
@@ -31,6 +31,7 @@ public class Movie implements Serializable
 
     public static final String FIND_ALL = "Movie.findAll";
     public static final String SEARCH = "Movie.Search";
+    private static final long serialVersionUID = 1L;
 
     @Id
     private String id;
@@ -39,9 +40,7 @@ public class Movie implements Serializable
     private Integer duration;
     private String youtube;
     private boolean trailer;
-
-    @Temporal(TemporalType.DATE)
-    private Date publishingDate;
+    private String publishingDate;
 
     @OneToMany
     private Set<Genre> genre;
@@ -109,11 +108,13 @@ public class Movie implements Serializable
         this.duration = duration;
     }
 
-    public Date getPublishingDate() {
+    public String getPublishingDate()
+    {
         return publishingDate;
     }
 
-    public void setPublishingDate(Date publishingDate) {
+    public void setPublishingDate(String publishingDate)
+    {
         this.publishingDate = publishingDate;
     }
 

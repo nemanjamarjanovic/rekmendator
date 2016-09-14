@@ -5,7 +5,7 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <application>
         <resource-bundle>
-            <base-name>Text</base-name>
+            <base-name>translation/Text</base-name>
             <var>text</var>
         </resource-bundle>
     </application>

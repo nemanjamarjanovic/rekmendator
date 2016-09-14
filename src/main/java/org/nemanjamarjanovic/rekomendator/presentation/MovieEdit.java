@@ -49,6 +49,13 @@ public class MovieEdit implements Serializable {
         this.actors.add(search);
     }
 
+    public void doRemoveActor(String actor) {
+        
+        if (this.actors.contains(actor)) {
+            this.actors.remove(actor);
+        }
+    }
+
     public Movie getData() {
         return data;
     }

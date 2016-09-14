@@ -19,6 +19,8 @@ import org.nemanjamarjanovic.rekomendator.bussines.omdb.entity.OmdbMovie;
 @ViewScoped
 public class MovieList implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private MovieDao movieDao;
 
@@ -57,16 +59,10 @@ public class MovieList implements Serializable {
 
     public void doSearch() {
 
-//        Date pd;
-//        try {
-//            pd = new SimpleDateFormat("dd.MM.yyyy").parse(this.publishingDate);
-//        } catch (ParseException ex) {
-//            pd = null;
-//        }
         this.pagination = new Pagination(
-                movieDao.search(this.title, null, null), 5);
+                movieDao.search(this.title, this.publishingDate, null), 5);
 
-        this.omdbMovie = this.omdbClient.search(this.title);
+        //this.omdbMovie = this.omdbClient.search(this.title);
     }
 
     public String getSrc() {

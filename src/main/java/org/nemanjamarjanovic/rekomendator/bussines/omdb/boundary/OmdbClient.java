@@ -43,20 +43,20 @@ public class OmdbClient {
                 .get()
                 .readEntity(String.class);
 
-        JsonReader jsonReader = Json.createReader(new StringReader(readEntity));
-        JsonObject object = jsonReader.readObject();
-        OmdbMovie movie = new OmdbMovie(
-                object.getString("Title"),
-                object.getString("Year"),
-                object.getString("Runtime"),
-                object.getString("Genre"),
-                object.getString("Director"),
-                object.getString("Actors"),
-                object.getString("Plot"),
-                object.getString("Poster"),
-                object.getString("imdbRating"));
-
-        jsonReader.close();
+        OmdbMovie movie;
+        try (JsonReader jsonReader = Json.createReader(new StringReader(readEntity))) {
+            JsonObject object = jsonReader.readObject();
+            movie = new OmdbMovie(
+                    object.getString("Title"),
+                    object.getString("Year"),
+                    object.getString("Runtime"),
+                    object.getString("Genre"),
+                    object.getString("Director"),
+                    object.getString("Actors"),
+                    object.getString("Plot"),
+                    object.getString("Poster"),
+                    object.getString("imdbRating"));
+        }
         return movie;
     }
 

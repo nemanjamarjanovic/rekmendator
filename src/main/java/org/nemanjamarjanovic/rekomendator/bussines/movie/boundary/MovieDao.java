@@ -1,6 +1,6 @@
 package org.nemanjamarjanovic.rekomendator.bussines.movie.boundary;
 
-import java.util.Date;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -36,15 +36,20 @@ public class MovieDao
                 .getResultList();
     }
 
-    public List<Movie> search(String title, Date publishingDate, List<Genre> genres)
+    public List<Movie> search(String title, String publishingDate, List<Genre> genres)
     {
 
-        String titleParam = (title == null) ? null : "%" + title.trim() + "%";
+        String titleParam = (title == null || title.isEmpty()) ? null : "%" + title.trim() + "%";
+        String pdParam = (publishingDate == null || publishingDate.isEmpty()) ? null : publishingDate.trim();
+        
+        if (titleParam == null && pdParam == null) {
+            return Collections.emptyList();
+        }
 
         return entityManager
                 .createNamedQuery(Movie.SEARCH, Movie.class)
                 .setParameter("title", titleParam)
-                // .setParameter("publishingDate", publishingDate)
+                .setParameter("publishingDate", pdParam)
                 .getResultList();
     }
 
@@ -57,6 +62,7 @@ public class MovieDao
         movie.setDuration(data.getDuration());
         movie.setDescription(data.getDescription());
         movie.setPublishingDate(data.getPublishingDate());
+        movie.setYoutube(data.getYoutube());
 
         movie.setGenre(new HashSet<>(10));
         data.getGenre().stream().map(g -> entityManager

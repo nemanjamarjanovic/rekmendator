@@ -2,13 +2,16 @@ package org.nemanjamarjanovic.rekomendator.presentation;
 
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
+import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Page;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 
 /**
@@ -19,6 +22,8 @@ import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 @SessionScoped
 public class CurrentUser implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Inject
     UserDao userDao;
 
@@ -28,6 +33,7 @@ public class CurrentUser implements Serializable {
     private String id;
     private String name;
     private Set<String> permissions = new HashSet<>();
+    private List<Page> pages = new ArrayList<>();
 
     public String doLogin() throws NoSuchAlgorithmException {
         User user = userDao.findByUsername(this.username, this.password);
@@ -36,7 +42,9 @@ public class CurrentUser implements Serializable {
         this.username = null;
         this.password = null;
         this.permissions = user.getRole().getPermissions().stream().map(p -> p.getTitle()).collect(Collectors.toSet());
-        return "/pages/movie-list?faces-redirect=true";
+        this.pages = user.getRole().getPages().stream().map(p -> p).collect(Collectors.toList());
+        this.pages.size();
+        return "/pages/movie-list?faces-redirect=true&src=search";
     }
 
     public String doLogout() {
@@ -71,6 +79,15 @@ public class CurrentUser implements Serializable {
 
     public boolean hasPermission(String permission) {
         return this.permissions.contains(permission);
+    }
+
+    public boolean canAccessPage(String page) {
+        return this.pages.stream().map(p -> p.getPage()).collect(Collectors.toSet()).contains(page);
+    }
+
+    public List<Page> getPages()
+    {
+        return pages;
     }
 
 }

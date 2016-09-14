@@ -17,30 +17,42 @@ import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
  */
 @Stateless
 @Loggable
-public class CommentDao {
+public class CommentDao
+{
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public Comment findById(String id) {
+    public Comment findById(String id)
+    {
         return entityManager.find(Comment.class, id);
     }
 
-    public List<Comment> findByUser(String user) {
+    public List<Comment> findAll()
+    {
+        return entityManager
+                .createNamedQuery(Comment.FIND_ALL, Comment.class)
+                .getResultList();
+    }
+
+    public List<Comment> findByUser(String user)
+    {
         return entityManager
                 .createNamedQuery(Comment.FIND_BY_USER, Comment.class)
                 .setParameter("user", user)
                 .getResultList();
     }
 
-    public List<Comment> findByMovie(String movie) {
+    public List<Comment> findByMovie(String movie)
+    {
         return entityManager
                 .createNamedQuery(Comment.FIND_BY_MOVIE, Comment.class)
                 .setParameter("movie", movie)
                 .getResultList();
     }
 
-    public void create(String movie, String user, String text) {
+    public void create(String movie, String user, String text)
+    {
         Comment comment = new Comment();
         comment.setId(UUID.randomUUID().toString());
         comment.setCreatedDate(new Date());
@@ -48,6 +60,12 @@ public class CommentDao {
         comment.setMovie(entityManager.getReference(Movie.class, movie));
         comment.setText(text);
         entityManager.persist(comment);
+    }
+
+    public void remove(String comment)
+    {
+        Comment forRemoval = entityManager.find(Comment.class, comment);
+        entityManager.remove(forRemoval);
     }
 
 }

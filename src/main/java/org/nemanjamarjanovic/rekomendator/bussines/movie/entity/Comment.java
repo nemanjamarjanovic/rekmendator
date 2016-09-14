@@ -18,11 +18,13 @@ import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Comment.*
  */
 @Entity
 @NamedQueries({
+    @NamedQuery(name = FIND_ALL, query = "select c from Comment c order by c.createdDate desc "),
     @NamedQuery(name = FIND_BY_USER, query = "select c from Comment c where c.user.id = :user "),
     @NamedQuery(name = FIND_BY_MOVIE, query = "select c from Comment c where c.movie.id = :movie ")
 })
 public class Comment implements Serializable {
 
+    public static final String FIND_ALL = "Comment.findAll";
     public static final String FIND_BY_USER = "Comment.findByUser";
     public static final String FIND_BY_MOVIE = "Comment.findByMovie";
     private static final long serialVersionUID = 1L;
