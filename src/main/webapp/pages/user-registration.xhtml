@@ -19,6 +19,17 @@
                          />
         </f:metadata>
 
+        <h:form id="form" enctype="multipart/form-data">
+            <h:panelGrid columns="1">
+                <h:outputLabel value="#{text['user.image']}:"/>
+                <h:inputFile value="#{userEdit.file}" id="image"/>
+                <h:commandButton value="#{text['generic.save']}">
+                    <f:ajax listener="#{userEdit.doSaveImage()}" execute="image" render="@form image1"/>
+                </h:commandButton>
+                <h:graphicImage url="/api/images/#{userEdit.data.id}" id="image1"/>
+            </h:panelGrid>
+        </h:form>
+
         <h:form id="newUserForm">
             <h:panelGrid columns="3">
 
@@ -38,9 +49,6 @@
                              validator="passwordValidator">
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
-
-                <h:outputLabel value="#{text['user.image']}:"/>
-                <h:inputFile value="#{userEdit.file}"/>
 
                 <h:outputLabel value="#{text['user.name']}:"/>
                 <h:inputText id="name" 

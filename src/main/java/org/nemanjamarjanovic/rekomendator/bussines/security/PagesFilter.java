@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -18,18 +19,29 @@ import org.nemanjamarjanovic.rekomendator.presentation.CurrentUser;
  *
  * @author nemanja.marjanovic
  */
-@WebFilter("/faces/admin/*")
+@WebFilter("/afaces/pages/*")
 @Loggable
-public class AdminPagesFilter implements Filter {
+public class PagesFilter implements Filter {
 
     @Inject
     CurrentUser currentUser;
 
+    @Inject
+    ServletContext servletContext;
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        if (currentUser.hasPermission("ADMIN-PAGES")) {
+        String uri = ((HttpServletRequest) request).getRequestURI();
+        String[] split = uri.split("/");
+        String page = split[4].replace(".xhtml", "").toUpperCase();
+
+        if (page.equals("USER-REGISTRATION")
+                || page.equals("MOVIE-LIST")
+                || currentUser.hasPermission(page)) {
+
             chain.doFilter(request, response);
+
         } else {
             ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/faces/index.xhtml");
         }

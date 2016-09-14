@@ -32,11 +32,12 @@
                 <h:graphicImage url="#{item.image}"/>
             </h:column>
             <h:column>
-                <a href="#{item.link}">
-                    <h:outputText value="#{item.title}"/>
-                </a>
+                <h:outputLink value="#{item.link}"
+                              target="_blank">
+                    <h:outputLabel value="#{item.title}"/>
+                </h:outputLink>
                 <br/>
-                <h:outputText value="#{item.sinopsis}"/>
+                <h:outputLabel value="#{item.sinopsis}"/>
             </h:column>
         </h:dataTable>
     </ui:define>

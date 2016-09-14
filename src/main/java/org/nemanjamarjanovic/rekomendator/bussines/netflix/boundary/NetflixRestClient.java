@@ -26,19 +26,18 @@ public class NetflixRestClient
     public Rss getNetflixRssFeed()
     {
 
-//        String address = servletContext.getInitParameter("netflix.address");
-//
-//        if (this.netflixRssFeed == null) {
-//            this.netflixRssFeed = ClientBuilder
-//                    .newClient()
-//                    .target(address)
-//                    .request()
-//                    .get()
-//                    .readEntity(Rss.class);
-//        }
-//
-//        return this.netflixRssFeed;
-        return null;
+        String address = servletContext.getInitParameter("netflix.address");
+
+        if (this.netflixRssFeed == null) {
+            this.netflixRssFeed = ClientBuilder
+                    .newClient()
+                    .target(address)
+                    .request()
+                    .get()
+                    .readEntity(Rss.class);
+        }
+
+        return this.netflixRssFeed;
     }
 
 }
