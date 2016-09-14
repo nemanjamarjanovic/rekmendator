@@ -14,7 +14,52 @@
 
         <h2><h:outputLabel value="#{text['reports.title']}"/></h2>
 
-    
+
+        <h3><h:outputLabel value="#{text['reports.top5favorited']}"/></h3>
+        <ui:repeat value="#{reports.top5Favorited}"
+                   var="favorite">
+            <strong>
+                <h:outputLabel value="#{favorite.title}"/>: 
+                <h:outputLabel value="#{favorite.rating}"/>
+            </strong>
+        </ui:repeat>
+        <hr/><br/>
+
+        <h3><h:outputLabel value="#{text['reports.top5rated']}"/></h3>
+        <ui:repeat value="#{reports.top5Rating}"
+                   var="rating">
+            <strong>
+                <h:outputLabel value="#{rating.title}"/>: 
+                <h:outputLabel value="#{rating.rating}"/>
+            </strong>
+        </ui:repeat>
+        <hr/><br/>
+
+        <h3><h:outputLabel value="#{text['reports.monthly']}"/></h3>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{text['reports.month']}"/>
+                <h:inputText value="#{reports.month}"/>
+                <h:outputLabel value="#{text['reports.year']}"/>
+                <h:inputText value="#{reports.year}"/>
+                <h:outputLabel value=""/>
+                <h:commandButton value="#{text['reports.generate']}" 
+                                 action="#{reports.doReport()}"/>
+            </h:panelGrid>
+        </h:form>
+        <hr/><br/>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel value="#{text['reports.users']}:"/>
+            <h:outputLabel value="#{reports.users}"/>
+
+            <h:outputLabel value="#{text['reports.movies']}:"/>
+            <h:outputLabel value="#{reports.movies}"/>
+
+            <h:outputLabel value="#{text['reports.events']}:"/>
+            <h:outputLabel value="#{reports.events}"/>
+        </h:panelGrid>
+
 
     </ui:define>
 </ui:composition>

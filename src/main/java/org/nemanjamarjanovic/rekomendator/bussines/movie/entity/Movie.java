@@ -1,7 +1,6 @@
 package org.nemanjamarjanovic.rekomendator.bussines.movie.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -9,8 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import static org.nemanjamarjanovic.rekomendator.bussines.movie.entity.Movie.*;
 
@@ -41,6 +39,9 @@ public class Movie implements Serializable
     private String youtube;
     private boolean trailer;
     private String publishingDate;
+    
+    @Transient
+    private Number rating;
 
     @OneToMany
     private Set<Genre> genre;
@@ -136,6 +137,14 @@ public class Movie implements Serializable
     public void setTrailer(boolean trailer)
     {
         this.trailer = trailer;
+    }
+
+    public Number getRating() {
+        return rating;
+    }
+
+    public void setRating(Number rating) {
+        this.rating = rating;
     }
 
     @Override

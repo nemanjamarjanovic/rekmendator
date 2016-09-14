@@ -81,7 +81,7 @@
 
             <h:column rendered="#{currentUser.hasPermission('MOVIE-EDIT')}">
                 <f:facet name="header">
-                    <h:outputLabel value=" #{text['generic.edit-title']}"/>
+                    <h:outputLabel value="#{text['generic.edit-title']}"/>
                 </f:facet>
                 <h:link outcome="movie-edit" value="#{text['generic.edit-title']}">
                     <f:param name="id" value="#{item.id}" />
@@ -94,7 +94,7 @@
             <h:panelGrid columns="2">
                 <h:graphicImage url="#{movieList.omdbMovie.poster}"/>
                 <h:panelGroup>
-                    <h2>Result from OMDB</h2>
+                    <h2>#{text['omdb.title']}</h2>
                     <h:outputText value="#{movieList.omdbMovie.title}"/><br/>
                     <h:outputText value="#{movieList.omdbMovie.plot}"/><br/>
                     <h:outputText value="#{movieList.omdbMovie.year}"/><br/>

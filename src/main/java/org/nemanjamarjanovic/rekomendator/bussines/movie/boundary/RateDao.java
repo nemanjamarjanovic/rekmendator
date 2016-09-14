@@ -3,6 +3,7 @@ package org.nemanjamarjanovic.rekomendator.bussines.movie.boundary;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,12 +41,21 @@ public class RateDao {
                 .getSingleResult();
     }
 
-
     public List<Movie> findTopMovies(int limit) {
 
-        return entityManager
-                .createNamedQuery(Rate.FIND_AVERAGE_BY_MOVIE, Movie.class)
+        List<Object[]> resultList = entityManager
+                .createNamedQuery(Rate.FIND_TOP_MOVIES)
+                .setMaxResults(limit)
                 .getResultList();
+
+        return resultList
+                .parallelStream()
+                .map((f) -> {
+                    Movie movie = (Movie) f[0];
+                    movie.setRating((Double) f[1]);
+                    return movie;
+                })
+                .collect(Collectors.toList());
     }
 
     public void create(String movie, String user, int rating) {

@@ -58,7 +58,7 @@
                 <h:outputLabel rendered="!#{item.approved}"
                                value="#{text['generic.no']}"/>
             </h:column>
-            <h:column rendered="#{currentUser.hasPermission('EVENT-APPROVE')}">
+            <h:column rendered="#{currentUser.hasPermission('EVENT-ACTIVATION')}">
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.action.approve']}"/>
                 </f:facet>

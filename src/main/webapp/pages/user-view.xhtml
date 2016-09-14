@@ -48,11 +48,12 @@
                 <h:outputLabel value="#{text['user.role']}:"/>
                 <h:outputLabel value="#{userEdit.data.role.title}"/>
 
+                <h:outputLabel value="#{text['user.action.changerole']}:"/>
                 <h:selectOneMenu value="#{role}">
                     <f:selectItems  value="#{allRoles}"/>
                 </h:selectOneMenu>
 
-                <h:outputLabel value="#{text['user.action.changerole']}:"/>
+                
                 <h:commandButton action="#{userEdit.doRoleChange(role)}" 
                                  value="#{text['generic.edit']}"
                                  rendered="#{not empty userEdit.data.id}"/>

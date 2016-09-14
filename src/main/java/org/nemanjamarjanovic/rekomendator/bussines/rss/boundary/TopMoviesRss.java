@@ -22,19 +22,17 @@ import org.nemanjamarjanovic.rekomendator.bussines.rss.entity.Rss;
  */
 @Path("Top5")
 @Loggable
-public class TopMoviesRss
-{
+public class TopMoviesRss {
 
     @Inject
     private RateDao rateDao;
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Response get(@Context UriInfo uriInfo)
-    {
+    public Response get(@Context UriInfo uriInfo) {
 
         String uri = uriInfo.getBaseUri().toString();
-        String link = uri.substring(0, uri.length()-5) + "/faces/pages/movie-view.xhtml?id=";
+        String link = uri.substring(0, uri.length() - 5) + "/faces/pages/movie-view.xhtml?id=";
 
         List<Item> result = rateDao
                 .findTopMovies(5)
@@ -42,9 +40,10 @@ public class TopMoviesRss
                 .map(f -> new Item(
                         f.getTitle(),
                         f.getDescription(),
-                        link + f.getId()))
+                        link + f.getId(),
+                        (Double) f.getRating()))
                 .collect(Collectors.toList());
-        
+
         Channel channel = new Channel();
         channel.setItems(result);
         channel.setDescription("Top 5 rated movies");

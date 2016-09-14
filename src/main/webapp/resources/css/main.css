@@ -1,0 +1,27 @@
+/* 
+    Created on : Sep 14, 2016, 7:15:09 PM
+    Author     : nemanja
+*/
+
+table{
+    border: 1px solid blue;
+    margin: 10px;
+    background: antiquewhite;
+}
+
+th{
+    background: grey;
+    color: white;
+    padding: 10px;
+    
+}
+
+tr{
+    margin: 0px;
+    padding: 0px;
+}
+td{
+    text-align: center;
+    padding: 3px;
+    margin: 0px;
+}

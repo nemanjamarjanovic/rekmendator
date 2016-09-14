@@ -10,16 +10,19 @@ public class Item
     private String title;
     private String description;
     private String link;
+    private Double rating;
 
     public Item()
     {
     }
 
-    public Item(String title, String description, String link)
+    public Item(String title, String description, String link, Double rating)
     {
         this.title = title;
         this.description = description;
         this.link = link;
+        this.link = link;
+        this.rating = rating;
     }
 
     public String getLink()
@@ -50,6 +53,14 @@ public class Item
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
 }

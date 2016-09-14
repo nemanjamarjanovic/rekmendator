@@ -41,7 +41,7 @@ public class MovieList implements Serializable {
 
     public void init() {
         switch (this.src) {
-            case "favorite":
+            case "favorites":
                 this.pagination = new Pagination(
                         favoriteDao.findByUser(currentUser.getId())
                         .parallelStream()
@@ -62,7 +62,7 @@ public class MovieList implements Serializable {
         this.pagination = new Pagination(
                 movieDao.search(this.title, this.publishingDate, null), 5);
 
-        //this.omdbMovie = this.omdbClient.search(this.title);
+        this.omdbMovie = this.omdbClient.search(this.title);
     }
 
     public String getSrc() {
