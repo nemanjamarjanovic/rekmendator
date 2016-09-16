@@ -60,55 +60,6 @@
             </h:panelGroup>
         </div>
 
-        <div align="center">
-            <h:panelGroup rendered="#{not empty currentUser.name}">
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('USER-LIST')}"
-                        outcome="/pages/user-list" 
-                        value="#{text['user-list.title']}"/>
-                &nbsp;
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('GENRE-LIST')}"
-                        outcome="/pages/genre-list" 
-                        value="#{text['genre-list.title']}"/> 
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                        outcome="/pages/movie-list?src=search" 
-                        value="#{text['movie-list.searchtitle']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                        outcome="/pages/movie-list?src=favorite" 
-                        value="#{text['movie-list.favoritetitle']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('MOVIE-LIST')}"
-                        outcome="/pages/movie-list?src=all" 
-                        value="#{text['movie-list.alltitle']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('MOVIE-EDIT')}"
-                        outcome="/pages/movie-edit" 
-                        value="#{text['movie-list.newmovie']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('EVENT-LIST')}"
-                        outcome="/pages/event-list" 
-                        value="#{text['event-list.title']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('EVENT-EDIT')}"
-                        outcome="/pages/event-edit" 
-                        value="#{text['event-edit.title']}"/>
-                &nbsp; 
-                <h:link class="menu-item" 
-                        rendered="#{currentUser.hasPermission('COMMENT-LIST')}"
-                        outcome="/pages/comment-list" 
-                        value="#{text['comment-list.title']}"/>
-            </h:panelGroup>
-        </div>
-
         <hr/>
         <br/>
 

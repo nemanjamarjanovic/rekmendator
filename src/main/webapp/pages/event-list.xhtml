@@ -15,18 +15,30 @@
         <h2><h:outputLabel value="#{text['event-list.title']}"/></h2>
 
         <h:dataTable value="#{eventList.pagination.items}" var="item">
+            
+            <h:column rendered="#{currentUser.hasPermission('EVENT-VIEW')}">
+                <f:facet name="header">
+                    <h:outputLabel value="#{text['generic.details']}"/>
+                </f:facet>
+                <h:link outcome="event-view" value="#{text['generic.details']}">
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.title']}"/>
                 </f:facet>
                 <h:outputLabel value="#{item.title}"/>
             </h:column>
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.location']}"/>
                 </f:facet>
                 <h:outputLabel value="#{item.location}"/>
             </h:column>
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.createddate']}"/>
@@ -35,6 +47,7 @@
                     <f:convertDateTime type="date" pattern="dd.MM.yyyy."/>
                 </h:outputLabel>
             </h:column>
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.eventdate']}"/>
@@ -49,6 +62,7 @@
                     </h:outputLabel>
                 </div>
             </h:column>
+            
             <h:column>
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.approved']}"/>
@@ -58,6 +72,7 @@
                 <h:outputLabel rendered="!#{item.approved}"
                                value="#{text['generic.no']}"/>
             </h:column>
+            
             <h:column rendered="#{currentUser.hasPermission('EVENT-ACTIVATION')}">
                 <f:facet name="header">
                     <h:outputLabel value="#{text['event.action.approve']}"/>
@@ -68,6 +83,7 @@
                                    rendered="#{!item.approved}"/>
                 </h:form>
             </h:column>
+            
         </h:dataTable>
 
     </ui:define>

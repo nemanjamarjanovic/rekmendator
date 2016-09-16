@@ -42,7 +42,7 @@ public class FavoriteDao {
                 .getResultList();
 
         return resultList
-                .parallelStream()
+                .stream()
                 .map((f) -> {
                     Movie movie = (Movie) f[0];
                     movie.setRating((Long) f[1]);

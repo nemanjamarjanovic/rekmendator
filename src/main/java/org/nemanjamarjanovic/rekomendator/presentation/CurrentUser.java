@@ -5,9 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.nemanjamarjanovic.rekomendator.bussines.security.boundary.UserDao;
@@ -44,12 +46,16 @@ public class CurrentUser implements Serializable {
         this.permissions = user.getRole().getPermissions().stream().map(p -> p.getTitle()).collect(Collectors.toSet());
         this.pages = user.getRole().getPages().stream().map(p -> p).collect(Collectors.toList());
         this.pages.size();
-        return "/pages/movie-list?faces-redirect=true&src=search";
+        
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
+        
+        return "/pages/event-list?faces-redirect=true";
     }
 
     public String doLogout() {
         this.id = null;
         this.name = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index?faces-redirect=true";
     }
 
@@ -90,4 +96,10 @@ public class CurrentUser implements Serializable {
         return pages;
     }
 
+    public Set<String> getPermissions()
+    {
+        return permissions;
+    }
+
+    
 }

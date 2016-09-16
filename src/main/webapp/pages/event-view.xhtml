@@ -14,7 +14,7 @@
 
         <f:metadata>
             <f:viewParam name="id" 
-                         value="#{event}" 
+                         value="#{eventEdit.data}" 
                          converter="#{eventConverter}" 
                          converterMessage="Unknown product, please use a link from within the system."
                          required="true" 
@@ -28,27 +28,45 @@
             <h:panelGrid columns="2">
                 <h:outputLabel value="#{text['event.title']}: "/>
                 <h:outputLabel id="title" 
-                               value="#{event.title}">
+                               value="#{eventEdit.data.title}">
                 </h:outputLabel>
 
                 <h:outputLabel value="#{text['event.location']}: "/>
                 <h:outputLabel id="location" 
-                               value="#{event.location}">
+                               value="#{eventEdit.data.location}">
                 </h:outputLabel>
 
                 <h:outputLabel value="#{text['event.createddate']}: "/>
                 <h:outputLabel id="createddate" 
-                               value="#{event.createdDate}">
+                               value="#{eventEdit.data.createdDate}">
                     <f:convertDateTime type="date" pattern="DD.mm.yyyy"/>
                 </h:outputLabel>
 
                 <h:outputLabel value="#{text['event.eventdate']}: "/>
                 <h:outputLabel id="eventdate" 
-                               value="#{event.eventDate}">
+                               value="#{eventEdit.data.eventDate}">
                     <f:convertDateTime type="date" pattern="DD.mm.yyyy"/>
                 </h:outputLabel>
             </h:panelGrid>
         </h:form>
+
+        <h:form id="form" enctype="multipart/form-data"
+                rendered="#{currentUser.hasPermission('EVENT-PHOTO')}">
+            <h:panelGrid columns="1">
+                <h:outputLabel value="#{text['user.image']}:"/>
+                <h:inputFile valueChangeListener="#{eventEdit.doSaveImage}" 
+                             onchange="submit()"/>
+            </h:panelGrid>
+        </h:form>
+        
+        <ui:repeat value="#{eventEdit.eventImages}"
+                   rendered="#{not empty eventEdit.eventImages}"
+                   var="item">
+            <div align="center">
+                <h:graphicImage url="/api/images/events/#{item}"
+                                style="width:256px;height: 256px"/>
+            </div>
+        </ui:repeat>
     </ui:define>
 
 </ui:composition>

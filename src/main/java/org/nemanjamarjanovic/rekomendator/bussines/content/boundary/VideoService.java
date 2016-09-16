@@ -28,7 +28,7 @@ public class VideoService
             @NotNull
             @PathParam("id") final String id)
     {
-        File file = new File(servletContext.getInitParameter("upload.location") + File.separator + "videos" + id);
+        File file = new File(servletContext.getInitParameter("upload.location") + File.separator + "video" + File.separator + id);
         return Response
                 .status(Response.Status.OK)
                 .entity((Object) file)

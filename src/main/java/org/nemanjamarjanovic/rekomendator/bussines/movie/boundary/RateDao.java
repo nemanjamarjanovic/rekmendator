@@ -49,7 +49,7 @@ public class RateDao {
                 .getResultList();
 
         return resultList
-                .parallelStream()
+                .stream()
                 .map((f) -> {
                     Movie movie = (Movie) f[0];
                     movie.setRating((Double) f[1]);
