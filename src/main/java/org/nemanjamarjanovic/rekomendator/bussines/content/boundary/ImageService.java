@@ -28,11 +28,26 @@ public class ImageService
             @NotNull
             @PathParam("id") final String id)
     {
-        File file = new File(servletContext.getInitParameter("upload.location") + File.separator + "image" + id);
+        File file = new File(servletContext.getInitParameter("upload.location") + File.separator + "user" + File.separator + id);
         if (!file.exists()) {
             file = new File(ImageService.class.getClassLoader().getResource("icon/default_user.png").getFile());
         }
 
+        return Response
+                .status(Response.Status.OK)
+                .entity((Object) file)
+                .header("Content-Disposition", "attachment; filename=" + file.getName())
+                .build();
+    }
+
+    @GET
+    @Path("events/{id}")
+    public Response events(
+            @NotNull
+            @PathParam("id") final String id)
+    {
+        File file = new File(servletContext.getInitParameter("upload.location") + File.separator + "event" + File.separator + id);
+        
         return Response
                 .status(Response.Status.OK)
                 .entity((Object) file)

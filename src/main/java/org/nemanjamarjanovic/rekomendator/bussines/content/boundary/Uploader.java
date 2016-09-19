@@ -39,7 +39,7 @@ public class Uploader extends HttpServlet
     {
         String id = request.getParameter("id");
         Part filePart = request.getPart("file");
-        String location = request.getServletContext().getInitParameter("upload.location") + File.separator + "videos" + id;
+        String location = request.getServletContext().getInitParameter("upload.location") + File.separator + "video" + id;
         
         Path path = FileSystems.getDefault().getPath(location);
         try (InputStream input = filePart.getInputStream()) {

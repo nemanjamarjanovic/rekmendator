@@ -45,4 +45,11 @@
             http://www.omdbapi.com/
         </param-value>
     </context-param>
+    <data-source>
+        <name>Rekomendator_MySQL_DataSource1</name>
+        <class-name>com.mysql.jdbc.Driver</class-name>
+        <url>jdbc:mysql://localhost:3306/rekomendator</url>
+        <user>rekomendator</user>
+        <password>rekomendator</password>
+    </data-source>
 </web-app>

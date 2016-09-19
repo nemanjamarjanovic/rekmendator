@@ -1,6 +1,8 @@
 package org.nemanjamarjanovic.rekomendator.bussines.security;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,9 +21,10 @@ import org.nemanjamarjanovic.rekomendator.presentation.CurrentUser;
  *
  * @author nemanja.marjanovic
  */
-@WebFilter("/afaces/pages/*")
+@WebFilter("/faces/pages/*")
 @Loggable
-public class PagesFilter implements Filter {
+public class PagesFilter implements Filter
+{
 
     @Inject
     CurrentUser currentUser;
@@ -29,30 +32,47 @@ public class PagesFilter implements Filter {
     @Inject
     ServletContext servletContext;
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    @Inject
+    Logger log;
 
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
+    {
         String uri = ((HttpServletRequest) request).getRequestURI();
         String[] split = uri.split("/");
         String page = split[4].replace(".xhtml", "").toUpperCase();
 
-        if (page.equals("USER-REGISTRATION")
-                || page.equals("MOVIE-LIST")
-                || currentUser.hasPermission(page)) {
+        log.log(Level.INFO, "User: {0}", (currentUser.getName() != null) ? currentUser.getName() : "GUEST");
+        log.log(Level.INFO, "Requested page: {0}", ((HttpServletRequest) request).getRequestURI());
+        log.log(Level.INFO, "Needed permission: {0}", page);
 
-            chain.doFilter(request, response);
+        if (currentUser.getName() != null) {
+            if (currentUser.getPages().stream().map(f -> f.getTitle()).anyMatch(f -> f.equals(page))
+                    || currentUser.getPermissions().contains(page)) {
 
-        } else {
-            ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/faces/index.xhtml");
+                chain.doFilter(request, response);
+                return;
+            }
         }
+        else if (page.equals("USER-REGISTRATION")
+                || (request.getParameter("src").equals("search") && uri.contains("movie-list.xhtml"))) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        log.log(Level.INFO, "ACCES DENIED :)");
+        ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/faces/index.xhtml");
+
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) throws ServletException
+    {
     }
 
     @Override
-    public void destroy() {
+    public void destroy()
+    {
     }
 
 }

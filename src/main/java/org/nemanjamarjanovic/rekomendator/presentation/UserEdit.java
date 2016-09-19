@@ -59,8 +59,9 @@ public class UserEdit implements Serializable {
         Part file = (Part) event.getNewValue();
         try (InputStream input = file.getInputStream()) {
             Files.copy(input,
-                    new File(servletContext.getInitParameter("upload.location"),
-                            "image" + this.data.getId()).toPath(),
+                    new File(servletContext.getInitParameter("upload.location")
+                            + File.separator + "user",
+                            this.data.getId()).toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             System.out.println(e);

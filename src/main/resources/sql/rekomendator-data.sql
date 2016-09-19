@@ -21,6 +21,7 @@ INSERT INTO `rekomendator`.`PAGE` (`TITLE`, `PAGE`) VALUES ('EVENT-EDIT', 'event
 INSERT INTO `rekomendator`.`PAGE` (`TITLE`, `PAGE`) VALUES ('COMMENT-LIST', 'comment-list');
 INSERT INTO `rekomendator`.`PAGE` (`TITLE`, `PAGE`) VALUES ('REPORTS', 'reports');
 
+INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIE-LIST');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIE-VIEW');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIE-EDIT');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('MOVIE-UPLOAD');
@@ -43,6 +44,9 @@ INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('SU
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('SUPER', 'EVENT-LIST');
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('SUPER', 'EVENT-EDIT');
 
+INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'MOVIE-ALL');
+INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'MOVIE-CREATE');
+INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'MOVIE-SEARCH');
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'USER-LIST');
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'GENRE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'GENRE-EDIT');
@@ -50,15 +54,19 @@ INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('AD
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'COMMENT-LIST');
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('ADMIN', 'REPORTS');
 
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIE-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIE-EDIT');
 
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-EDIT');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-UPLOAD');
 
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'MOVIE-LIST');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'MOVIE-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'USER-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'EVENT-ACTIVATION');
