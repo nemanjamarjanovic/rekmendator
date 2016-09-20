@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 
@@ -29,20 +31,26 @@ public class UserEdit implements Serializable {
 
     @Inject
     private UserDao userDao;
-
+    
     @Inject
     ServletContext servletContext;
 
     private User data = new User();
+    
+    public void init(){
+        this.data.setPassword(null);
+    }
 
     public String doRegister() throws NoSuchAlgorithmException {
+
+        data.setLang(FacesContext.getCurrentInstance().getViewRoot().getLocale().getLanguage());
         userDao.create(data);
         return "/index?faces-redirect=true";
     }
 
     public String doUpdate() throws NoSuchAlgorithmException {
         userDao.update(data);
-        return "user-list?faces-redirect=true";
+        return "/index?faces-redirect=true";
     }
 
     public String doStateChange(String id) {

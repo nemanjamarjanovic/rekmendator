@@ -13,10 +13,11 @@
         <f:metadata>
             <f:viewParam name="id" 
                          value="#{userEdit.data}" 
-                         converter="#{userConverter}" 
+                         converter="#{userConverter}"
                          converterMessage="Unknown product, 
                          please use a link from within the system."
                          />
+            <f:viewAction action="#{userEdit.init()}" />
         </f:metadata>
 
         <h:form id="form" enctype="multipart/form-data">
@@ -39,9 +40,7 @@
 
                 <h:outputLabel value="#{text['user.password']}:"/>
                 <h:inputText id="password" 
-                             value="#{userEdit.data.password}" 
-                             required="true" >
-                    <f:validateLength minimum="3" maximum="100" />
+                             value="#{userEdit.data.password}">
                 </h:inputText>
                 <h:message for="password" style="color:red"/>
 

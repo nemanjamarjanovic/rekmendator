@@ -29,6 +29,7 @@ INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('EVENT-ACTIVATION');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('EVENT-PHOTO');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('EVENT-VIEW');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('USER-VIEW');
+INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('USER-EDIT');
 INSERT INTO `rekomendator`.`PERMISSION` (`TITLE`) VALUES ('COMMENT-REMOVE');
 
 INSERT INTO `rekomendator`.`ROLE_PAGE` (`Role_TITLE`, `pages_TITLE`) VALUES ('USER', 'MOVIE-ALL');
@@ -58,30 +59,27 @@ INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`)
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIE-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'MOVIE-EDIT');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('USER', 'USER-EDIT');
 
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-EDIT');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'MOVIE-UPLOAD');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('SUPER', 'USER-EDIT');
 
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'MOVIE-LIST');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'MOVIE-VIEW');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'MOVIE-EDIT');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'USER-VIEW');
+INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'USER-EDIT');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'EVENT-VIEW');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'EVENT-ACTIVATION');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'EVENT-PHOTO');
 INSERT INTO `rekomendator`.`ROLE_PERMISSION` (`Role_TITLE`, `permissions_TITLE`) VALUES ('ADMIN', 'COMMENT-REMOVE');
 
-
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`, `NAME`, `SURNAME`, `MBR`, `EMAIL`) 
-VALUES ('6c614e2b-e206-4503-8723-9f62e1e1afc4','user', 'UserMarko1234567890', 'USER', 'Marko', 'Markovic', '123456789123456', 'nemanjam@blic.net');
-
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`, `NAME`, `SURNAME`, `MBR`, `EMAIL`) 
-VALUES ('c62cb541-18a1-40c6-b721-2bb1b0653375', 'admin','AdministratorNemanja', 'ADMIN', 'Nemanja', 'Marjanovic', '123456789123456', 'nemanjam@blic.net');
-
-INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`, `NAME`, `SURNAME`, `MBR`, `EMAIL`) 
-VALUES ('d4d75e2a-df2e-4cb0-8967-290d73747699', 'super','SuperJelena1234567890', 'SUPER', 'Jelena', 'Marjanovic', '123456789123456', 'nemanjam@blic.net');
+INSERT INTO `rekomendator`.`USER` (`ID`, `PASSWORD`, `USERNAME`, `ROLE_TITLE`, `NAME`, `SURNAME`, `MBR`, `EMAIL`, `ACTIVE`) 
+VALUES ('c62cb541-18a1-40c6-b721-2bb1b0653375', '41305dc336ca683188da00a90b61045e','AdministratorNemanja', 'ADMIN', 'Nemanja', 'Marjanovic', '123456789123456', 'nemanjam@blic.net', true);
 
 -- DATA
 

@@ -62,7 +62,7 @@ public class ImageService
             @PathParam("id") final String id)
     {
 
-        File file = new File(ImageService.class.getClassLoader().getResource("icon/" + id.trim() + ".png").getFile());
+        File file = new File(ImageService.class.getClassLoader().getResource("icon/" + id.trim()).getFile());
 
         return Response
                 .status(Response.Status.OK)

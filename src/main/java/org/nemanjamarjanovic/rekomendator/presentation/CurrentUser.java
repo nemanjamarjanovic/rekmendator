@@ -34,11 +34,22 @@ public class CurrentUser implements Serializable {
 
     private String id;
     private String name;
+    private String language = "en";
     private Set<String> permissions = new HashSet<>();
     private List<Page> pages = new ArrayList<>();
 
     public String doLogin() throws NoSuchAlgorithmException {
+
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            return "index?faces-redirect=true";
+        }
+
         User user = userDao.findByUsername(this.username, this.password);
+
+        if (user == null) {
+            return "index?faces-redirect=true";
+        }
+
         this.id = user.getId();
         this.name = user.getName();
         this.username = null;
@@ -46,16 +57,16 @@ public class CurrentUser implements Serializable {
         this.permissions = user.getRole().getPermissions().stream().map(p -> p.getTitle()).collect(Collectors.toSet());
         this.pages = user.getRole().getPages().stream().map(p -> p).collect(Collectors.toList());
         this.pages.size();
-        
-        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
-        
-        return "/pages/event-list?faces-redirect=true";
+        this.language = user.getLang();
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(this.language));
+        return "/pages/movie-list?faces-redirect=true&src=search";
     }
 
     public String doLogout() {
         this.id = null;
         this.name = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(this.language));
         return "/index?faces-redirect=true";
     }
 
@@ -91,15 +102,25 @@ public class CurrentUser implements Serializable {
         return this.pages.stream().map(p -> p.getPage()).collect(Collectors.toSet()).contains(page);
     }
 
-    public List<Page> getPages()
-    {
+    public List<Page> getPages() {
         return pages;
     }
 
-    public Set<String> getPermissions()
-    {
+    public Set<String> getPermissions() {
         return permissions;
     }
 
-    
+    public void doChangeLanguage(String language) throws NoSuchAlgorithmException {
+        this.language = language;
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+        User findById = userDao.findById(this.id);
+        findById.setLang(this.language);
+        findById.setPassword(null);
+        userDao.update(findById);
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
 }

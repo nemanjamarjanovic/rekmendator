@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,14 +13,35 @@
         <h:outputStylesheet library="css" name="main.css"  />
     </h:head>
 
+    <f:view locale="#{currentUser.language}"/>
     <h:body>
+        <div align="right">
+            <h:form>
+                <h:commandLink  action="#{currentUser.doChangeLanguage('en')}">
+                    <h:graphicImage url="/api/images/icons/gb.jpg"
+                                    style="width:16px;height: 16px"
+                                    />
+                </h:commandLink>&nbsp;
+                <h:commandLink action="#{currentUser.doChangeLanguage('de')}">
+                    <h:graphicImage url="/api/images/icons/ger.jpg"
+                                    style="width:16px;height: 16px"/>
+                </h:commandLink>&nbsp;
+                <h:commandLink action="#{currentUser.doChangeLanguage('sr')}">
+                    <h:graphicImage url="/api/images/icons/ser.jpg"
+                                    style="width:16px;height: 16px"/>
+                </h:commandLink>
+            </h:form>
+        </div>
+
         <div align="right">
             <h:outputLink value="/rekomendator/api/Top5" 
                           target="_blank">
-                <h:graphicImage url="/api/images/icons/rss"
+                <h:graphicImage url="/api/images/icons/rss.png"
                                 style="width:16px;height: 16px"/>
             </h:outputLink>
         </div>
+
+
 
         <div align="left">
             <h:panelGroup rendered="#{empty currentUser.name}">
@@ -68,6 +90,7 @@
                 Content goes here
             </ui:insert>
         </div>
+
     </h:body>
 
 </html>

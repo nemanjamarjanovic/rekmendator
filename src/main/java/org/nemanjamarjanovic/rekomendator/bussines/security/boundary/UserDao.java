@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.nemanjamarjanovic.rekomendator.bussines.log.boundary.Loggable;
+import org.nemanjamarjanovic.rekomendator.bussines.security.control.HashedPassword;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.Role;
 import org.nemanjamarjanovic.rekomendator.bussines.security.entity.User;
 import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.FIND_ALL;
@@ -31,18 +32,17 @@ public class UserDao {
         newUser.setActive(false);
         newUser.setUsername(user.getUsername());
 
-        String hashedPassword = new String(
-                MessageDigest
-                .getInstance("MD5")
-                .digest(user.getPassword().getBytes(StandardCharsets.UTF_8)));
+        HashedPassword hashedPassword = new HashedPassword(user.getPassword());
+        newUser.setPassword(hashedPassword.getValue());
 
-        newUser.setPassword(hashedPassword);
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
         newUser.setMbr(user.getMbr());
         newUser.setEmail(user.getEmail());
+        newUser.setLang(user.getLang());
         Role registered = entityManager.getReference(Role.class, "USER");
-        user.setRole(registered);
+        newUser.setRole(registered);
+        newUser.setActive(true);
         entityManager.persist(newUser);
         return newUser;
     }
@@ -50,16 +50,16 @@ public class UserDao {
     public void update(User user) throws NoSuchAlgorithmException {
         User edited = entityManager.find(User.class, user.getId());
 
-        String hashedPassword = new String(
-                MessageDigest
-                .getInstance("MD5")
-                .digest(user.getPassword().getBytes(StandardCharsets.UTF_8)));
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            HashedPassword hashedPassword = new HashedPassword(user.getPassword());
+            edited.setPassword(hashedPassword.getValue());
+        }
 
-        edited.setPassword(hashedPassword);
         edited.setName(user.getName());
         edited.setSurname(user.getSurname());
         edited.setMbr(user.getMbr());
         edited.setEmail(user.getEmail());
+        edited.setLang(user.getLang());
     }
 
     public List<User> findAll() {
@@ -86,16 +86,15 @@ public class UserDao {
     public User findByUsername(String username, String password)
             throws NoSuchAlgorithmException, NoResultException {
 
-        String hashedPassword = new String(
-                MessageDigest
-                .getInstance("MD5")
-                .digest(password.getBytes(StandardCharsets.UTF_8)));
+        HashedPassword hashedPassword = new HashedPassword(password);
 
-        return entityManager
+        List<User> resultList = entityManager
                 .createNamedQuery(User.FIND_BY_USERNAME, User.class)
                 .setParameter("username", username)
-               // .setParameter("password", hashedPassword)
-                .getSingleResult();
+                .setParameter("password", hashedPassword.getValue())
+                .getResultList();
+
+        return (resultList.isEmpty()) ? null : resultList.get(0);
     }
 
 }

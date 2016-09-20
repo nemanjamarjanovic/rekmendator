@@ -2,6 +2,7 @@ package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -68,6 +69,31 @@ public class Role implements Serializable
     public void setPages(Set<Page> pages)
     {
         this.pages = pages;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Role other = (Role) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        return true;
     }
 
   

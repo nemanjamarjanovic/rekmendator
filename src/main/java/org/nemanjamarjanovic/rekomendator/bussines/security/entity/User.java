@@ -2,6 +2,7 @@ package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -15,10 +16,12 @@ import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.*
 @Entity
 @NamedQueries({
     @NamedQuery(name = FIND_ALL, query = "select u from User u"),
-    @NamedQuery(name = FIND_BY_USERNAME, query = "select u from User u where u.username = :username ")
+    @NamedQuery(name = FIND_BY_USERNAME,
+            query = "select u from User u  where u.username = :username "
+            + " and u.password = :password "
+            + " and u.active = true ")
 })
-public class User implements Serializable
-{
+public class User implements Serializable {
 
     public static final String FIND_ALL = "User.findAll";
     public static final String FIND_BY_USERNAME = "User.findByUsername";
@@ -33,92 +36,76 @@ public class User implements Serializable
     private String surname;
     private String mbr;
     private String email;
+    private String lang;
     private boolean active;
 
     private Role role;
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Role getRole()
-    {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role)
-    {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getSurname()
-    {
+    public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname)
-    {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public String getMbr()
-    {
+    public String getMbr() {
         return mbr;
     }
 
-    public void setMbr(String mbr)
-    {
+    public void setMbr(String mbr) {
         this.mbr = mbr;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public boolean isActive()
-    {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active)
-    {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -126,18 +113,23 @@ public class User implements Serializable
         this.id = id;
     }
 
-    
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 7;
         hash = 83 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
