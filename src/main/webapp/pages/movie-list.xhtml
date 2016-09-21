@@ -37,8 +37,10 @@
                              value="#{movieList.publishingDate}"/>
                 <h:message for="publishingDate" style="color:red"/>
 
-                <h:commandButton action="#{movieList.doSearch()}" 
-                                 value="#{text['generic.search']}"/>
+                <h:commandLink action="#{movieList.doSearch()}"  
+                                 value="#{text['generic.search']}">
+                    <f:param name="src" value="search"/>
+                </h:commandLink>
 
             </h:panelGrid>
         </h:form>
