@@ -1,10 +1,5 @@
-/**
- * Author:  nemanja
- * Created: Aug 1, 2016
- */
-
-CREATE DATABASE  IF NOT EXISTS `rekomendator`;
-USE `rekomendator`;
+CREATE SCHEMA  IF NOT EXISTS `rekomendator`;
+SET SCHEMA `rekomendator`;
 
 
 DROP TABLE IF EXISTS `MOVIE_ACTOR`;

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -26,8 +28,7 @@
             upload.location
         </param-name>
         <param-value>
-            C:\tomee\uploaded_files
-            <!--/home/nemanja/tomee/uploaded_files-->
+            /tmp/uploaded_files
         </param-value>
     </context-param>
     <context-param>
@@ -46,11 +47,4 @@
             http://www.omdbapi.com/
         </param-value>
     </context-param>
-    <!--    <data-source>
-        <name>Rekomendator_MySQL_DataSource1</name>
-        <class-name>com.mysql.jdbc.Driver</class-name>
-        <url>jdbc:mysql://localhost:3306/rekomendator</url>
-        <user>rekomendator</user>
-        <password>rekomendator</password>
-    </data-source>-->
 </web-app>

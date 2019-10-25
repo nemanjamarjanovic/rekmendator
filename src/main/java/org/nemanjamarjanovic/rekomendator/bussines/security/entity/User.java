@@ -2,17 +2,15 @@ package org.nemanjamarjanovic.rekomendator.bussines.security.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+
 import static org.nemanjamarjanovic.rekomendator.bussines.security.entity.User.*;
 
 /**
  *
  * @author nemanja
  */
+@Table(name = "R_USER")
 @Entity
 @NamedQueries({
     @NamedQuery(name = FIND_ALL, query = "select u from User u"),
